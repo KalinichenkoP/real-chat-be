@@ -3,12 +3,12 @@ import {createConnection} from "typeorm";
 import {User} from "./entity/user";
 
 createConnection({
-    type: "mysql",
+    type: "postgres",
     host: "localhost",
-    port: 3306,
-    username: "root",
-    password: "root",
-    database: "test",
+    port: 5432,
+    username: "postgres",
+    password: "postgres",
+    database: "postgres",
     entities: [
         User
     ],
