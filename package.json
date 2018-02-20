@@ -1,0 +1,22 @@
+{
+  "name": "realchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "pg": "^7.4.1",
+    "reflect-metadata": "^0.1.12",
+    "typeorm": "^0.1.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.cleveroad.com/pavel.kalinichenko.cr/realChat.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
