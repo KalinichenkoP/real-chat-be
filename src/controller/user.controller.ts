@@ -1,26 +1,20 @@
-import {Controller, Get, Param, Res, HttpStatus, Inject} from "@nestjs/common";
+import {Controller, Get, Param, Res, HttpStatus} from "@nestjs/common";
 import {User} from "../entity/user";
-import {InjectRepository} from '@nestjs/typeorm';
 import {UserService} from "../service/user.service";
 
 @Controller('user')
 export class UserController {
 
-    private readonly userService: UserService;
 
-    constructor(@InjectRepository(User)
-                    userService: UserService) {
-        this.userService = userService;
-    }
+    constructor(private readonly userService: UserService) {}
 
     @Get()
-    async findAll(@Res() res): Promise<User[]> {
-        return res.status(HttpStatus.OK).json({this.userService.findAll()});
+    findAll(): Promise<User[]> {
+        return this.userService.findAll();
     }
 
     @Get(':id')
-    async findOne(@Res() res, @Param() params): User {
-        console.log(params.id);
-        return res.status(HttpStatus.OK).json({});
+    findOne(@Res()res, @Param() params): Promise<User> {
+        return this.userService.findById(params.id);
     }
 }
