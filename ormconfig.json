@@ -2,18 +2,13 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "postrges",
-  "password": "postrges",
+  "username": "postgres",
+  "password": "postgres",
   "database": "postgres",
   "synchronize": true,
   "logging": false,
+  "ssl": true,
   "entities": [
     "src/entity/**/*.ts"
-  ],
-  "migrations": [
-    "src/migration/**/*.ts"
-  ],
-  "subscribers": [
-    "src/subscriber/**/*.ts"
   ]
 }

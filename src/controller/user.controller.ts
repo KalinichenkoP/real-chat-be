@@ -1,4 +1,4 @@
-import {Controller, Get, Param, Res, HttpStatus} from "@nestjs/common";
+import {Controller, Get, Param, Res} from "@nestjs/common";
 import {User} from "../entity/user";
 import {UserService} from "../service/user.service";
 
@@ -14,7 +14,8 @@ export class UserController {
     }
 
     @Get(':id')
-    findOne(@Res()res, @Param() params): Promise<User> {
+    findOne(@Param() params): Promise<User> {
+        console.log(params.id);
         return this.userService.findById(params.id);
     }
 }
