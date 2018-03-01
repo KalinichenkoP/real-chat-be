@@ -1,13 +1,13 @@
 import {Component} from "@nestjs/common";
-import {Repository} from "typeorm";
-import {Message} from "../entity/message";
+import {MongoRepository} from "typeorm";
+import {Message} from "./message";
 import {InjectRepository} from "@nestjs/typeorm";
 
 @Component()
 export class MessageService {
 
     constructor(@InjectRepository(Message)
-                private readonly messageRepository: Repository<Message>,) {
+                private readonly messageRepository: MongoRepository<Message>,) {
     }
 
     public async findAll(): Promise<Message[]> {

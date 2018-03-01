@@ -10,6 +10,7 @@
     "@nestjs/testing": "^4.6.1",
     "@nestjs/typeorm": "^2.0.0",
     "@nestjs/websockets": "^4.5.8",
+    "mongodb": "^3.0.3",
     "pg": "^7.4.1",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12",

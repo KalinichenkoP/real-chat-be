@@ -1,6 +1,6 @@
 import {Entity, ObjectID, ObjectIdColumn, Column} from "typeorm";
 
-@Entity()
+@Entity("mongodb")
 export class Message {
 
     @ObjectIdColumn()

@@ -1,14 +1,28 @@
-{
-  "type": "postgres",
-  "host": "localhost",
-  "port": 5432,
-  "username": "postgres",
-  "password": "postgres",
-  "database": "postgres",
-  "synchronize": true,
-  "logging": false,
-  "ssl": true,
-  "entities": [
-    "src/entity/**/*.ts"
-  ]
-}
+[
+  {
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "postgres",
+    "database": "postgres",
+    "synchronize": true,
+    "logging": false,
+    "ssl": true,
+    "entities": [
+      "src/models/user/*.ts"
+    ]
+  },
+  {
+    "name": "mongodb",
+    "type": "mongodb",
+    "host": "localhost",
+    "port": 27017,
+    "database": "message",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+      "src/models/message/*.ts"
+    ]
+  }
+]

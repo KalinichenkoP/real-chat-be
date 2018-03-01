@@ -1,8 +1,8 @@
 import {Controller, Get, Param} from "@nestjs/common";
-import {MessageService} from "../service/message.service";
-import {Message} from "../entity/message";
+import {MessageService} from "./message.service";
+import {Message} from "./message";
 
-@Controller('user')
+@Controller('message')
 export class MessageController {
 
 
@@ -10,7 +10,7 @@ export class MessageController {
 
     @Get()
     findAll(): Promise<Message[]> {
-        return this.userService.findAll();
+        return this.messageService.findAll();
     }
 
     @Get(':id')
