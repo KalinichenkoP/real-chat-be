@@ -1,12 +1,12 @@
-import {Component} from "@nestjs/common";
+import {Component, Inject} from "@nestjs/common";
 import {MongoRepository} from "typeorm";
-import {Message} from "./message";
+import {Message} from "./message.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 
 @Component()
 export class MessageService {
 
-    constructor(@InjectRepository(Message)
+    constructor(@Inject('messageRepositoryToken')
                 private readonly messageRepository: MongoRepository<Message>,) {
     }
 
