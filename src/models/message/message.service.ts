@@ -6,8 +6,8 @@ import {InjectRepository} from "@nestjs/typeorm";
 @Component()
 export class MessageService {
 
-    constructor(@Inject('messageRepositoryToken')
-                private readonly messageRepository: MongoRepository<Message>,) {
+    constructor(@InjectRepository(Message)
+                private readonly messageRepository: MongoRepository<Message>) {
     }
 
     public async findAll(): Promise<Message[]> {

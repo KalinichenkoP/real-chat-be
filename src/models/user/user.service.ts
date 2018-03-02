@@ -6,7 +6,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 @Component()
 export class UserService {
 
-    constructor(@Inject('userRepositoryToken')
+    constructor(@InjectRepository(User)
                 private readonly userRepository: Repository<User>) {
     }
 
