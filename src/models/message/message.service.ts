@@ -1,4 +1,4 @@
-import {Component, Inject} from "@nestjs/common";
+import {Component} from "@nestjs/common";
 import {MongoRepository} from "typeorm";
 import {Message} from "./message.entity";
 import {InjectRepository} from "@nestjs/typeorm";

@@ -5,7 +5,15 @@ import {MessageController} from "./message.controller";
 import {Message} from "./message.entity";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Message])],
+    imports: [TypeOrmModule.forRoot({
+        type: 'mongodb',
+        name: 'nosql',
+        host: 'localhost',
+        port: 27017,
+        database: 'test',
+        entities: [Message],
+        synchronize: true
+    })],
     controllers: [MessageController],
     components: [MessageService],
 })

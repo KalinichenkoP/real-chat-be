@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity} from "typeorm/decorator/entity/Entity";
 
 @Entity()
 export class User {
