@@ -14,7 +14,7 @@ export class MessageService {
         return await this.messageRepository.find();
     }
 
-    // public async findById(id: number): Promise<Message> {
-    //     return await this.messageRepository.findOne(id);
-    // }
+    public async findById(id: number): Promise<Message> {
+        return await this.messageRepository.findOne(id);
+    }
 }
