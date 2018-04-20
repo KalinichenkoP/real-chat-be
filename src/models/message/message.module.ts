@@ -1,21 +1,13 @@
 import {Module} from "@nestjs/common";
-import {TypeOrmModule} from "@nestjs/typeorm";
 import {MessageService} from "./message.service";
 import {MessageController} from "./message.controller";
-import {Message} from "./message.entity";
+import {DatabaseModule} from "../database/database.module";
+import {messageProvider} from "./message.provider";
 
 @Module({
-    imports: [TypeOrmModule.forRoot({
-        type: 'mongodb',
-        name: 'nosql',
-        host: 'localhost',
-        port: 27017,
-        database: 'test',
-        entities: [Message],
-        synchronize: true
-    })],
+    imports: [DatabaseModule],
     controllers: [MessageController],
-    components: [MessageService],
+    components: [...messageProvider, MessageService],
 })
 export class MessageModule {
 }

@@ -13,9 +13,9 @@ export class MessageController {
         return this.messageService.findAll();
     }
 
-    @Get(':id')
-    findOne(@Param() params): Promise<Message> {
-        console.log(params.id);
-        return this.messageService.findById(params.id);
-    }
+    // @Get(':id')
+    // findOne(@Param() params): Promise<Message> {
+    //     console.log(params.id);
+    //     return this.messageService.findById(params.id);
+    // }
 }

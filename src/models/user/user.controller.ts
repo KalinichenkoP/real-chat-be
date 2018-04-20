@@ -1,4 +1,4 @@
-import {Controller, Get, Param, Res} from "@nestjs/common";
+import {Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Res} from "@nestjs/common";
 import {User} from "./user.entity";
 import {UserService} from "./user.service";
 
@@ -6,16 +6,22 @@ import {UserService} from "./user.service";
 export class UserController {
 
 
-    constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService) {
+    }
 
     @Get()
-    findAll(): Promise<User[]> {
-        return this.userService.findAll();
+    async findAll(): Promise<[User[], number]> {
+        return await this.userService.find();
     }
 
     @Get(':id')
-    findOne(@Param() params): Promise<User> {
-        console.log(params.id);
-        return this.userService.findById(params.id);
+    async findOne(@Res() res, @Param() params) {
+        const user = await this.userService.findById(params.id);
+
+        if (!user) {
+            throw new NotFoundException(`User is absent`);
+        }
+
+        res.json(user);
     }
 }

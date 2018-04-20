@@ -1,20 +1,19 @@
-import {Component} from "@nestjs/common";
+import {Component, HttpStatus, Inject} from "@nestjs/common";
 import {Repository} from "typeorm";
 import {User} from "./user.entity";
-import {InjectRepository} from "@nestjs/typeorm";
 
 @Component()
 export class UserService {
 
-    constructor(@InjectRepository(User)
+    constructor(@Inject('UserRepositoryToken')
                 private readonly userRepository: Repository<User>) {
     }
 
-    public async findAll(): Promise<User[]> {
-        return await this.userRepository.find();
+    async find(): Promise<[User[], number]> {
+        return await this.userRepository.findAndCount();
     }
 
-    public async findById(id: number): Promise<User> {
-        return await this.userRepository.findOneById(id);
+    async findById(id: number): Promise<User | undefined> {
+        return await this.userRepository.findOne(id);
     }
 }
