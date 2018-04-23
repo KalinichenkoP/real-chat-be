@@ -1,7 +1,7 @@
 import {Connection} from "typeorm";
-import {CONNECTION_TOKEN} from "../../constants/connection.tokens";
-import {REPOSITORY_TOKEN} from "../../constants/repository.tokens";
-import {Message} from "./message.entity";
+import {CONNECTION_TOKEN} from "../../enums/ConnectionTokens";
+import {REPOSITORY_TOKEN} from "../../enums/RepositoryTokens";
+import {Message} from "./MessageEntity";
 
 export const messageProvider = [
     {

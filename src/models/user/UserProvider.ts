@@ -1,7 +1,7 @@
 import {Connection} from "typeorm";
-import {User} from "./user.entity";
-import {CONNECTION_TOKEN} from "../../constants/connection.tokens";
-import {REPOSITORY_TOKEN} from "../../constants/repository.tokens";
+import {User} from "./UserEntity";
+import {CONNECTION_TOKEN} from "../../enums/ConnectionTokens";
+import {REPOSITORY_TOKEN} from "../../enums/RepositoryTokens";
 
 export const userProvider = [
     {

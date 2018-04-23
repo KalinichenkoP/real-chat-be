@@ -1,7 +1,7 @@
 import {createConnection} from 'typeorm';
-import {CONNECTION_TOKEN} from "../../constants/connection.tokens";
-import {User} from "../user/user.entity";
-import {Message} from "../message/message.entity";
+import {CONNECTION_TOKEN} from "../enums/ConnectionTokens";
+import {User} from "../models/user/UserEntity";
+import {Message} from "../models/message/MessageEntity";
 
 export const databaseProviders = [
     {
@@ -20,7 +20,7 @@ export const databaseProviders = [
         }),
     },
     {
-        provide: CONNECTION_TOKEN.MONGO_CONNETION_TOKEN,
+        provide: CONNECTION_TOKEN.MONGO_CONNECTION_TOKEN,
         useFactory: async () => await createConnection({
             type: 'mongodb',
             name: 'nosql',

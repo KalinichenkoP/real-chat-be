@@ -1,6 +1,6 @@
 import {Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Res} from "@nestjs/common";
-import {User} from "./user.entity";
-import {UserService} from "./user.service";
+import {User} from "./UserEntity";
+import {UserService} from "./UserService";
 
 @Controller('user')
 export class UserController {
@@ -15,8 +15,8 @@ export class UserController {
     }
 
     @Get(':id')
-    async findOne(@Res() res, @Param() params) {
-        const user = await this.userService.findById(params.id);
+    async findOne(@Res() res, @Param("id") id) {
+        const user = await this.userService.findById(id);
 
         if (!user) {
             throw new NotFoundException(`User is absent`);
@@ -24,4 +24,5 @@ export class UserController {
 
         res.json(user);
     }
+
 }

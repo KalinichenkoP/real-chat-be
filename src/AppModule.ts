@@ -1,7 +1,7 @@
 import {Module} from '@nestjs/common';
-import {UserModule} from "./models/user/user.module";
-import {MessageModule} from "./models/message/message.module";
-import {DatabaseModule} from "./models/database/database.module";
+import {UserModule} from "./models/user/UserModule";
+import {MessageModule} from "./models/message/MessageModule";
+import {DatabaseModule} from "./database/DatabaseModule";
 
 @Module({
     imports:

@@ -1,8 +1,8 @@
-import {PrimaryGeneratedColumn, Column} from "typeorm";
+import {PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
 import {Entity} from "typeorm/decorator/entity/Entity";
 
 @Entity()
-export class User {
+export class User extends BaseEntity{
 
     @PrimaryGeneratedColumn()
     id: number;

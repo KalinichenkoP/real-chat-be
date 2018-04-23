@@ -1,7 +1,7 @@
 import {Component, Inject} from "@nestjs/common";
 import {MongoRepository} from "typeorm";
-import {Message} from "./message.entity";
-import {REPOSITORY_TOKEN} from "../../constants/repository.tokens";
+import {Message} from "./MessageEntity";
+import {REPOSITORY_TOKEN} from "../../enums/RepositoryTokens";
 
 @Component()
 export class MessageService {

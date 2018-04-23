@@ -1,6 +1,6 @@
 import {Component, HttpStatus, Inject} from "@nestjs/common";
 import {Repository} from "typeorm";
-import {User} from "./user.entity";
+import {User} from "./UserEntity";
 
 @Component()
 export class UserService {
