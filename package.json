@@ -18,7 +18,8 @@
     "typeorm": "^0.2.7",
     "typescript": "^2.8.1",
     "reflect-metadata": "^0.1.12",
-    "bcrypt": "latest"
+    "bcrypt": "latest",
+    "@angular/core": "latest"
   },
   "devDependencies": {
     "@types/node": "^9.6.5",

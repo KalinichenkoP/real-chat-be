@@ -1,6 +1,8 @@
 import {Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Res} from "@nestjs/common";
 import {User} from "./UserEntity";
 import {UserService} from "./UserService";
+import {ListResponseDto} from "../../core/dto/ListResponseDto";
+import {UserDto} from "./dto/UserDto";
 
 @Controller('user')
 export class UserController {
@@ -10,7 +12,7 @@ export class UserController {
     }
 
     @Get()
-    async findAll(): Promise<[User[], number]> {
+    async findAll(): Promise<ListResponseDto<UserDto>> {
         return await this.userService.find();
     }
 

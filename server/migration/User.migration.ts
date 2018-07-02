@@ -3,14 +3,17 @@ import {QueryRunner} from "typeorm";
 
 export class UserMigration implements MigrationInterface {
     async up(queryRunner: QueryRunner): Promise<any> {
-        // await queryRunner.renameColumn("post", "title", "name");
-        // alternatively you can do:
-        // await queryRunner.query("CREATE TABLE `USER` ()");
+        await queryRunner.query("DROP TABLE IF EXISTS USERS;\n" +
+            "CREATE TABLE USERS (\n" +
+            "  id int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  created_at datetime NOT NULL,\n" +
+            "  updated_at datetime NOT NULL,\n" +
+            "  email varchar(50) NOT NULL,\n" +
+            "  PRIMARY KEY (id)\n" +
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
     }
 
     async down(queryRunner: QueryRunner): Promise<any> {
-        // await queryRunner.renameColumn("post", "name", "title");
-        // alternatively you can do:
-        // await queryRunner.query("ALTER TABLE `post` CHANGE `name` `title` VARCHAR(255)");
+        await queryRunner.query("DROP TABLE IF EXISTS USERS");
     }
 }

@@ -2,10 +2,10 @@ import {Component, Inject} from "@nestjs/common";
 import {Repository} from "typeorm";
 import {User} from "./UserEntity";
 import {ListResponseDto} from "../../core/dto/ListResponseDto";
-import {UserDto} from "./dto/UserDto";
+
 
 @Component()
-export class UserService {
+export class SessionService {
 
     constructor(@Inject('UserRepositoryToken')
                 private readonly userRepository: Repository<User>) {

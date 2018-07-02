@@ -1,8 +1,10 @@
 import {PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn} from "typeorm";
 import {Entity} from "typeorm/decorator/entity/Entity";
+import {UserDto} from "./dto/UserDto";
+import {Base} from "../base/BaseEntity";
 
 @Entity()
-export class User extends BaseEntity {
+export class User extends Base<User> {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -13,21 +15,11 @@ export class User extends BaseEntity {
     @Column({name: "last_name"})
     lastName: string;
 
-    @Column({
-        name: "is_active",
-        type: "boolean"
-    })
-    isActive: boolean;
+    @Column({name: "email"})
+    email: string;
 
-    @CreateDateColumn({
-        name: "created_at",
-        type: "timestamp"
-    })
-    createdAt: Date;
+    toDto(): UserDto {
+        return new UserDto(this);
+    }
 
-    @UpdateDateColumn({
-        name: "updated_at",
-        type: "timestamp"
-    })
-    updatedAt: Date;
 }

@@ -5,15 +5,15 @@ import {Channel} from "./ChannelEntity";
 @Component()
 export class ChannelService {
 
-    constructor(@Inject('UserRepositoryToken')
-                private readonly userRepository: Repository<Channel>) {
+    constructor(@Inject('ChannelRepositoryToken')
+                private readonly channelRepository: Repository<Channel>) {
     }
 
     async find(): Promise<[Channel[], number]> {
-        return await this.userRepository.findAndCount();
+        return await this.channelRepository.findAndCount();
     }
 
     async findById(id: number): Promise<Channel | undefined> {
-        return await this.userRepository.findOne(id);
+        return await this.channelRepository.findOne(id);
     }
 }

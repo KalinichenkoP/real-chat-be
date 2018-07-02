@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {API_URL} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {User} from '../models/user';
-import BehaviorSubject from 'rxjs/BehaviorSubject';
+import {BehaviorSubject} from 'rxjs';
 import {Params} from '@angular/router';
 
 interface UserModel {
@@ -89,4 +89,4 @@ export class UserService {
     this.userSub.next(null);
   }
 }
-}
+

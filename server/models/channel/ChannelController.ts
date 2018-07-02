@@ -16,12 +16,12 @@ export class ChannelController {
 
     @Get(':id')
     async findOne(@Res() res, @Param("id") id) {
-        const user = await this.channelService.findById(id);
+        const channel = await this.channelService.findById(id);
 
-        if (!user) {
+        if (!channel) {
             throw new NotFoundException(`User is absent`);
         }
 
-        res.json(user);
+        res.json(channel);
     }
 }
