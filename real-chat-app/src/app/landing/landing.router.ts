@@ -3,5 +3,4 @@ import {LandingComponent} from "./landing.component";
 
 export const ROUTES: Routes = [
   {path: '', component: LandingComponent},
-  {path: 'land', component: LandingComponent},
 ];
