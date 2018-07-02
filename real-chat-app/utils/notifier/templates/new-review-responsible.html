@@ -1,0 +1,21 @@
+<%= header %>
+
+<div style="max-width: 480px; margin: 15px auto; font-family: Arial, Helvetica, sans-serif;">
+    <div style="font-size: 14px; color: #1b1b1b; max-width: 350px; margin: 0 auto; text-align: center;">
+        Hi <%= responsibleUser %>! You have been appointed the responsible on the review.
+    </div>
+    <div style="text-align: center; margin: 10px 0; color: #151515;">
+        <div style="display: inline-block;">
+            <div style="font-size: 40px; font-family: 'Arial Black', Gadget, sans-serif; line-height: 1;">
+                <%= formatDate(plannedDate) %>
+            </div>
+           Respondent: <%= respondentPosition %> <strong><%= respondentUser %></strong> in <%= respondentDepartment %> department.
+        </div>
+    </div>
+    <div style="font-size: 14px; margin-bottom: 5px; color: #1b1b1b; text-align: center;">
+        Visit <a style="color: #313b72; text-decoration: none; border-bottom: 1px solid;" href="http://hr-crm.dev.cleveroad.com">your page</a>
+        for more details
+    </div>
+</div>
+
+<%= footer %>

@@ -1,0 +1,30 @@
+<%= header %>
+
+<% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]; %>
+
+<div style="max-width: 480px; margin: 15px auto; font-family: Arial, Helvetica, sans-serif;">
+    <div style="font-size: 14px; color: #1b1b1b; max-width: 350px; margin: 0 auto; text-align: center;">
+        <%= requestingUser %> is going to take a vacation and asks for your permission
+    </div>
+    <div style="text-align: center; margin: 10px 0; color: #151515;">
+        <div style="display: inline-block;">
+            <div style="font-size: 40px; font-family: 'Arial Black', Gadget, sans-serif; line-height: 1;">
+                <%= beginningDate.getDate() %>
+            </div>
+            <div style="font-size: 12px;"><%= months[beginningDate.getMonth()] %></div>
+        </div>
+        <div style="display: inline-block; font-size: 40px; vertical-align: top; margin: 0 15px;">-</div>
+        <div style="display: inline-block;">
+            <div style="font-size: 40px; font-family: 'Arial Black', Gadget, sans-serif; line-height: 1;">
+                <%= endingDate.getDate() %>
+            </div>
+            <div style="font-size: 12px;"><%= months[endingDate.getMonth()] %></div>
+        </div>
+    </div>
+    <div style="font-size: 14px; margin-bottom: 5px; color: #1b1b1b; text-align: center;">
+        Please leave your response at
+        <a style="color: #313b72; text-decoration: none; border-bottom: 1px solid;" href="http://hr-crm.dev.cleveroad.com/vacations/manage-vacations">CR staff website</a>
+    </div>
+</div>
+
+<%= footer %>

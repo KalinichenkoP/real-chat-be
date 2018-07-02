@@ -15,11 +15,13 @@
     "pg": "^7.4.1",
     "redis": "^2.8.0",
     "rxjs": "^5.5.10",
+    "ts-md5": "^1.2.4",
     "typeorm": "^0.2.7",
     "typescript": "^2.8.1",
     "reflect-metadata": "^0.1.12",
     "bcrypt": "latest",
-    "@angular/core": "latest"
+    "@angular/core": "latest",
+    "google-auth-library": "latest"
   },
   "devDependencies": {
     "@types/node": "^9.6.5",
