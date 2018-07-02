@@ -20,4 +20,14 @@ export class UserService {
     async findById(id: number): Promise<User | undefined> {
         return await this.userRepository.findOne(id);
     }
+
+    async findByEmail(email: string): Promise<User | undefined> {
+        return await this.userRepository.findOne({where: {email: email}});
+    }
+
+    async updateAccessToken(user: User, token: string): Promise<User | undefined> {
+        user.accessToken = token;
+        return await this.userRepository.save(user);
+    }
+
 }

@@ -18,6 +18,12 @@ export class User extends Base<User> {
     @Column({name: "email"})
     email: string;
 
+    @Column({name: "access_token"})
+    accessToken: string;
+
+    @Column({name: "refresh_token"})
+    refreshToken: string;
+
     toDto(): UserDto {
         return new UserDto(this);
     }

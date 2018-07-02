@@ -176,35 +176,35 @@ export function Error (target: any, propertyKey : string, index : number) {
  * to users with specified role
  * (others will receive 401 error).
  */
-export function AllowedFor (roles: string[]) {
-    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
-        let reqIndex = target[propertyKey + reqMetaKey];
-        let resIndex = target[propertyKey + resMetaKey];
-
-        return {
-            value: async (...args: any[]) => {
-                let req : Request = args[reqIndex];
-                let res : Response = args[resIndex];
-
-                let accessToken = req.header('Authorization').split(' ')[1];
-                let user : User = await pullUser(accessToken);
-                req['user'] = user;
-
-                // this actually works only if user roles in DB and in constants are the same,
-                // and are ordered by permissions amount, ascending;
-                // also each following role has to include
-                // permissions of all of the preceding.
-                const formattedUser = user.toJSON();
-                formattedUser.role = formatRole(user.toJSON().role);
-                const isAllowedToProceed = user && (roles.indexOf( formattedUser.role.title['en']) !== -1);
-
-                return (isAllowedToProceed)
-                    ? descriptor.value.apply(this, args)
-                    : (() => res.sendStatus(401)).apply(this, args);
-            }
-        };
-    };
-}
+// export function AllowedFor (roles: string[]) {
+//     return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+//         let reqIndex = target[propertyKey + reqMetaKey];
+//         let resIndex = target[propertyKey + resMetaKey];
+//
+//         return {
+//             value: async (...args: any[]) => {
+//                 let req : Request = args[reqIndex];
+//                 let res : Response = args[resIndex];
+//
+//                 let accessToken = req.header('Authorization').split(' ')[1];
+//                 let user : User = await pullUser(accessToken);
+//                 req['user'] = user;
+//
+//                 // this actually works only if user roles in DB and in constants are the same,
+//                 // and are ordered by permissions amount, ascending;
+//                 // also each following role has to include
+//                 // permissions of all of the preceding.
+//                 const formattedUser = user.toDto();
+//                 // formattedUser.role = formatRole(user.toJSON().role);
+//                 // const isAllowedToProceed = user && (roles.indexOf( formattedUser.role.title['en']) !== -1);
+//
+//                 return (isAllowedToProceed)
+//                     ? descriptor.value.apply(this, args)
+//                     : (() => res.sendStatus(401)).apply(this, args);
+//             }
+//         };
+//     };
+// }
 
 function formatRole(role) {
     const fieldsWithTranslate = ['title'];

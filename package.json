@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@angular/core": "latest",
     "@nestjs/common": "^4.6.6",
     "@nestjs/core": "^4.6.6",
     "@nestjs/microservices": "^4.6.6",
@@ -11,19 +12,21 @@
     "@nestjs/testing": "^4.6.6",
     "@nestjs/typeorm": "^2.0.0",
     "@nestjs/websockets": "^4.6.6",
+    "bcrypt": "latest",
+    "google-auth-library": "latest",
+    "joi": "^13.4.0",
     "mongodb": "^3.0.7",
     "pg": "^7.4.1",
     "redis": "^2.8.0",
+    "reflect-metadata": "^0.1.12",
     "rxjs": "^5.5.10",
     "ts-md5": "^1.2.4",
     "typeorm": "^0.2.7",
-    "typescript": "^2.8.1",
-    "reflect-metadata": "^0.1.12",
-    "bcrypt": "latest",
-    "@angular/core": "latest",
-    "google-auth-library": "latest"
+    "typescript": "^2.8.1"
   },
   "devDependencies": {
+    "@types/config": "^0.0.34",
+    "@types/joi": "^13.3.0",
     "@types/node": "^9.6.5",
     "nodemon": "^1.17.5",
     "ts-node": "^6.0.0"

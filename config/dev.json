@@ -1,0 +1,25 @@
+{
+  "server": {
+    "port": 3000
+  },
+  "dev": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "tap_dev",
+    "username": "root",
+    "password": "dmitry1992",
+    "charset": "utf8mb4",
+    "dialect": "mysql",
+    "connectionRetryCount": 5,
+    "maxConnections": 10,
+    "delayBeforeReconnect": 3000,
+    "showErrors": true,
+    "logging": false
+  },
+  "firebase": {
+    "projectId": "aptap-efda9",
+    "privateKey": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC0yyUCaiBuFjlh\nKwhjM1DSU+IgySUX0/RI0yNys9C0jfwUmFpQVLynRJdsfem+1uFJLH1B5M5+xmiz\nW3fhyMFPvOwPO5veZtfud3V9gz7Rxi/LYdOTuYqSILDH4bYhps0EX2ausnXVZpCI\nHuK9VeBh4dNv8zoyHei2xrBgIyKdQLwdpHeTYdAOaUj3DSmJqyUi5VAt3rquE4Cz\nP1AxCvFBFhFzcvWgxX324wLFVViF4Fbn/8KsFAJ6xP3nuCM92dZKMVNQWEI9u/JI\nIroJkMc6WuoWZBZozqVD7vcEq/7PlKEgDk6qd9c3Cy2Vmt1A6lIVOhda8cniCggK\nBD+34wCxAgMBAAECggEAAuHRKXhxI2ghyomB1PkCsxOowW6Lc5WKqaWKBWBV9abk\ny5xBJlIvfrgidNWOBh+NUFoP9h60ZwN5NFDDOLt3T3LazYRc//7iNtg7LIDM3dG7\nvdGFqq90xM8WGl2gBmnPD2CI9cR9CeWcbLsXUL7feJf9w6VcOmPNK6q/sYyl1t1k\nNawLOJ7kRl/RgAUcttkBnCL/+CxOwGrkDY/VeDmBx4+VP1YCeckY1IrRaeDUgGRy\nSPmgSUWy3uxgrGXphreNrHql9+Y+/x+n2ZkQhmRyon9yWOqzFrHbUvazsiYBb+Sd\nic/Dangu5B1MrYwa+ZXrztEtZpYh+Kljj5cvpVIntQKBgQDdQOqRw0lMoizxMNIf\nHwh0eDAvpJwJpnpdAL8XaxMJ2RivQ4vaSiYQyCaT2Wh1VOqT8Z/vzusbMQBeqaEH\npAcxYyYsOpKGWxdM+JcDab/G1jK0YNQpbGwJp3HuIWfyqfHyuvVeD4gbQHqHyHE5\n5EOV4gZp3O6sqJ6WVqVne5bFZQKBgQDRL5u5LR654LoTkmDXVi6tM4hSLLEoy+W4\nUolHxHFRTkt5XN1prVjjrxkRNX+hprZBDU6LxHnp5HJT8wcD7GFH9xNfzIQHY09w\n/rSK9RhcefH4+V0zw/q1YklLFXLT/2WvNYxLo8txJ5Ymix4dtb80FgveESW2DcbJ\nnKTtjUTvXQKBgCanwtO4pMPIycVR3EQnrdh7bx/DyKc++L3q9Xfn8ymTTmbAjFyU\n+9WOwn6uSzvEnD9AxcqmAhl8FC51wHaPR9pvEipECXmDzKxb+jZUcXcR0UYGbMrX\n8IA3SwZpu7l/y4+27kuCtyrbtwymDnIo2U4EcU5plSGBTEPD254az5qpAoGAZ4dL\nZ7tH8LCjBxqz6P8TPM87UYgi6dD30WCv5p/3gUjhm5/1SN7tFkpLerPiheuPWeSv\nEgdcWwCgAKJPv4ZWoxpKMWhzk4B4CbFVQ0yIEQSdWB56HSuKQgjxw0JLQVauSaeT\n1r+q6UaxTkQd1JBln+6lUvNjmZV548At9A+tpVUCgYBKXGMxzmpFKVIBsy5Rv4xa\nyKLe1+r9LYbz2NsRBxGPEs7Yf0DWWH33Z3daALwcx4GehBm6G6kITYQStAS6wDIO\nwmXfgmp4ZMG0IfswYCaBDALvvdavxW6CFkLKvsd7d50fmUMvEpNDzaOwn5mEPnLJ\naIA+4ILpxOZhga9T9cSBYw==\n-----END PRIVATE KEY-----\n",
+    "clientEmail": "firebase-adminsdk-imsqr@taptap",
+    "databaseURL": "https://taptap-efda9.firebaseio.com"
+  }
+}
