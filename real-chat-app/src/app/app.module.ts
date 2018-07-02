@@ -9,6 +9,8 @@ import {MessageService} from './services/message.service';
 import {LandingModule} from "./landing/landing.module";
 import {ChatModule} from "./chat/chat.module";
 import {RouterModule} from "@angular/router";
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
 // import {AuthGuardService} from './services/auth-guarg.service';
 // import {StorageService} from './services/storage.service';
 // import {SessionService} from './services/session.service';
@@ -20,9 +22,8 @@ import {RouterModule} from "@angular/router";
     AppComponent
   ],
   imports: [
+    BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    NgbModalModule.forRoot(),
     RouterModule.forRoot(ROUTES),
   ],
   providers: [

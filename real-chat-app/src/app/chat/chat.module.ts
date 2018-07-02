@@ -6,12 +6,12 @@ import {RouterModule} from "@angular/router";
 import {ROUTES} from "./chat.router";
 
 @NgModule({
+  declarations: [ChatComponent],
   imports: [
-    MatButtonModule,
-    MatCheckboxModule,
+    // MatButtonModule,
+    // MatCheckboxModule,
     CommonModule,
     RouterModule.forChild(ROUTES),
-  ],
-  declarations: [ChatComponent]
+  ]
 })
 export class ChatModule { }
