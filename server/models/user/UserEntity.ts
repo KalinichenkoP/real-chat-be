@@ -18,6 +18,9 @@ export class User extends Base<User> {
     @Column({name: "email"})
     email: string;
 
+    @Column({name: "image"})
+    image: string;
+
     @Column({name: "access_token"})
     accessToken: string;
 

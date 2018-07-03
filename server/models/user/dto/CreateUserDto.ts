@@ -1,17 +1,16 @@
 import { RegisterUserDto } from "./RegisterUserDto";
 
 export class CreateUserDto {
-    readonly userName: string;
-    readonly fullName: string;
-    readonly phone: string;
-    readonly birthday: string;
-    readonly passHash: string;
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly email: string;
+    readonly image: string;
 
-    constructor(registerDto: RegisterUserDto, passHash: string) {
-        this.userName = registerDto.userName;
-        this.fullName = registerDto.fullName;
-        this.phone = registerDto.phone;
-        this.passHash = passHash;
+    constructor(registerDto: RegisterUserDto) {
+        this.firstName = registerDto.firstName;
+        this.lastName = registerDto.lastName;
+        this.email = registerDto.email;
+        this.image = registerDto.image;
 
     }
 }

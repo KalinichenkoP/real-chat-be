@@ -24,6 +24,7 @@ export default class ServerController {
      */
     @MayHaveErrors
     public static failure (res: Response, @Error error: any) {
+      // console.log(error);
         let apiResponse : APIResponse = {
             status: CONST.STATUSES.ERROR,
             payload: (error && error.message)

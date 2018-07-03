@@ -3,6 +3,8 @@ import {Repository} from "typeorm";
 import {User} from "./UserEntity";
 import {ListResponseDto} from "../../core/dto/ListResponseDto";
 import {UserDto} from "./dto/UserDto";
+import {RegisterUserDto} from './dto/RegisterUserDto';
+import {CreateUserFactory} from './factory/UserFactory';
 
 @Component()
 export class UserService {
@@ -26,8 +28,15 @@ export class UserService {
     }
 
     async updateAccessToken(user: User, token: string): Promise<User | undefined> {
+        console.log(user);
+        console.log(token);
         user.accessToken = token;
         return await this.userRepository.save(user);
+    }
+
+    async createOne(registerDto: RegisterUserDto): Promise<User> {
+        const createUser = new CreateUserFactory().create(registerDto);
+        return await this.userRepository.save(createUser);
     }
 
 }
