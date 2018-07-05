@@ -24,6 +24,7 @@ export class UserController extends ServerController {
             return Promise.reject(error);
         }
         let payload = login.getPayload();
+        console.log(payload);
         let user: User = await this.userService.findByEmail(payload.email);
         if (!user) {
             user = await this.userService.createOne(payload);
@@ -61,6 +62,7 @@ export class UserController extends ServerController {
         const audiance = '546854662215-mmnqq81j1bk4k1nf8jn1flugnf9eik28.apps.googleusercontent.com'; // gapi client id
         gaClient.verifyIdToken({idToken, audiance}, async (error, login) => {
                 try {
+                    console.log(login);
 
                     const user: User = await this.findOrCreateUser(error, login);
                     // if (!user) {

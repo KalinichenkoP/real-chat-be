@@ -11,8 +11,7 @@ export class Session extends Base<Session> {
     @Column({ name: "refresh_token" })
     refreshToken: string;
 
-
-    @OneToOne(type => User)
+    @OneToOne(() => User)
     @JoinColumn()
     user: User;
 }

@@ -30,13 +30,15 @@ export class UserService {
     async updateAccessToken(user: User, token: string): Promise<User | undefined> {
         console.log(user);
         console.log(token);
-        user.accessToken = token;
+        // user.accessToken = token;
         return await this.userRepository.save(user);
     }
 
     async createOne(registerDto: RegisterUserDto): Promise<User> {
+        console.log(registerDto);
         const createUser = new CreateUserFactory().create(registerDto);
-        return await this.userRepository.save(createUser);
+        console.log(createUser);
+        return await this.userRepository.create(createUser);
     }
 
 }

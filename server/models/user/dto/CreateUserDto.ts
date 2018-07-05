@@ -7,10 +7,10 @@ export class CreateUserDto {
     readonly image: string;
 
     constructor(registerDto: RegisterUserDto) {
-        this.firstName = registerDto.firstName;
-        this.lastName = registerDto.lastName;
+        this.firstName = registerDto.given_name;
+        this.lastName = registerDto.family_name;
         this.email = registerDto.email;
-        this.image = registerDto.image;
+        this.image = registerDto.picture;
 
     }
 }

@@ -1,12 +1,12 @@
 
 
 export class RegisterUserDto {
-    readonly firstName: string;
+    readonly given_name: string;
 
-    readonly lastName: string;
+    readonly family_name: string;
 
     readonly email: string;
 
-    readonly image: string;
+    readonly picture: string;
 
 }
