@@ -74,6 +74,7 @@ export class AuthService extends ClientService {
         try {
             console.log('REQUEST');
             const authToken: string = await this.simplePOST("/users/me/verify-token", body);
+            console.log(authToken);
             this.http.setAuthToken(authToken);
             return Promise.resolve(true);
         } catch (err) {

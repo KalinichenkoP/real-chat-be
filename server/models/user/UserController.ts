@@ -38,7 +38,8 @@ export class UserController extends ServerController {
 
 
     @Get()
-    async findAll(): Promise<ListResponseDto<UserDto>> {
+    async findAll(@Req() req): Promise<ListResponseDto<UserDto>> {
+        console.log(req);
         return await this.userService.find();
     }
 

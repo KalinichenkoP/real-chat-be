@@ -28,8 +28,6 @@ export class UserService {
     }
 
     async updateAccessToken(user: User, token: string): Promise<User | undefined> {
-        console.log(user);
-        console.log(token);
         // user.accessToken = token;
         return await this.userRepository.save(user);
     }

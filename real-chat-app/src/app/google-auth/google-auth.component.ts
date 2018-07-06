@@ -76,6 +76,7 @@ export class GoogleAuthComponent implements OnInit, OnDestroy {
 
     try {
       // verifying user
+      console.log(authResponse);
       await this.gaService.verifyGAToken(authResponse["id_token"]);
       // since this method is used as a callback for an action,
       // that takes place outside of Angular scope,
