@@ -11,7 +11,7 @@ export class ChannelController {
 
     @Get()
     async findAll(): Promise<[Channel[], number]> {
-        return await this.channelService.find();
+        return await this.channelService.findAll();
     }
 
     @Get(':id')

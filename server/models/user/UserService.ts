@@ -13,7 +13,7 @@ export class UserService {
                 private readonly userRepository: Repository<User>) {
     }
 
-    async find(): Promise<ListResponseDto<UserDto>> {
+    async findAll(): Promise<ListResponseDto<UserDto>> {
         const res = await this.userRepository.findAndCount();
         const users = res[0].map((user) => user.toDto());
         return new ListResponseDto<UserDto>(users, res[1]);

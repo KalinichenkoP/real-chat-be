@@ -40,7 +40,8 @@ export class UserController extends ServerController {
     @Get()
     async findAll(@Req() req): Promise<ListResponseDto<UserDto>> {
         console.log(req);
-        return await this.userService.find();
+        console.log(req.header);
+        return await this.userService.findAll();
     }
 
     @Get(':id')

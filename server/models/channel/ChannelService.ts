@@ -9,7 +9,7 @@ export class ChannelService {
                 private readonly channelRepository: Repository<Channel>) {
     }
 
-    async find(): Promise<[Channel[], number]> {
+    async findAll(): Promise<[Channel[], number]> {
         return await this.channelRepository.findAndCount();
     }
 

@@ -16,8 +16,9 @@ export class LandingComponent implements OnInit {
 
   public async sendRequest() {
     console.log('send request');
-    const users = await this.http.get("http://localhost:3000/api/v1/users");
-    console.log(users);
+    this.http.get("/users").subscribe((response => {
+      console.log(response);
+    }));
   }
 
 }

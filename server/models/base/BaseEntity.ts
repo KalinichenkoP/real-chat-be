@@ -1,4 +1,4 @@
-import {BaseEntity, Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import {BaseEntity, CreateDateColumn, UpdateDateColumn} from "typeorm";
 
 
 export abstract class Base<T> extends BaseEntity{

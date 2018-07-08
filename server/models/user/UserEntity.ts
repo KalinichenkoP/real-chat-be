@@ -1,24 +1,24 @@
-import {PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn} from "typeorm";
-import {Entity} from "typeorm/decorator/entity/Entity";
-import {UserDto} from "./dto/UserDto";
-import {Base} from "../base/BaseEntity";
+import {PrimaryGeneratedColumn, Column} from 'typeorm';
+import {Entity} from 'typeorm/decorator/entity/Entity';
+import {UserDto} from './dto/UserDto';
+import {Base} from '../base/BaseEntity';
 
-@Entity()
+@Entity({name: 'users'})
 export class User extends Base<User> {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({name: "first_name"})
+    @Column({name: 'first_name'})
     firstName: string;
 
-    @Column({name: "last_name"})
+    @Column({name: 'last_name'})
     lastName: string;
 
-    @Column({name: "email"})
+    @Column({name: 'email'})
     email: string;
 
-    @Column({name: "image"})
+    @Column({name: 'image'})
     image: string;
 
     toDto(): UserDto {
