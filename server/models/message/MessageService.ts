@@ -1,7 +1,7 @@
-import {Component, Inject} from "@nestjs/common";
-import {MongoRepository} from "typeorm";
-import {Message} from "./MessageEntity";
-import {REPOSITORY_TOKEN} from "../../enums/RepositoryTokens";
+import {Component, Inject} from '@nestjs/common';
+import {MongoRepository} from 'typeorm';
+import {Message} from './MessageEntity';
+import {REPOSITORY_TOKEN} from '../../enums/RepositoryTokens';
 
 @Component()
 export class MessageService {
@@ -14,7 +14,14 @@ export class MessageService {
         return await this.messageRepository.find();
     }
 
-    public async findById(id: number): Promise<Message> {
-        return await this.messageRepository.findOne(id);
+    public async findByUser(userId: number): Promise<Message | undefined> {
+        console.log(userId);
+        this.messageRepository.findOne({where: {userId: userId}})
+            .then(response => {
+            console.log('response ' + response);
+        }, error => {
+                console.log('error ' + error);
+        });
+        return await this.messageRepository.findOne({where: {userId: userId}});
     }
 }

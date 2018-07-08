@@ -9,9 +9,9 @@ export class Message {
     id: ObjectID;
 
     @Column()
-    firstName: string;
+    ownerId: number;
 
     @Column()
-    lastName: string;
+    channelId: number;
 
 }

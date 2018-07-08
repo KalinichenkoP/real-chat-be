@@ -2,7 +2,7 @@ import {Controller, Get,  NotFoundException, Param, Res} from "@nestjs/common";
 import {ChannelService} from "./ChannelService";
 import {Channel} from "./ChannelEntity";
 
-@Controller('channel')
+@Controller('api/v1/channels')
 export class ChannelController {
 
 
