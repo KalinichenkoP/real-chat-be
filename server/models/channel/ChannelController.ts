@@ -26,8 +26,6 @@ export class ChannelController {
     async findOne(@Res() res, @Param("id") id): Promise<ChannelDto> {
         const channel: ChannelDto = await this.channelService.findById(id);
 
-
-
         return res.json(channel);
     }
 }

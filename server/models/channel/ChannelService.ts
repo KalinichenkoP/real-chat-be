@@ -5,8 +5,6 @@ import {CreateChannelFactory} from './factory/ChannelFactory';
 import {ChannelDto} from './dto/ChannelDto';
 import {ListResponseDto} from '../../core/dto/ListResponseDto';
 import {RegisterChannelDto} from './dto/RegisterChannelDto';
-import {C} from '@angular/core/src/render3';
-
 @Component()
 export class ChannelService {
 
