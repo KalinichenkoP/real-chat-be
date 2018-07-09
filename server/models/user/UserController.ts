@@ -17,16 +17,14 @@ export class UserController extends ServerController {
         super();
     }
 
-    private async findOrCreateUser(error: any, login: any): Promise<User> {
+    private async findOrCreateUser(error: any, login: any): Promise<UserDto> {
         if (error) {
             return Promise.reject(error);
         }
         let payload = login.getPayload();
-        console.log(payload);
-        let user: User = await this.userService.findByEmail(payload.email);
+        const user: UserDto = await this.userService.findByEmail(payload.email);
         if (!user) {
             const user: UserDto = await this.userService.createOne(payload);
-            console.log(user);
         }
 
         return user;
@@ -35,8 +33,6 @@ export class UserController extends ServerController {
 
     @Get()
     async findAll(@Req() req): Promise<ListResponseDto<UserDto>> {
-        console.log(req);
-        console.log(req.header);
         return await this.userService.findAll();
     }
 
@@ -58,14 +54,10 @@ export class UserController extends ServerController {
                 try {
                     console.log(login);
 
-                    const user: User = await this.findOrCreateUser(error, login);
-                    // if (!user) {
-                    //     return UserController.failure(res, new Error('user not found'));
-                    // }
-
+                    const user: UserDto = await this.findOrCreateUser(error, login);
                     // access token is a random unique string
                     let accessToken = await Md5.hashStr((new Date()).toString()).toString();
-                    await this.userService.updateAccessToken(user, accessToken);
+                    // await this.userService.updateAccessToken(user, accessToken);
 
                     return UserController.success(res, accessToken);
                 } catch (err) {

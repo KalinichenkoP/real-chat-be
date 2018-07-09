@@ -35,9 +35,11 @@ export class UserService {
         return user.toDto();
     }
 
-    async updateAccessToken(user: User, token: string): Promise<User | undefined> {
+    async updateAccessToken(user: UserDto, token: string): Promise<UserDto> {
         // user.accessToken = token;
-        return await this.userRepository.save(user);
+        // TO DO
+        return user;
+        // return await this.userRepository.save(user);
     }
 
     async createOne(registerUserDto: RegisterUserDto): Promise<UserDto> {
