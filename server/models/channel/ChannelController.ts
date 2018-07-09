@@ -1,7 +1,7 @@
 import {Controller, Get, NotFoundException, Param, Post, Req, Res} from '@nestjs/common';
 import {ChannelService} from "./ChannelService";
-import {Channel} from "./ChannelEntity";
 import {ChannelDto} from './dto/ChannelDto';
+import {ListResponseDto} from '../../core/dto/ListResponseDto';
 
 @Controller('api/v1/channels')
 export class ChannelController {
@@ -11,23 +11,23 @@ export class ChannelController {
     }
 
     @Get()
-    async findAll(): Promise<[Channel[], number]> {
+    async findAll(): Promise<ListResponseDto<ChannelDto>> {
         return await this.channelService.findAll();
     }
 
     @Post()
     async create(@Req() req, @Res() res): Promise<ChannelDto> {
-        return await this.channelService.create(req.body);
+        console.log(req.body);
+        const channel = await this.channelService.createOne(req.body);
+        return res.send(channel);
     }
 
     @Get(':id')
-    async findOne(@Res() res, @Param("id") id) {
-        const channel = await this.channelService.findById(id);
+    async findOne(@Res() res, @Param("id") id): Promise<ChannelDto> {
+        const channel: ChannelDto = await this.channelService.findById(id);
 
-        if (!channel) {
-            throw new NotFoundException(`User is absent`);
-        }
 
-        res.json(channel);
+
+        return res.json(channel);
     }
 }

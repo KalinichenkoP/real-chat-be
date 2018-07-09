@@ -33,11 +33,10 @@ export class UserService {
         return await this.userRepository.save(user);
     }
 
-    async createOne(registerDto: RegisterUserDto): Promise<User> {
-        console.log(registerDto);
-        const createUser = new CreateUserFactory().create(registerDto);
-        console.log(createUser);
-        return await this.userRepository.create(createUser);
+    async createOne(registerUserDto: RegisterUserDto): Promise<UserDto> {
+        const createUser = new CreateUserFactory().create(registerUserDto);
+        const  user = await this.userRepository.create(createUser);
+        return user.toDto();
     }
 
 }

@@ -10,7 +10,7 @@ export class Channel extends Base<Channel>{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({name: "first_name"})
+    @Column({name: "name", unique: true})
     name: string;
 
     @ManyToMany(() => User)
