@@ -44,10 +44,6 @@ export class UserController extends ServerController {
     async findOne(@Res() res, @Param('id') id): Promise<UserDto> {
         const user = await this.userService.findById(id);
 
-        if (!user) {
-            throw new NotFoundException(`User is absent`);
-        }
-
         return res.json(user);
     }
 
