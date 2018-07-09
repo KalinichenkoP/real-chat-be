@@ -1,4 +1,4 @@
-import {Controller, Get, Param, Res} from '@nestjs/common';
+import {Controller, Get, Param, Post, Req, Res} from '@nestjs/common';
 import {MessageService} from "./MessageService";
 import {Message} from "./MessageEntity";
 
@@ -11,12 +11,14 @@ export class MessageController {
     findAll(): Promise<Message[]> {
         return this.messageService.findAll();
     }
+    @Post()
+    createOne(@Req() req): Promise<Message> {
+        return this.messageService.createMessage(req.body);
+    }
 
     @Get(':userId')
     async findOne(@Res() res, @Param('userId') userId): Promise<Message> {
-        console.log(userId);
-        console.log()
-        return this.messageService.findByUser(userId);
+        return this.messageService.findByUserId(userId);
     }
 
     // @Get(':id')
