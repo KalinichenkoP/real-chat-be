@@ -1,6 +1,7 @@
-import {Controller, Get,  NotFoundException, Param, Res} from "@nestjs/common";
+import {Controller, Get, NotFoundException, Param, Post, Req, Res} from '@nestjs/common';
 import {ChannelService} from "./ChannelService";
 import {Channel} from "./ChannelEntity";
+import {ChannelDto} from './dto/ChannelDto';
 
 @Controller('api/v1/channels')
 export class ChannelController {
@@ -12,6 +13,11 @@ export class ChannelController {
     @Get()
     async findAll(): Promise<[Channel[], number]> {
         return await this.channelService.findAll();
+    }
+
+    @Post()
+    async create(@Req() req, @Res() res): Promise<ChannelDto> {
+        return await this.channelService.create(req.body);
     }
 
     @Get(':id')

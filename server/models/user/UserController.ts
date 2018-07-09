@@ -45,14 +45,14 @@ export class UserController extends ServerController {
     }
 
     @Get(':id')
-    async findOne(@Res() res, @Param('id') id) {
+    async findOne(@Res() res, @Param('id') id): Promise<UserDto> {
         const user = await this.userService.findById(id);
 
         if (!user) {
             throw new NotFoundException(`User is absent`);
         }
 
-        res.json(user);
+        return res.json(user);
     }
 
     @Post('/me/verify-token')

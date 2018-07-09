@@ -19,8 +19,9 @@ export class UserService {
         return new ListResponseDto<UserDto>(users, res[1]);
     }
 
-    async findById(id: number): Promise<User | undefined> {
-        return await this.userRepository.findOne(id);
+    async findById(id: number): Promise<UserDto> {
+        const user = await this.userRepository.findOne(id);
+        return user.toDto()
     }
 
     async findByEmail(email: string): Promise<User | undefined> {

@@ -1,5 +1,3 @@
-
-
 import { Base } from "../BaseEntity";
 import { TimeManager } from "../../../core/utils/TimeManager";
 
