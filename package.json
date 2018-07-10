@@ -12,6 +12,7 @@
     "@nestjs/testing": "^4.6.6",
     "@nestjs/typeorm": "^2.0.0",
     "@nestjs/websockets": "^4.6.6",
+    "@types/socket.io": "^1.4.36",
     "bcrypt": "latest",
     "google-auth-library": "latest",
     "joi": "^13.4.0",

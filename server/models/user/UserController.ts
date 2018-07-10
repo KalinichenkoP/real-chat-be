@@ -11,7 +11,7 @@ import {Md5} from 'ts-md5/dist/md5';
 const gaClient: any = new OAuth2Client('546854662215-mmnqq81j1bk4k1nf8jn1flugnf9eik28.apps.googleusercontent.com', '', '');
 
 
-@Controller('api/v1/users')
+@Controller('users')
 export class UserController extends ServerController {
     constructor(private readonly userService: UserService) {
         super();

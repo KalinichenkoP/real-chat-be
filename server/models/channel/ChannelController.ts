@@ -3,7 +3,7 @@ import {ChannelService} from "./ChannelService";
 import {ChannelDto} from './dto/ChannelDto';
 import {ListResponseDto} from '../../core/dto/ListResponseDto';
 
-@Controller('api/v1/channels')
+@Controller('channels')
 export class ChannelController {
 
 
