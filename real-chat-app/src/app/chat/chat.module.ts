@@ -4,9 +4,10 @@ import { ChatComponent } from './chat/chat.component';
 import {MatButtonModule, MatCheckboxModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
 import {ROUTES} from "./chat.router";
+import { ChatListComponent } from './chat-list/chat-list.component';
 
 @NgModule({
-  declarations: [ChatComponent],
+  declarations: [ChatComponent, ChatListComponent],
   imports: [
     // MatButtonModule,
     // MatCheckboxModule,

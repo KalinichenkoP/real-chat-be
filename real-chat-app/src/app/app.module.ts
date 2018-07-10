@@ -23,6 +23,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {NotifierService} from './notifier/notifier.service';
 import {SpinnerService} from './extra-services/loading-spinner.service';
+import {ChannelService} from '../../../server/models/channel/ChannelService';
+import {ChatService} from './services/chat.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import {SpinnerService} from './extra-services/loading-spinner.service';
     HttpClient,
     NotifierService,
     SpinnerService,
+    ChatService,
     // AuthGuardService,
     // AuthInterceptorService,
     UserService,

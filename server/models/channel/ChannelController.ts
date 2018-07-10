@@ -1,4 +1,4 @@
-import {Controller, Get, NotFoundException, Param, Post, Req, Res} from '@nestjs/common';
+import {Controller, Get, Param, Post, Req, Res} from '@nestjs/common';
 import {ChannelService} from "./ChannelService";
 import {ChannelDto} from './dto/ChannelDto';
 import {ListResponseDto} from '../../core/dto/ListResponseDto';
