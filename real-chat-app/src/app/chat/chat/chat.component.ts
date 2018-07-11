@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+ private name: string;
+
+  constructor( private route: ActivatedRoute,) { }
 
   ngOnInit() {
+    this.name = this.route.snapshot.paramMap.get('name');
+    console.log(this.name);
   }
 
 }
