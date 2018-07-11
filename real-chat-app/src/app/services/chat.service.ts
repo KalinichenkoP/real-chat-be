@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {API_URL} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Channel} from '../models/channel';
+import {ApiListResponse} from '../../../classes/ApiListResponce';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class ChatService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getChatList(): Observable<Channel[]> {
+  getChatList(): Observable<ApiListResponse<Channel>> {
     return this.httpClient
-      .get<Channel[]>(this.url);
+      .get<ApiListResponse<Channel>>(this.url);
   }
 }

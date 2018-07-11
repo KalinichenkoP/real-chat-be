@@ -1,0 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.auth-component {
+  height: 100vh;
+}

@@ -1,19 +1,21 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MyDatePickerModule } from "mydatepicker";
-import { Ng2PaginationModule } from "ng2-pagination";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MyDatePickerModule} from 'mydatepicker';
+import {Ng2PaginationModule} from 'ng2-pagination';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { GoogleAuthComponent } from "./google-auth.component";
+import {GoogleAuthComponent} from './google-auth.component';
 
-import { PipeModule } from "../extra-pipes/pipes.module";
+import {PipeModule} from '../extra-pipes/pipes.module';
 
-import { ROUTES } from "./google-auth.router";
+import {ROUTES} from './google-auth.router';
+import {MatButtonModule} from '@angular/material';
 
 @NgModule({
   imports: [
+    MatButtonModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -25,6 +27,10 @@ import { ROUTES } from "./google-auth.router";
   ],
   declarations: [
     GoogleAuthComponent
+  ],
+  exports: [
+    MatButtonModule
   ]
 })
-export class GoogleAuthModule { }
+export class GoogleAuthModule {
+}

@@ -27,12 +27,9 @@ export class UserService {
         return user.toDto()
     }
 
-    async findByEmail(email: string): Promise<UserDto> {
-        const user:User =  await this.userRepository.findOne({where: {email: email}});
-        if (!user) {
-            throw new NotFoundException(`User is absent`);
-        }
-        return user.toDto();
+    async findByEmail(email: string, throwException = true): Promise<User | undefined>  {
+        return await this.userRepository.findOne({where: {email: email}});
+
     }
 
     async updateAccessToken(user: UserDto, token: string): Promise<UserDto> {
@@ -42,10 +39,10 @@ export class UserService {
         // return await this.userRepository.save(user);
     }
 
-    async createOne(registerUserDto: RegisterUserDto): Promise<UserDto> {
+    async createOne(registerUserDto: RegisterUserDto): Promise<User> {
         const createUser = new CreateUserFactory().create(registerUserDto);
-        const  user: User = await this.userRepository.create(createUser);
-        return user.toDto();
+        const createdUser: User =  await this.userRepository.create(createUser);
+        return await this.userRepository.save(createdUser);
     }
 
 }

@@ -15,8 +15,8 @@ export class ChatListComponent implements OnInit {
   async ngOnInit() {
     await this.chatService.getChatList().subscribe(
       (result)=> {
-        console.log(result);
-        this.chats = result;
+        console.log(result.data);
+        this.chats = result.data;
       }, (error) => {
         console.log(error);
       }

@@ -22,12 +22,12 @@ export class UserController extends ServerController {
             return Promise.reject(error);
         }
         let payload = login.getPayload();
-        const user: UserDto = await this.userService.findByEmail(payload.email);
-        if (!user) {
-            const user: UserDto = await this.userService.createOne(payload);
-        }
+        let user: User = await this.userService.findByEmail(payload.email, false);
 
-        return user;
+        if (!user) {
+            user = await this.userService.createOne(payload);
+        }
+        return user.toDto();
     }
 
 
