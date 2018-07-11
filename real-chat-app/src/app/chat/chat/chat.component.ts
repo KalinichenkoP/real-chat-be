@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ChatComponent implements OnInit {
 
- private name: string;
+ protected name: string;
 
   constructor( private route: ActivatedRoute,) { }
 
