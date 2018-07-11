@@ -8,8 +8,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {GoogleAuthComponent} from './google-auth.component';
 
-import {PipeModule} from '../extra-pipes/pipes.module';
-
 import {ROUTES} from './google-auth.router';
 import {MatButtonModule} from '@angular/material';
 
@@ -22,7 +20,6 @@ import {MatButtonModule} from '@angular/material';
     MyDatePickerModule,
     RouterModule.forChild(ROUTES),
     NgbModule.forRoot(),
-    PipeModule,
     Ng2PaginationModule
   ],
   declarations: [

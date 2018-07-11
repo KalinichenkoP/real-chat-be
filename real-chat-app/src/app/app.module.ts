@@ -12,7 +12,7 @@ import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {AuthService} from './google-auth/auth.service';
-import { SimpleNotificationsModule} from 'angular2-notifications';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 // import {AuthGuardService} from './services/auth-guarg.service';
 // import {StorageService} from './services/storage.service';
 // import {SessionService} from './services/session.service';
@@ -23,7 +23,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {NotifierService} from './notifier/notifier.service';
 import {SpinnerService} from './extra-services/loading-spinner.service';
-import {ChannelService} from '../../../server/models/channel/ChannelService';
 import {ChatService} from './services/chat.service';
 
 @NgModule({

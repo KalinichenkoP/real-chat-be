@@ -1,14 +1,16 @@
-import { NotificationsService } from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 import { Injectable } from '@angular/core';
 
 /**
  * Service that allows to show notification toasts.
  * Actually is just a wrapper above 'angular2-notifications'.
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NotifierService {
     constructor (
-        private toaster: NotificationsService
+        private notificationService: NotificationsService
     ) {
     }
 
@@ -16,7 +18,8 @@ export class NotifierService {
      * Show notification about action that succeeded.
      */
     success (message: string) {
-        this.toaster.success("", message, {
+      console.log(message);
+        this.notificationService.success("", message, {
             timeOut: 3000,
             showProgressBar: false
         });
@@ -26,7 +29,7 @@ export class NotifierService {
      * Show notification about action that failed.
      */
     failure (message: string) {
-        this.toaster.error("", message, {
+        this.notificationService.error("", message, {
             timeOut: 3000,
             showProgressBar: false
         });

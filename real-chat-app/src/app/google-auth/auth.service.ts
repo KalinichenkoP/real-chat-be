@@ -3,7 +3,7 @@ import { NotifierService } from "../notifier/notifier.service";
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import ClientService from "../../../classes/ClientService";
-import {PublicUserAttributes} from "../../../interfaces/UserAttributes";
+// import {PublicUserAttributes} from "../../../interfaces/UserAttributes";
 // import {HttpClient} from '@angular/common/http';
 
 // 'gapi' is a global object, created by Google API client library;
@@ -99,14 +99,14 @@ export class AuthService extends ClientService {
         });
     }
 
-    /**
-     * Get info about user, currently being signed in
-     * (public attributes of his profile).
-     */
-    public async getCurrentUserInfo () : Promise<PublicUserAttributes> {
-        // todo: cache this info not to send requests every time
-        return this.simpleGET("/api/users/me");
-    }
+    // /**
+    //  * Get info about user, currently being signed in
+    //  * (public attributes of his profile).
+    //  */
+    // public async getCurrentUserInfo () : Promise<PublicUserAttributes> {
+    //     // todo: cache this info not to send requests every time
+    //     return this.simpleGET("/api/users/me");
+    // }
 
     /**
      * Log out from application:
