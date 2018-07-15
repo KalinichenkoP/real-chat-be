@@ -18,12 +18,15 @@ export class ChannelService {
         return new ListResponseDto<ChannelDto>(channels, res[1]);
     }
 
-    async findById(id: number): Promise<ChannelDto> {
+    async findById(id: number): Promise<Channel> {
         const channel = await this.channelRepository.findOne(id);
         if (!channel) {
             throw new NotFoundException(`Channel is absent`);
         }
-        return channel.toDto()
+        return channel;
+    }
+    async findByName(name: string): Promise<Channel | undefined> {
+        return await this.channelRepository.findOne({where: {name: name}});
     }
 
     async createOne(registerChannelDto: RegisterChannelDto): Promise<ChannelDto> {

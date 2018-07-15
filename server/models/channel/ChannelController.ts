@@ -1,7 +1,8 @@
-import {Controller, Get, Param, Post, Req, Res} from '@nestjs/common';
+import {Controller, Get, NotFoundException, Param, Post, Req, Res} from '@nestjs/common';
 import {ChannelService} from "./ChannelService";
 import {ChannelDto} from './dto/ChannelDto';
 import {ListResponseDto} from '../../core/dto/ListResponseDto';
+import {Channel} from './ChannelEntity';
 
 @Controller('channels')
 export class ChannelController {
@@ -17,15 +18,20 @@ export class ChannelController {
 
     @Post()
     async create(@Req() req, @Res() res): Promise<ChannelDto> {
-        console.log(req.body);
+        console.log(req.body.name);
+        //check for exist
+        const testChannel = await this.channelService.findByName(req.body.name);
+        if (testChannel) {
+            throw new NotFoundException(`Chat with selected name was`);
+        }
         const channel = await this.channelService.createOne(req.body);
         return res.send(channel);
     }
 
     @Get(':id')
     async findOne(@Res() res, @Param("id") id): Promise<ChannelDto> {
-        const channel: ChannelDto = await this.channelService.findById(id);
+        const channel: Channel = await this.channelService.findById(id);
 
-        return res.json(channel);
+        return res.json(channel.toDto());
     }
 }
