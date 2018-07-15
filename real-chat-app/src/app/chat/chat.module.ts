@@ -6,16 +6,23 @@ import {RouterModule} from "@angular/router";
 import {ROUTES} from "./chat.router";
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ChatCreateComponent } from './chat-create/chat-create.component';
+import {MatButtonModule, MatInputModule} from '@angular/material';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [ChatComponent, ChatListComponent, ChatCreateComponent],
   imports: [
     MatListModule,
+    MatInputModule,
+    MatButtonModule,
     CommonModule,
+    FormsModule,
     RouterModule.forChild(ROUTES),
   ],
   exports: [
-    MatListModule
+    MatListModule,
+    MatInputModule,
+    MatButtonModule,
   ]
 })
 export class ChatModule { }
