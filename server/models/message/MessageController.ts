@@ -20,10 +20,4 @@ export class MessageController {
     async findOne(@Res() res, @Param('userId') userId): Promise<Message> {
         return this.messageService.findByUserId(userId);
     }
-
-    // @Get(':id')
-    // findOne(@Param() params): Promise<Message> {
-    //     console.log(params.id);
-    //     return this.messageService.findById(params.id);
-    // }
 }

@@ -15,5 +15,5 @@ export class Message {
     text: string;
 
     @Column()
-    channelId: number;
+    room: string;
 }
