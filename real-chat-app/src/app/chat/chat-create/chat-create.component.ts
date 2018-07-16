@@ -9,7 +9,7 @@ import {NotifierService} from '../../notifier/notifier.service';
 })
 export class ChatCreateComponent implements OnInit {
 
-  protected chatName: string = 'ok';
+  protected chatName: string = '';
   constructor(private chatService: ChatService,
               private notifyService: NotifierService) { }
 

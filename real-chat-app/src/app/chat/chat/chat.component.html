@@ -1,4 +1,7 @@
 <section class="container">
-  <p>{{ name }}</p>
+  <p>{{ chatName }}</p>
+  <div class="message-list"></div>
+  <input mat-input-element type="text" [(ngModel)]="text">
+  <button mat-button (click)="sendMessage()">Send</button>
 <!--<MatButtonModule></MatButtonModule>-->
 </section>
