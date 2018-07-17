@@ -16,6 +16,7 @@
     "google-auth-library": "latest",
     "joi": "^13.4.0",
     "mongodb": "^3.0.7",
+    "cors": "latest",
     "pg": "^7.4.1",
     "zone.js": "^0.8.26",
     "redis": "^2.8.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/config": "^0.0.34",
+    "@types/cors": "^2.8.4",
     "@types/joi": "^13.3.0",
     "@types/node": "^9.6.5",
     "nodemon": "^1.17.5",
