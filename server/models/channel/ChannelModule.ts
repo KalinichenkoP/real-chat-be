@@ -6,7 +6,7 @@ import {channelProvider} from "./ChannelProvider";
 
 @Module({
     imports: [DatabaseModule],
-    components: [...channelProvider, ChannelService],
+    providers: [...channelProvider, ChannelService],
     controllers: [ChannelController],
     exports: [ChannelModule]
 })

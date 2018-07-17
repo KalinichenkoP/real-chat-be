@@ -3,6 +3,7 @@ import {UserModule} from "./models/user/UserModule";
 import {MessageModule} from "./models/message/MessageModule";
 import {DatabaseModule} from "./database/DatabaseModule";
 import {ChannelModule} from "./models/channel/ChannelModule";
+import {EventsModule} from './models/events/EventsModule';
 
 @Module({
     imports:
@@ -10,7 +11,8 @@ import {ChannelModule} from "./models/channel/ChannelModule";
             UserModule,
             ChannelModule,
             MessageModule,
-            DatabaseModule
+            DatabaseModule,
+            EventsModule,
         ]
 })
 

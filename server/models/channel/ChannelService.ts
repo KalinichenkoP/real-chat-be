@@ -1,11 +1,12 @@
-import {Component, Inject, NotFoundException} from '@nestjs/common';
+import {Inject, Injectable, NotFoundException} from '@nestjs/common';
 import {Repository} from "typeorm";
 import {Channel} from "./ChannelEntity";
 import {CreateChannelFactory} from './factory/ChannelFactory';
 import {ChannelDto} from './dto/ChannelDto';
 import {ListResponseDto} from '../../core/dto/ListResponseDto';
 import {RegisterChannelDto} from './dto/RegisterChannelDto';
-@Component()
+
+@Injectable()
 export class ChannelService {
 
     constructor(@Inject('ChannelRepositoryToken')

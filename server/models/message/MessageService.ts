@@ -1,9 +1,9 @@
-import {Component, Inject} from '@nestjs/common';
+import { Inject, Injectable} from '@nestjs/common';
 import {InsertOneWriteOpResult, MongoRepository} from 'typeorm';
 import {Message} from './MessageEntity';
 import {REPOSITORY_TOKEN} from '../../enums/RepositoryTokens';
 
-@Component()
+@Injectable()
 export class MessageService {
 
     constructor(@Inject(REPOSITORY_TOKEN.MESSAGE_REPOSITORY_TOKEN)

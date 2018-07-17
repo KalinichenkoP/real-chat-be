@@ -7,7 +7,7 @@ import {messageProvider} from "./MessageProvider";
 @Module({
     imports: [DatabaseModule],
     controllers: [MessageController],
-    components: [...messageProvider, MessageService],
+    providers: [...messageProvider, MessageService],
 })
 export class MessageModule {
 }

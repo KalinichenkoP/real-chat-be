@@ -1,4 +1,4 @@
-import {Component, Inject, NotFoundException} from '@nestjs/common';
+import {Inject, Injectable, NotFoundException} from '@nestjs/common';
 import {Repository} from "typeorm";
 import {User} from './UserEntity';
 import {ListResponseDto} from "../../core/dto/ListResponseDto";
@@ -6,7 +6,7 @@ import {UserDto} from "./dto/UserDto";
 import {RegisterUserDto} from './dto/RegisterUserDto';
 import {CreateUserFactory} from './factory/UserFactory';
 
-@Component()
+@Injectable()
 export class UserService {
 
     constructor(@Inject('UserRepositoryToken')
