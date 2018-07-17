@@ -12,18 +12,20 @@ import {MessageService} from '../../services/message.service';
 export class ChatComponent implements OnInit {
 
   protected chatName: string = '';
- protected text: string = '';
+  protected text: string = '';
 
-  constructor( private route: ActivatedRoute,
-               private messageService: MessageService,) { }
+  constructor(private route: ActivatedRoute,
+              private messageService: MessageService,) {
+  }
 
   ngOnInit() {
     this.chatName = this.route.snapshot.paramMap.get('name');
+    // this.messageService.connect();
   }
 
   sendMessage() {
     this.messageService.sendMessage(this.text, this.chatName).subscribe(
-      (result)=> {
+      (result) => {
         console.log(result);
         // this.chats = result.data;
       }, (error) => {
@@ -32,5 +34,8 @@ export class ChatComponent implements OnInit {
     );
   }
 
-
+  sendMessageSocket() {
+    this.messageService.sendMessageSocket({text: this.text, room: this.chatName, sender: 10});
+  }
 }
+

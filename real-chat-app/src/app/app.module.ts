@@ -19,11 +19,12 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
 // import {AuthInterceptorService} from './services/auth-interceptor.service';
 // import {InfoInterceptorService} from './services/info-interceptor.service';
 import {HttpClient} from './extra-services/http-client.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {NotifierService} from './notifier/notifier.service';
 import {SpinnerService} from './extra-services/loading-spinner.service';
 import {ChatService} from './services/chat.service';
+import {AccessInterceptorService} from './services/access.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -47,13 +48,14 @@ import {ChatService} from './services/chat.service';
     // AuthInterceptorService,
     UserService,
     MessageService,
+
     // SessionService,
     // StorageService,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptorService,
-    //   multi: true
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AccessInterceptorService,
+      multi: true
+    },
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: InfoInterceptorService,
