@@ -22,7 +22,6 @@ export class ChannelController {
     @Post()
     @UsePipes(new JoiValidationPipe<CreateChannelDto>(new CreateChannelSchema()))
     async create(@Body() body: CreateChannelDto, @Res() res): Promise<ChannelDto> {
-        console.log(body.name);
         //check for exist
         const testChannel = await this.channelService.findByName(body.name);
         if (testChannel) {

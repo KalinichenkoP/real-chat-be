@@ -21,9 +21,7 @@ export class JoiValidationPipe<T> implements PipeTransform<T> {
 
     transform(value: T): T {
         const result = Joi.validate(value, this.schema);
-        console.log(value);
-        console.log(result);
-        console.log(result.error);
+
         if (result.error) {
             throw new BadRequestException(result.error);
         }
