@@ -5,7 +5,7 @@ import {MessageService} from '../message/MessageService';
 
 @Module({
     providers: [
-        MessageService,
+        // MessageService,
         EventsGateway
     ],
 })
