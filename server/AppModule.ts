@@ -14,7 +14,6 @@ import {EventsModule} from './models/events/EventsModule';
             DatabaseModule,
             EventsModule,
         ]
-
 })
 
 export class ApplicationModule {

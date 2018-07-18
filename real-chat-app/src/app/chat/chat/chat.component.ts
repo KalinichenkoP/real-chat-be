@@ -23,17 +23,6 @@ export class ChatComponent implements OnInit {
     // this.messageService.connect();
   }
 
-  sendMessage() {
-    this.messageService.sendMessage(this.text, this.chatName).subscribe(
-      (result) => {
-        console.log(result);
-        // this.chats = result.data;
-      }, (error) => {
-        console.log(error);
-      }
-    );
-  }
-
   sendMessageSocket() {
     this.messageService.sendMessageSocket({text: this.text, room: this.chatName, sender: 10});
   }
