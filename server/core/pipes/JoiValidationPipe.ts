@@ -12,7 +12,6 @@ export class JoiValidationPipe<T> implements PipeTransform<T> {
 
     constructor(schemaFactory: CreateSchema, factory?: Factory<T>) {
         this.schema = schemaFactory.createSchema();
-        console.log('creating schema');
 
         if (factory) {
             this.factory = factory;

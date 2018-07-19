@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ChatService} from '../../services/chat.service';
 import {NotifierService} from '../../notifier/notifier.service';
 import {MessageService} from '../../services/message.service';
+import {Message} from '../../models/message';
 
 @Component({
   selector: 'app-chat',
@@ -24,7 +25,11 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessageSocket() {
-    this.messageService.sendMessageSocket({text: this.text, room: this.chatName, sender: 10});
+    const message = new Message();
+    message.text = this.text;
+    message.senderId = 10;
+    message.chatRoom = this.chatName;
+    this.messageService.sendMessageSocket(message);
   }
 }
 

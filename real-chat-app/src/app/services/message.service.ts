@@ -20,11 +20,11 @@ export class MessageService {
   //     .post<Message>(this.url, JSON.stringify({text: text, room: room}), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
   // }
 
-  sendMessageSocket(message: Object): void {
+  sendMessageSocket(message: Message): void {
     const socket = io('http://localhost:3001');
     // socket.on('connect', function () {
     //   console.log('Connected');
-      socket.emit('message', { message });
+      socket.emit('message', message);
     // });
   }
 

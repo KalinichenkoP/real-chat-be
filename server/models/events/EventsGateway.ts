@@ -3,7 +3,12 @@ import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import * as redisAdapter from 'socket.io-redis';
 import {MessageService} from '../message/MessageService';
-import {Message} from '../message/MessageEntity';
+import {MessageDto} from '../message/dto/MessageDto';
+import {Message} from '../../../real-chat-app/src/app/models/message';
+import {CreateMessageDto} from '../message/dto/CreateMessageDto';
+import {CreateMessageSchema} from '../../core/schemas/CreateMessageSchema';
+import {UsePipes} from '@nestjs/common';
+import {JoiValidationPipe} from '../../core/pipes/JoiValidationPipe';
 
 @WebSocketGateway(3001, {adapter: redisAdapter({host: 'localhost', port: 6379})})
 export class EventsGateway {
@@ -12,25 +17,14 @@ export class EventsGateway {
     constructor(private readonly messageService: MessageService) {
     }
 
-
-    // @SubscribeMessage('events')
-    // onEvent(client, data): Observable<WsResponse<number>> {
-    //     console.log(data);
-    //
-    //     const event = 'events';
-    //     const response = [1, 2, 3];
-    //
-    //     return from(response).pipe(map(res => ({ event, data: res })));
-    // }
-
+    // @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     @SubscribeMessage('message')
-    onEventConnect(client, data: Message): Observable<WsResponse<number>> {
-        console.log(data);
-        // console.log(client);
-        this.messageService.createMessage(data)
+    onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
+        console.log(message);
+        this.messageService.createMessage(message)
             .then(result => {
-                    this.server.of('/').adapter.clientRooms(data.room, (err, clientRooms) => {
-                        this.server.to(data.room).emit('message', data);
+                    this.server.of('/').adapter.clientRooms(message.chatRoom, (err, clientRooms) => {
+                        this.server.to(message.chatRoom).emit('message', message);
                         console.log('clientRooms');
                         console.log(clientRooms);
                     });
@@ -38,33 +32,6 @@ export class EventsGateway {
                 error => {
                     console.log(error);
                 });
-        // console.log(client.id);
-        // let roomArray = [];
-        // this.server.of('/').adapter.allRooms((err, rooms) => {
-        //     roomArray = rooms;
-        //     console.log('rooms');
-        //     console.log(rooms);
-        // });
-        // this.server.of('/').adapter.clientRooms(client.id, (err, rooms) => {
-        //     console.log('clientRooms');
-        //     console.log(rooms);
-        // });
-        // this.server.of('/').adapter.clients(roomArray, (err, clients) => {
-        //     console.log('clients');
-        //     console.log(clients);
-        // });
-        // console.log(this.server.adapter().adapter);
-        // this.server.adapter().clients((err, clients) => {
-        //     console.log('clients'); // an array containing all connected socket ids
-        //     console.log(clients); // an array containing all connected socket ids
-        // });
-        // this.server.allRooms((err, rooms) => {
-        //     console.log('rooms'); // an array containing all rooms (accross every node)
-        //     console.log(rooms); // an array containing all rooms (accross every node)
-        //     console.log('err'); // an array containing all rooms (accross every node)
-        //     console.log(err); // an array containing all rooms (accross every node)
-        // });
-        // console.log(client);
         const event = 'events';
         const response = [1, 2, 3];
 
