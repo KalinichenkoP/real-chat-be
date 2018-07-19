@@ -24,7 +24,7 @@ export class MessageService {
     const socket = io('http://localhost:3001');
     // socket.on('connect', function () {
     //   console.log('Connected');
-      socket.emit('message', { test: message });
+      socket.emit('message', { message });
     // });
   }
 
