@@ -10,18 +10,18 @@ import {ApiListResponse} from '../../../classes/ApiListResponce';
 })
 export class ChatService {
 
-  private url = API_URL + '/channels';
+  // private url = API_URL + '/channels';
 
-  constructor(private httpClient: HttpClient) { }
+  // constructor(private httpClient: HttpClient) { }
 
-  getChatList(): Observable<ApiListResponse<Channel>> {
-    return this.httpClient
-      .get<ApiListResponse<Channel>>(this.url);
-  }
-
-  createChat(chatName: string): Observable<Channel> {
-    console.log(chatName);
-    return this.httpClient
-      .post<Channel>(this.url, JSON.stringify({name: chatName}), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
-  }
+  // getChatList(): Observable<ApiListResponse<Channel>> {
+  //   return this.httpClient
+  //     .get<ApiListResponse<Channel>>(this.url);
+  // }
+  //
+  // createChat(chatName: string): Observable<Channel> {
+  //   console.log(chatName);
+  //   return this.httpClient
+  //     .post<Channel>(this.url, JSON.stringify({name: chatName}), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
+  // }
 }

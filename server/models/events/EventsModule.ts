@@ -3,8 +3,6 @@ import {EventsGateway} from './EventsGateway';
 import {MessageService} from '../message/MessageService';
 import {messageProvider} from '../message/MessageProvider';
 import {DatabaseModule} from '../../database/DatabaseModule';
-import {ChannelService} from '../channel/ChannelService';
-import {channelProvider} from '../channel/ChannelProvider';
 
 @Module({
     imports: [
@@ -13,8 +11,6 @@ import {channelProvider} from '../channel/ChannelProvider';
     providers: [
         ...messageProvider,
         MessageService,
-        ...channelProvider,
-        ChannelService,
         EventsGateway,
     ],
 })

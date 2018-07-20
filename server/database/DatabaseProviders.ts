@@ -3,7 +3,6 @@ import {CONNECTION_TOKEN} from "../enums/ConnectionTokens";
 import {User} from "../models/user/UserEntity";
 import {Message} from "../models/message/MessageEntity";
 import {UserMigration} from "../migration/User.migration";
-import {Channel} from "../models/channel/ChannelEntity";
 import {ChannelMigration} from "../migration/Channel.migration";
 
 export const databaseProviders = [
@@ -17,10 +16,10 @@ export const databaseProviders = [
             username: 'postgres',
             password: 'postgres',
             entities: [
-                User, Channel
+                User
             ],
             migrations: [
-                UserMigration, ChannelMigration
+                UserMigration
             ],
             synchronize: true
         }),

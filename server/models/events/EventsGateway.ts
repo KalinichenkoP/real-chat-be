@@ -4,32 +4,25 @@ import {map} from 'rxjs/operators';
 import * as redisAdapter from 'socket.io-redis';
 import {MessageService} from '../message/MessageService';
 import {MessageDto} from '../message/dto/MessageDto';
-import {Message} from '../../../real-chat-app/src/app/models/message';
-import {CreateMessageDto} from '../message/dto/CreateMessageDto';
-import {CreateMessageSchema} from '../../core/schemas/CreateMessageSchema';
-import {UsePipes} from '@nestjs/common';
-import {JoiValidationPipe} from '../../core/pipes/JoiValidationPipe';
-import {ChannelDto} from '../channel/dto/ChannelDto';
-import {ChannelService} from '../channel/ChannelService';
+const {promisify} = require('util');
 
 @WebSocketGateway(3001, {adapter: redisAdapter({host: 'localhost', port: 6379})})
 export class EventsGateway {
     @WebSocketServer() server;
 
     constructor(private readonly messageService: MessageService,
-                private readonly roomService: ChannelService) {
+                // private readonly roomService: ChannelService) {
+                ) {
     }
 
     // @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     @SubscribeMessage('message')
     onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
-        console.log(message);
         this.messageService.createMessage(message)
             .then(result => {
                     this.server.of('/').adapter.clientRooms(message.chatRoom, (err, clientRooms) => {
                         this.server.to(message.chatRoom).emit('message', message);
-                        console.log('clientRooms');
-                        console.log(clientRooms);
+                        this.server.to(message.chatRoom).emit('rooms', {test: "ok"});
                     });
                 },
                 error => {
@@ -45,33 +38,31 @@ export class EventsGateway {
 
         return from(response).pipe(map(res => ({event, data: res})));
     }
-
-    @SubscribeMessage('createRoom')
-    onEventCreate(client, room: ChannelDto): Observable<WsResponse<number>> {
-        console.log(room);
-        this.roomService.createRoom(room)
-            .then(result => {
-                    this.server.of('/').adapter.remoteJoin(client.id, result.name, (err) => {
-                        console.log(err);
-                    });
-                },
-                error => {
-                    console.log(error);
-                });
-        this.server.of('/').adapter.allRooms((err, rooms) => {
-            console.log('rooms');
-            console.log(rooms);
-        });
-        const event = 'events';
-        const response = [1, 2, 3];
-
-        return from(response).pipe(map(res => ({event, data: res})));
-    }
+    //
+    // @SubscribeMessage('createRoom')
+    // onEventCreate(client, room: RoomDto): Observable<WsResponse<number>> {
+    //     console.log(room);
+    //     this.roomService.createRoom(room)
+    //         .then(result => {
+    //                 this.server.of('/').adapter.remoteJoin(client.id, result.name, (err) => {
+    //                     console.log(err);
+    //                 });
+    //             },
+    //             error => {
+    //                 console.log(error);
+    //             });
+    //     this.server.of('/').adapter.allRooms((err, rooms) => {
+    //         console.log('rooms');
+    //         console.log(rooms);
+    //     });
+    //     const event = 'events';
+    //     const response = [1, 2, 3];
+    //
+    //     return from(response).pipe(map(res => ({event, data: res})));
+    // }
 
     @SubscribeMessage('connectRoom')
     onEventConnectRoom(client, room: string): Observable<WsResponse<number>> {
-        console.log(client);
-        console.log(room);
 
         this.server.of('/').adapter.remoteJoin(client.id, room, (err) => {
             this.server.of('/').adapter.clientRooms(client.id, (err, clientRooms) => {
@@ -93,5 +84,17 @@ export class EventsGateway {
         const response = [1, 2, 3];
 
         return from(response).pipe(map(res => ({event, data: res})));
+    }
+
+    @SubscribeMessage('rooms')
+    onEventRoomList(): Observable<WsResponse<string[]>> | void {
+        let res = [];
+        this.server.of('/').adapter.allRooms( (err, rooms) => {
+                console.log('allRooms');
+                console.log(rooms);
+                res = rooms;
+                this.server.emit('rooms', {data: res});
+        });
+        return null;
     }
 }

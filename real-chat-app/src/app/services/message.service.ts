@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import * as io from 'socket.io-client/dist/socket.io.js';
 
@@ -12,8 +12,16 @@ import {API_URL} from '../../environments/environment';
 export class MessageService {
 
   private url = API_URL + '/messages';
-
-  // constructor(private httpClient: HttpClient) { }
+  private socket = io('http://localhost:3001');
+  constructor() {
+    console.log('serviceConstructor');
+    this.socket.on('rooms', (data) => {
+      console.log(data);
+    });
+    this.socket.on('message', (data) => {
+      console.log(data);
+    });
+  }
 
   // sendMessage(text: string, room: string) : Observable<Message> {
   //   return this.httpClient
@@ -21,21 +29,24 @@ export class MessageService {
   // }
 
   sendMessageSocket(message: Message): void {
-    const socket = io('http://localhost:3001');
+    // const socket = io('http://localhost:3001');
     // socket.on('connect', function () {
     //   console.log('Connected');
-      socket.emit('message', message);
+    this.socket.emit('message', message);
     // });
   }
 
   createRoom(name: string): void {
-    const socket = io('http://localhost:3001');
-      socket.emit('createRoom', name);
+    this.socket.emit('createRoom', name);
   }
 
   connectRoom(name: string): void {
-    const socket = io('http://localhost:3001');
-      socket.emit('connectRoom', name);
+    this.socket.emit('connectRoom', name);
+  }
+
+  getAllRooms(): void {
+    this.socket.emit('rooms');
+    console.log('roomsGet');
   }
 
 }
