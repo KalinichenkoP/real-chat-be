@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChatService} from '../../services/chat.service';
 import {NotifierService} from '../../notifier/notifier.service';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-chat-create',
@@ -11,6 +12,7 @@ export class ChatCreateComponent implements OnInit {
 
   protected chatName: string = '';
   constructor(private chatService: ChatService,
+              private messageService: MessageService,
               private notifyService: NotifierService) { }
 
   ngOnInit() {

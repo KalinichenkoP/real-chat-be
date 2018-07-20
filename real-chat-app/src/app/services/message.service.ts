@@ -28,4 +28,14 @@ export class MessageService {
     // });
   }
 
+  createRoom(name: string): void {
+    const socket = io('http://localhost:3001');
+      socket.emit('createRoom', name);
+  }
+
+  connectRoom(name: string): void {
+    const socket = io('http://localhost:3001');
+      socket.emit('connectRoom', name);
+  }
+
 }

@@ -30,7 +30,7 @@ export class ChannelService {
         return await this.channelRepository.findOne({where: {name: name}});
     }
 
-    async createOne(registerChannelDto: RegisterChannelDto): Promise<ChannelDto> {
+    async createRoom(registerChannelDto: RegisterChannelDto): Promise<ChannelDto> {
         const createChannel = new CreateChannelFactory().create(registerChannelDto);
         const channel: Channel = await this.channelRepository.create(createChannel);
         const savedChannel: Channel = await this.channelRepository.save<Channel>(channel);

@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.chatName = this.route.snapshot.paramMap.get('name');
+    this.messageService.connectRoom(this.chatName);
     // this.messageService.connect();
   }
 
