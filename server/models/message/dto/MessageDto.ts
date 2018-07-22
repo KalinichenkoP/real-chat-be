@@ -3,5 +3,5 @@ export class MessageDto {
 
     readonly chatRoom: string;
 
-    readonly senderId: number;
+    readonly roomName: number;
 }

@@ -34,7 +34,6 @@ export class RoomController {
     @Get(':id')
     async findOne(@Res() res, @Param("id") id): Promise<RoomDto> {
         const room: Room = await this.roomService.findById(id);
-
         return res.json(room.toDto());
     }
 }

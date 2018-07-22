@@ -13,13 +13,12 @@ import {ApiListResponse} from '../../../classes/ApiListResponce';
 export class MessageService {
 
   private url = API_URL + '/messages';
-  private socket;
   constructor(private httpClient: HttpClient) {
   }
 
-  getMessages(chatName: string): Observable<Message[]> {
+  getMessages(roomName: string): Observable<Message[]> {
     return this.httpClient
-      .get<Message[]>(`${this.url}?chatId=${chatName}`);
+      .get<Message[]>(`${this.url}?roomName=${roomName}`);
   }
 
 }

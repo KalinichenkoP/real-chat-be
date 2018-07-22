@@ -10,9 +10,7 @@ const {promisify} = require('util');
 export class EventsGateway {
     @WebSocketServer() server;
 
-    constructor(private readonly messageService: MessageService,
-                // private readonly roomService: RoomService) {
-                ) {
+    constructor(private readonly messageService: MessageService) {
     }
 
     // @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
@@ -20,46 +18,17 @@ export class EventsGateway {
     onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
         this.messageService.createMessage(message)
             .then(result => {
-                    this.server.of('/').adapter.clientRooms(message.chatRoom, (err, clientRooms) => {
                         this.server.to(message.chatRoom).emit('message', message);
-                        this.server.to(message.chatRoom).emit('rooms', {test: "ok"});
-                    });
+                    // });
                 },
                 error => {
                     console.log(error);
                 });
-
-        this.server.of('/').adapter.allRooms((err, rooms) => {
-            console.log('rooms');
-            console.log(rooms);
-        });
         const event = 'events';
         const response = [1, 2, 3];
 
         return from(response).pipe(map(res => ({event, data: res})));
     }
-    //
-    // @SubscribeMessage('createRoom')
-    // onEventCreate(client, room: RoomDto): Observable<WsResponse<number>> {
-    //     console.log(room);
-    //     this.roomService.createRoom(room)
-    //         .then(result => {
-    //                 this.server.of('/').adapter.remoteJoin(client.id, result.name, (err) => {
-    //                     console.log(err);
-    //                 });
-    //             },
-    //             error => {
-    //                 console.log(error);
-    //             });
-    //     this.server.of('/').adapter.allRooms((err, rooms) => {
-    //         console.log('rooms');
-    //         console.log(rooms);
-    //     });
-    //     const event = 'events';
-    //     const response = [1, 2, 3];
-    //
-    //     return from(response).pipe(map(res => ({event, data: res})));
-    // }
 
     @SubscribeMessage('connectRoom')
     onEventConnectRoom(client, room: string): Observable<WsResponse<number>> {

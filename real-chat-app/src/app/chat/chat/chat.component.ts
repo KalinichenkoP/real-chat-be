@@ -13,7 +13,7 @@ import {ApiListResponse} from '../../../../classes/ApiListResponce';
 })
 export class ChatComponent implements OnInit {
 
-  protected chatName: string = '';
+  protected roomName: string = '';
   protected text: string = '';
   messages: Message[] = [];
 
@@ -24,9 +24,9 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.initIoConnection();
-    this.chatName = this.route.snapshot.paramMap.get('name');
-    this.socketService.connectRoom(this.chatName);
-    this.messageService.getMessages(this.chatName)
+    this.roomName = this.route.snapshot.paramMap.get('name');
+    this.socketService.connectRoom(this.roomName);
+    this.messageService.getMessages(this.roomName)
       .subscribe((message: Message[]) => this.messages = message);
   }
 
@@ -42,7 +42,7 @@ export class ChatComponent implements OnInit {
   sendMessageSocket() {
     const message = new Message();
     message.text = this.text;
-    message.senderId = 10;
+    message.roomName = this.roomName;
     message.chatRoom = this.chatName;
     this.socketService.sendMessageSocket(message);
   }

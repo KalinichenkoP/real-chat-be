@@ -11,8 +11,8 @@ export class MessageController {
     constructor(private readonly messageService: MessageService) {}
 
     @Get()
-    findAll(): Promise<Message[]> {
-        return this.messageService.findAll();
+    findAll(@Param("roomName") roomName): Promise<Message[]> {
+        return this.messageService.findAll(roomName);
     }
 
     @Post()

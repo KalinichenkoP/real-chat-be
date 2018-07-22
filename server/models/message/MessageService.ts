@@ -12,17 +12,16 @@ export class MessageService {
                 private readonly messageRepository: MongoRepository<Message>) {
     }
 
-    public async findAll(): Promise<Message[]> {
-        return await this.messageRepository.find();
+    public async findAll(roomName: string): Promise<Message[]> {
+        return await this.messageRepository.find({where: {roomName: roomName}});
     }
 
     public async createMessage(messageDto: MessageDto): Promise<Message> {
         const message = new Message();
-        message.userId = messageDto.senderId;
-        message.chatRoom = messageDto.chatRoom;
+        message.userId = messageDto.roomName;
+        message.roomName = messageDto.chatRoom;
         message.text = messageDto.text;
         const result: Message = await this.messageRepository.save<Message>(message);
-        console.log(result);
         return result;
     }
 
