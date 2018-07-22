@@ -10,7 +10,7 @@ export class Message {
     id: ObjectID;
 
     @Column()
-    userId: number;
+    senderId: number;
 
     @Column()
     text: string;

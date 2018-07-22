@@ -11,15 +11,20 @@ export class MessageController {
     constructor(private readonly messageService: MessageService) {}
 
     @Get()
-    findAll(@Param("roomName") roomName): Promise<Message[]> {
-        return this.messageService.findAll(roomName);
+    findAll(): Promise<Message[]> {
+        return this.messageService.findAll();
     }
 
-    @Post()
-    @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
-    createOne(@Body() body): Promise<Message> {
-        return this.messageService.createMessage(body);
+    @Get(':roomName')
+    findByRoomName(@Param("roomName") roomName): Promise<Message[]> {
+        return this.messageService.findByRoomName(roomName);
     }
+
+    // @Post()
+    // @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
+    // createOne(@Body() body): Promise<Message> {
+    //     return this.messageService.createMessage(body);
+    // }
 
     @Get(':userId')
     async findOne(@Res() res, @Param('userId') userId): Promise<Message> {

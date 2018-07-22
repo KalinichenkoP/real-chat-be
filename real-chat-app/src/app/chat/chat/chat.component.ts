@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit {
     const message = new Message();
     message.text = this.text;
     message.roomName = this.roomName;
-    message.chatRoom = this.chatName;
+    message.senderId = 10;
     this.socketService.sendMessageSocket(message);
   }
 }

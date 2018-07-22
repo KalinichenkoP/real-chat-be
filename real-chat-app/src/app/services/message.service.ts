@@ -18,7 +18,7 @@ export class MessageService {
 
   getMessages(roomName: string): Observable<Message[]> {
     return this.httpClient
-      .get<Message[]>(`${this.url}?roomName=${roomName}`);
+      .get<Message[]>(`${this.url}/${roomName}`);
   }
 
 }
