@@ -18,7 +18,7 @@ export class EventsGateway {
     onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
         this.messageService.createMessage(message)
             .then(result => {
-                        this.server.to(message.chatRoom).emit('message', message);
+                        this.server.to(message.roomName).emit('message', message);
                     // });
                 },
                 error => {

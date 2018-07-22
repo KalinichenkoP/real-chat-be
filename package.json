@@ -39,7 +39,7 @@
     "ts-node": "^6.0.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "NODE_ENV=development node index.js "
   },
   "repository": {
     "type": "git",

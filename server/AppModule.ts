@@ -4,6 +4,7 @@ import {MessageModule} from "./models/message/MessageModule";
 import {DatabaseModule} from "./database/DatabaseModule";
 import {EventsModule} from './models/events/EventsModule';
 import {RoomModule} from './models/room/RoomModule';
+import {ConfigModule} from './models/config/ConfigModule';
 
 @Module({
     imports:
@@ -13,6 +14,7 @@ import {RoomModule} from './models/room/RoomModule';
             RoomModule,
             DatabaseModule,
             EventsModule,
+            ConfigModule
         ]
 })
 
