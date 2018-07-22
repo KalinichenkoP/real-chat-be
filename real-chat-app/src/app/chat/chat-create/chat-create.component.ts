@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RoomService} from '../../services/room.service';
 import {NotifierService} from '../../notifier/notifier.service';
-import {SocketService} from '../../services/socket.service';
 
 @Component({
   selector: 'app-chat-create',
@@ -11,21 +10,22 @@ import {SocketService} from '../../services/socket.service';
 export class ChatCreateComponent implements OnInit {
 
   protected chatName: string = '';
-  constructor(private messageService: SocketService,
+  constructor(private roomService: RoomService,
               private notifyService: NotifierService) { }
 
   ngOnInit() {
   }
 
   sendChatName() {
-    // this.chatService.createChat(this.chatName).subscribe(
-    //   (result)=> {
-    //     console.log(result);
-    //     // this.chats = result.data;
-    //   }, (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    console.log(this.chatName);
+    this.roomService.createRoom(this.chatName).subscribe(
+      (result)=> {
+        console.log(result);
+        // this.chats = result.data;
+      }, (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

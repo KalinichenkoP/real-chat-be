@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {API_URL} from '../../environments/environment';
 import {Observable} from 'rxjs';
 // import {Channel} from '../models/room';
@@ -19,10 +19,10 @@ export class RoomService {
     return this.httpClient
       .get<ApiListResponse<Room>>(this.url);
   }
-  //
-  // createChat(chatName: string): Observable<Channel> {
-  //   console.log(chatName);
-  //   return this.httpClient
-  //     .post<Channel>(this.url, JSON.stringify({name: chatName}), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
-  // }
+
+  createRoom(chatName: string): Observable<Room> {
+    console.log(chatName);
+    return this.httpClient
+      .post<Room>(this.url, JSON.stringify({name: chatName}), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
+  }
 }
