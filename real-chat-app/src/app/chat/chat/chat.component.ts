@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {NotifierService} from '../../notifier/notifier.service';
 import {SocketService} from '../../services/socket.service';
 import {Message} from '../../models/message';
+import {MessageService} from '../../services/message.service';
+import {ApiListResponse} from '../../../../classes/ApiListResponce';
 
 @Component({
   selector: 'app-chat',
@@ -16,14 +18,16 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [];
 
   constructor(private route: ActivatedRoute,
-              private socketService:SocketService,) {
+              private socketService:SocketService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
     this.initIoConnection();
     this.chatName = this.route.snapshot.paramMap.get('name');
     this.socketService.connectRoom(this.chatName);
-    // this.messageService.connect();
+    this.messageService.getMessages(this.chatName)
+      .subscribe((message: Message[]) => this.messages = message);
   }
 
   private initIoConnection(): void {

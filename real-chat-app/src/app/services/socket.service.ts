@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import * as io from 'socket.io-client/dist/socket.io.js';
 import {Message} from '../models/message';
-import {API_URL} from '../../environments/environment';
 import {Room} from '../models/room';
 
 @Injectable({
@@ -10,7 +9,6 @@ import {Room} from '../models/room';
 })
 export class SocketService {
 
-  private url = API_URL + '/messages';
   private socket;
   // constructor() {
   //   this.socket = io('http://localhost:3001');
