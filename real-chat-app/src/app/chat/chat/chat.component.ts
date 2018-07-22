@@ -44,7 +44,7 @@ export class ChatComponent implements OnInit {
     message.text = this.text;
     message.roomName = this.roomName;
     message.senderId = 10;
-    this.socketService.sendMessageSocket(message);
+    this.socketService.sendMessage(message);
   }
 }
 
