@@ -1,4 +1,4 @@
-export class Channel {
+export class Room {
   id: number;
   name: string;
 }

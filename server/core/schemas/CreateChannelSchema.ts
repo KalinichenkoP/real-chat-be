@@ -6,7 +6,7 @@ import {CreateSchema} from './CreateSchemaFactory';
 const MIN_LENGTH = 3;
 const MAX_LENGTH = 50;
 
-export class CreateChannelSchema implements CreateSchema {
+export class CreateRoomSchema implements CreateSchema {
     createSchema(): ObjectSchema {
         return Joi
             .object()

@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {API_URL} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {Channel} from '../models/channel';
+// import {Channel} from '../models/room';
 import {ApiListResponse} from '../../../classes/ApiListResponce';
+import {Room} from '../models/room';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class RoomService {
 
-  // private url = API_URL + '/channels';
+  private url = API_URL + '/rooms';
 
-  // constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  // getChatList(): Observable<ApiListResponse<Channel>> {
-  //   return this.httpClient
-  //     .get<ApiListResponse<Channel>>(this.url);
-  // }
+  getRoomList(): Observable<ApiListResponse<Room>> {
+    return this.httpClient
+      .get<ApiListResponse<Room>>(this.url);
+  }
   //
   // createChat(chatName: string): Observable<Channel> {
   //   console.log(chatName);

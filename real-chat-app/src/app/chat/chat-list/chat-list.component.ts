@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ChatService} from '../../services/chat.service';
-import {NotifierService} from '../../notifier/notifier.service';
-import {MessageService} from '../../services/message.service';
+import {Component, OnInit} from '@angular/core';
+import {RoomService} from '../../services/room.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -10,21 +8,13 @@ import {MessageService} from '../../services/message.service';
 })
 export class ChatListComponent implements OnInit {
 
-  private chats = [];
+  private rooms = [];
 
-  constructor(private chatService: ChatService,
-              private  messageService: MessageService,
-              private notifyService: NotifierService) { }
+  constructor(private roomService: RoomService) {
+  }
 
   async ngOnInit() {
-    this.messageService.getAllRooms();
-    // await this.chatService.getChatList().subscribe(
-    //   (result)=> {
-    //     this.chats = result.data;
-    //   }, (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this.roomService.getRoomList().subscribe(response => this.rooms = response.data);
   }
 
 }

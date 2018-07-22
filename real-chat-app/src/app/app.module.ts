@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {ROUTES} from './app-routing.module';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {UserService} from './services/user.service';
-import {MessageService} from './services/message.service';
+import {SocketService} from './services/socket.service';
 import {LandingModule} from './landing/landing.module';
 import {ChatModule} from './chat/chat.module';
 import {RouterModule} from '@angular/router';
@@ -23,7 +23,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {NotifierService} from './notifier/notifier.service';
 import {SpinnerService} from './extra-services/loading-spinner.service';
-import {ChatService} from './services/chat.service';
+import {RoomService} from './services/room.service';
 import {AccessInterceptorService} from './services/access.interceptor.service';
 
 @NgModule({
@@ -43,11 +43,11 @@ import {AccessInterceptorService} from './services/access.interceptor.service';
     HttpClient,
     NotifierService,
     SpinnerService,
-    ChatService,
+    RoomService,
     // AuthGuardService,
     // AuthInterceptorService,
     UserService,
-    MessageService,
+    SocketService,
 
     // SessionService,
     // StorageService,

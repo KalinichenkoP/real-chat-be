@@ -1,7 +1,7 @@
 import {MigrationInterface} from "typeorm";
 import {QueryRunner} from "typeorm";
 
-export class ChannelMigration implements MigrationInterface {
+export class RoomMigration implements MigrationInterface {
     async up(queryRunner: QueryRunner): Promise<any> {
         // await queryRunner.renameColumn("post", "title", "name");
         // alternatively you can do:

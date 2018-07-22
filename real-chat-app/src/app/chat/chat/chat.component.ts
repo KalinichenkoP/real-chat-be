@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ChatService} from '../../services/chat.service';
 import {NotifierService} from '../../notifier/notifier.service';
-import {MessageService} from '../../services/message.service';
+import {SocketService} from '../../services/socket.service';
 import {Message} from '../../models/message';
 
 @Component({
@@ -14,15 +13,26 @@ export class ChatComponent implements OnInit {
 
   protected chatName: string = '';
   protected text: string = '';
+  messages: Message[] = [];
 
   constructor(private route: ActivatedRoute,
-              private messageService: MessageService,) {
+              private socketService:SocketService,) {
   }
 
   ngOnInit() {
+    this.initIoConnection();
     this.chatName = this.route.snapshot.paramMap.get('name');
-    this.messageService.connectRoom(this.chatName);
+    this.socketService.connectRoom(this.chatName);
     // this.messageService.connect();
+  }
+
+  private initIoConnection(): void {
+    this.socketService.initSocket();
+
+    this.socketService.onMessage()
+      .subscribe((message: Message) => {
+        this.messages.push(message);
+      });
   }
 
   sendMessageSocket() {
@@ -30,7 +40,7 @@ export class ChatComponent implements OnInit {
     message.text = this.text;
     message.senderId = 10;
     message.chatRoom = this.chatName;
-    this.messageService.sendMessageSocket(message);
+    this.socketService.sendMessageSocket(message);
   }
 }
 

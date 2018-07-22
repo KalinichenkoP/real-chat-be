@@ -11,7 +11,7 @@ export class EventsGateway {
     @WebSocketServer() server;
 
     constructor(private readonly messageService: MessageService,
-                // private readonly roomService: ChannelService) {
+                // private readonly roomService: RoomService) {
                 ) {
     }
 

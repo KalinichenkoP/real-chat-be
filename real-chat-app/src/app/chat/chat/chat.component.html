@@ -3,4 +3,5 @@
   <div class="message-list"></div>
   <input matInput type="text" [(ngModel)]="text">
   <button mat-button (click)="sendMessageSocket()">Send</button>
+  <section class="messages"><div *ngFor="let message of messages">{{ message.text }}</div></section>
 </section>
