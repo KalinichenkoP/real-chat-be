@@ -4,6 +4,6 @@
   <input matInput type="text" [(ngModel)]="text">
   <button mat-button (click)="sendMessageSocket()">Send</button>
   <mat-nav-list>
-    <mat-list-item *ngFor="let message of messages">{{ message.text }}</mat-list-item>
+    <mat-list-item *ngFor="let message of messages">{{ message.text }} from {{ findUserById(message.senderId)?.firstName}}</mat-list-item>
   </mat-nav-list>
 </section>

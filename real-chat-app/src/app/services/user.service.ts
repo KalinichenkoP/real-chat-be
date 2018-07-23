@@ -27,16 +27,16 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
 
   }
-
-  sendUserFormToServer(userForm: FormGroup): Observable<User> {
-    return this.httpClient
-      .post<User>(`${API_URL}/singup`, userForm.value);
-  }
-
-  public sendLoginFormToServer(loginForm: FormGroup): Observable<UserModel> {
-    return this.httpClient
-      .post<UserModel>(`${API_URL}/singin`, loginForm.value);
-  }
+  // serFormToServer(userForm: FormGroup): Observable<User> {
+  //   return this.httpClient
+  //     .post<User>(`${API_URL}/singup`, userForm.value);
+  // }
+  // sendU
+  //
+  // public sendLoginFormToServer(loginForm: FormGroup): Observable<UserModel> {
+  //   return this.httpClient
+  //     .post<UserModel>(`${API_URL}/singin`, loginForm.value);
+  // }
 
   public updateUser(updateForm: FormGroup): Observable<User> {
     return this.httpClient
@@ -48,7 +48,7 @@ export class UserService {
       .get<User>(`${this.url}/me`);
   }
 
-  public getUserById(id?: number): Observable<User> {
+  public getUserById(id: number): Observable<User> {
     return this.httpClient
       .get<User>(`${this.url}/${id}`);
   }
