@@ -1,7 +1,8 @@
-import {PrimaryGeneratedColumn, Column} from 'typeorm';
+import {PrimaryGeneratedColumn, Column, ManyToMany} from 'typeorm';
 import {Entity} from 'typeorm/decorator/entity/Entity';
 import {UserDto} from './dto/UserDto';
 import {Base} from '../base/BaseEntity';
+import {Room} from '../room/RoomEntity';
 
 @Entity({name: 'users'})
 export class User extends Base<User> {
@@ -24,5 +25,9 @@ export class User extends Base<User> {
     toDto(): UserDto {
         return new UserDto(this);
     }
+
+    @ManyToMany(type => Room, room => room.users)
+    rooms: Room[];
+
 
 }

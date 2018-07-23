@@ -28,7 +28,7 @@ export class UserService {
     }
 
     async findByRoom(roomId: number): Promise<ListResponseDto<UserDto>> {
-        const res = await this.userRepository.findAndCount({where: {roomId}});
+        const res = await this.userRepository.findAndCount({relations: ['rooms'],where: {roomId}});
         const users = res[0].map((user) => user.toDto());
         return new ListResponseDto<UserDto>(users, res[1]);
     }
