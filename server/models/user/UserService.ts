@@ -27,6 +27,12 @@ export class UserService {
         return user.toDto()
     }
 
+    async findByRoom(roomId: number): Promise<ListResponseDto<UserDto>> {
+        const res = await this.userRepository.findAndCount({where: {roomId}});
+        const users = res[0].map((user) => user.toDto());
+        return new ListResponseDto<UserDto>(users, res[1]);
+    }
+
     async findByEmail(email: string, throwException = true): Promise<User | undefined>  {
         return await this.userRepository.findOne({where: {email: email}});
 

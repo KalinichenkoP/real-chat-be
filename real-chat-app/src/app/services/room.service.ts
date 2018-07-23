@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {ApiListResponse} from '../../../classes/ApiListResponce';
 import {Room} from '../models/room';
 import {FormGroup} from '@angular/forms';
+import {User} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,10 @@ export class RoomService {
     console.log(roomId);
     return this.httpClient
       .get<Room>(`${this.url}/${roomId}`);
+  }
+
+  connectToRoom(roomId: number, userId: number): Observable<Room> {
+    return this.httpClient
+      .get<Room>(`${this.url}/${roomId}/${userId}`);
   }
 }

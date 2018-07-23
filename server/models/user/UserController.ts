@@ -35,6 +35,10 @@ export class UserController extends ServerController {
     async findAll(@Req() req): Promise<ListResponseDto<UserDto>> {
         return await this.userService.findAll();
     }
+    @Get('room/:roomId')
+    async findByRoom(@Req() req, @Param('roomId') roomId): Promise<ListResponseDto<UserDto>> {
+        return await this.userService.findByRoom(roomId);
+    }
 
     @Get(':id')
     async findOne(@Res() res, @Param('id') id): Promise<UserDto> {

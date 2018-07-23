@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@nestjs/common';
-import {InsertOneWriteOpResult, MongoRepository} from 'typeorm';
+import {InsertOneWriteOpResult, MongoRepository, ObjectID} from 'typeorm';
 import {Message} from './MessageEntity';
 import {REPOSITORY_TOKEN} from '../../enums/RepositoryTokens';
 import {CreateMessageDto} from './dto/CreateMessageDto';
@@ -22,6 +22,7 @@ export class MessageService {
 
     public async createMessage(messageDto: MessageDto): Promise<Message> {
         const message = new Message();
+        message.uuid = messageDto.uuid;
         message.senderId = messageDto.senderId;
         message.roomId = messageDto.roomId;
         message.text = messageDto.text;

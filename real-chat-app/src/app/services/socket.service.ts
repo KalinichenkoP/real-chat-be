@@ -15,17 +15,8 @@ export class SocketService {
   // }
 
   public initSocket(): void {
-    this.socket = io('http://127.0.0.1:4000');
+    this.socket = io('http://127.0.0.1:3000');
   }
-
-  sendMessage(message: Message): void {
-    this.socket.to(message.roomId.toString()).emit('message', message);
-    // });
-  }
-
-  // createRoom(name: string): void {
-  //   this.socket.emit('createRoom', name);
-  // }
 
   connectRoom(roomId: number): void {
     console.log(roomId);

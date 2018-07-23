@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {User} from '../models/user';
 import {BehaviorSubject} from 'rxjs';
 import {Params} from '@angular/router';
+import {ApiListResponse} from '../../../classes/ApiListResponce';
+import {Room} from '../models/room';
 
 interface UserModel {
   user: User;
@@ -51,6 +53,11 @@ export class UserService {
   public getUserById(id: number): Observable<User> {
     return this.httpClient
       .get<User>(`${this.url}/${id}`);
+  }
+
+  public getUserByRoom(roomId: number): Observable<ApiListResponse<User>> {
+    return this.httpClient
+      .get<ApiListResponse<User>>(`${this.url}/room/${roomId}`);
   }
 
   public getMeUser(): Observable<User> {

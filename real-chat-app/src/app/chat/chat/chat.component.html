@@ -2,6 +2,7 @@
   <p>{{ room?.name }}</p>
   <form [formGroup]="createMessageForm" class="example-form" (submit)="sendMessage()">
     <input title="message" matInput type="text" formControlName="text">
+    <input type="hidden" formControlName="uuid">
     <input type="hidden" formControlName="roomId">
     <input type="hidden" formControlName="senderId">
     <button mat-button type="submit">Send</button>

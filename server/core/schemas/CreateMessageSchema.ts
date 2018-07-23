@@ -11,6 +11,9 @@ export class CreateMessageSchema implements CreateSchema {
         return Joi
             .object()
             .keys({
+                uuid: Joi
+                    .string()
+                    .required(),
                 text: Joi
                     .string()
                     .trim()

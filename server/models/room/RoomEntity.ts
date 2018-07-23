@@ -13,9 +13,9 @@ export class Room extends Base<Room>{
     @Column({name: "name", unique: true})
     roomName: string;
 
-    // @ManyToMany(() => User)
-    // @JoinTable()
-    // users: User[];
+    @ManyToMany(() => User)
+    @JoinTable()
+    users: User[];
 
     toDto(): RoomDto {
         return new RoomDto(this);

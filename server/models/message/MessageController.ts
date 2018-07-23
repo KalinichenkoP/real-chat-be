@@ -5,11 +5,12 @@ import {JoiValidationPipe} from '../../core/pipes/JoiValidationPipe';
 import {CreateMessageSchema} from '../../core/schemas/CreateMessageSchema';
 import {CreateMessageDto} from './dto/CreateMessageDto';
 import {SocketService} from '../../../real-chat-app/src/app/services/socket.service';
+import {EventsGateway} from '../events/EventsGateway';
 
 @Controller('messages')
 export class MessageController {
 
-    constructor(private readonly messageService: MessageService, private readonly socketService: SocketService) {}
+    constructor(private readonly messageService: MessageService, private readonly eventGateway: EventsGateway) {}
 
     @Get()
     findAll(): Promise<Message[]> {
@@ -24,9 +25,9 @@ export class MessageController {
     @Post()
     @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     async createOne(@Body() body): Promise<Message> {
+
         const message: Message  = await this.messageService.createMessage(body);
-        this.eventGa.initSocket();
-        this.socketService.sendMessage(message);
+        this.eventGateway.emitMessage(message.toDto());
         return this.messageService.createMessage(body);
     }
 

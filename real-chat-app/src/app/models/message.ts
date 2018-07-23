@@ -1,5 +1,10 @@
+import {MessageStatus} from './message.status';
+
 export class Message {
-  text?: string;
+  uuid: string;
+  text: string;
+  status: MessageStatus;
+  reeadCount: number;
   senderId: number;
   roomId: number;
 }

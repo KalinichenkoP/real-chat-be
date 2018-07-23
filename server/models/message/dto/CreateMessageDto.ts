@@ -1,5 +1,7 @@
 export class CreateMessageDto {
-    readonly text: string;
+    readonly uuid: string;
+
+    readonly text?: string;
 
     readonly roomId: number;
 
