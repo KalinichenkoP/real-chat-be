@@ -16,8 +16,8 @@ export class MessageService {
         return await this.messageRepository.find();
     }
 
-    public async findByRoomId(roomId: number): Promise<Message[]> {
-        return await this.messageRepository.find({'roomId': roomId});
+    public async findByRoomId(roomId: string): Promise<Message[]> {
+        return await this.messageRepository.find({'roomId': parseInt(roomId,10)});
     }
 
     public async createMessage(messageDto: MessageDto): Promise<Message> {

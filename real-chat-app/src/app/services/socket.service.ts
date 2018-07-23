@@ -27,8 +27,8 @@ export class SocketService {
   //   this.socket.emit('createRoom', name);
   // }
 
-  connectRoom(name: string): void {
-    this.socket.emit('connectRoom', name);
+  connectRoom(roomId: number): void {
+    this.socket.emit('connectRoom', roomId.toString());
   }
 
   public onMessage(): Observable<Message> {

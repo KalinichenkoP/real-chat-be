@@ -1,5 +1,5 @@
 <section class="container">
-  <p>{{ chatName }}</p>
+  <p>{{ room?.name }}</p>
   <div class="message-list"></div>
   <input matInput type="text" [(ngModel)]="text">
   <button mat-button (click)="sendMessageSocket()">Send</button>

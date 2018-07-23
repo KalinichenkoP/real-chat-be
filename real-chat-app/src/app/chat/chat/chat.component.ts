@@ -38,12 +38,11 @@ export class ChatComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.roomService.getRoomById(parseInt(paramMap.get('roomId'), 10)).subscribe((room: Room) => {
         this.room = room;
-        this.socketService.connectRoom(this.room.name);
+        this.socketService.connectRoom(this.room.id);
         this.messageService.getMessages(this.room.id)
           .subscribe((message: Message[]) => this.messages = message);
       });
     });
-
   }
 
   private initIoConnection(): void {
