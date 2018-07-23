@@ -17,21 +17,24 @@ export class EventsGateway {
     constructor(private readonly messageService: MessageService) {
     }
 
-    @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
-    @SubscribeMessage('message')
-    onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
-        this.messageService.createMessage(message)
-            .then(result => {
-                    this.server.to(message.roomId).emit('message', message);
-                },
-                error => {
-                    console.log(error);
-                });
-        const event = 'events';
-        const response = [1, 2, 3];
-
-        return from(response).pipe(map(res => ({event, data: res})));
-    }
+    // @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
+    // @SubscribeMessage('message')
+    // onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
+    //     this.messageService.createMessage(message)
+    //         .then(result => {
+    //             console.log('result');
+    //             console.log(result);
+    //                 this.server.to(message.roomId.toString()).emit('message', message);
+    //             },
+    //             error => {
+    //                 console.log('error');
+    //                 console.log(error);
+    //             });
+    //     const event = 'events';
+    //     const response = [1, 2, 3];
+    //
+    //     return from(response).pipe(map(res => ({event, data: res})));
+    // }
 
     @SubscribeMessage('connectRoom')
     onEventConnectRoom(client, roomId: number): Observable<WsResponse<number>> {

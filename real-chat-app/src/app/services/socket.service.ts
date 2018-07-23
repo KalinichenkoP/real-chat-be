@@ -15,11 +15,11 @@ export class SocketService {
   // }
 
   public initSocket(): void {
-    this.socket = io('http://localhost:4000', {transports: ['websocket']});
+    this.socket = io('http://127.0.0.1:4000');
   }
 
   sendMessage(message: Message): void {
-    this.socket.emit('message', message);
+    this.socket.to(message.roomId.toString()).emit('message', message);
     // });
   }
 
@@ -28,13 +28,15 @@ export class SocketService {
   // }
 
   connectRoom(roomId: number): void {
-    this.socket.emit('connectRoom', roomId.toString());
+    console.log(roomId);
+    this.socket.emit('connectRoom', roomId);
   }
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
-      this.socket.on('message', (data: Message) => {
-        observer.next(data);
+      this.socket.on('message', (message: Message) => {
+        console.log(message);
+        observer.next(message);
       });
     });
   }
