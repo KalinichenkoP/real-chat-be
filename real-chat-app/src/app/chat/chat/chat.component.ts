@@ -9,9 +9,8 @@ import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import {Room} from '../../models/room';
 import {RoomService} from '../../services/room.service';
-import {BehaviorSubject, Observable} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as uuidFactory from "uuid";
+import * as uuidFactory from 'uuid';
 import {MessageStatus} from '../../models/message.status';
 
 @Component({
@@ -36,10 +35,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.initIoConnection();
-
-    // this.room.id = parseInt(this.route.snapshot.paramMap.get('roomId'), 10);
-    //
-    // this.uuid = uuidFactory.v4();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.roomService.getRoomById(parseInt(paramMap.get('roomId'), 10)).subscribe((room: Room) => {
         this.room = room;
@@ -65,11 +60,10 @@ export class ChatComponent implements OnInit {
       .subscribe((message: Message) => {
         let newMessage: Message = this.findMessageByUUID(message.uuid);
         if (!newMessage) {
-          this.messages.push(newMessage);
+          this.messages.push(message);
         } else {
-          newMessage.status = MessageStatus.Send
+          newMessage.status = MessageStatus.Send;
         }
-        this.messages.push(message);
         let user: User = this.findUserById(message.senderId);
         if (!user) {
           this.getUser(message.senderId);
@@ -79,6 +73,7 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     this.messageService.sendMessage(this.createMessageForm).subscribe((message: Message) => this.messages.push(message));
+    this.createMessageForm.reset({uuid: uuidFactory.v4(), text: '', roomId: this.room.id, senderId: 10});
   }
 
   getUser(id: number) {
@@ -89,7 +84,7 @@ export class ChatComponent implements OnInit {
 
   getUsersByRoom(roomId: number) {
     this.userService.getUserByRoom(roomId).subscribe((result: ApiListResponse<User>) => {
-      this.users =result.data;
+      this.users = result.data;
     });
   }
 
@@ -98,6 +93,7 @@ export class ChatComponent implements OnInit {
   }
 
   findMessageByUUID(uuid: string): Message {
+    console.log(this.messages.filter((message: Message) => message.uuid === uuid));
     return this.messages.filter((message: Message) => message.uuid === uuid)[0];
   }
 }

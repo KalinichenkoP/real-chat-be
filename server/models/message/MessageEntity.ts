@@ -1,4 +1,4 @@
-import { ObjectIdColumn, Column} from "typeorm";
+import {ObjectIdColumn, Column, Index} from 'typeorm';
 import {Entity} from "typeorm/decorator/entity/Entity";
 import {ObjectID} from "typeorm/driver/mongodb/typings";
 import {MessageDto} from './dto/MessageDto';
@@ -14,6 +14,7 @@ export class Message {
     senderId: number;
 
     @Column()
+    @Index({ unique: true })
     uuid: string;
 
     @Column()

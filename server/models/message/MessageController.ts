@@ -25,10 +25,10 @@ export class MessageController {
     @Post()
     @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     async createOne(@Body() body): Promise<Message> {
-
+        console.log('create request');
         const message: Message  = await this.messageService.createMessage(body);
         this.eventGateway.emitMessage(message.toDto());
-        return this.messageService.createMessage(body);
+        return message;
     }
 
     @Get(':userId')

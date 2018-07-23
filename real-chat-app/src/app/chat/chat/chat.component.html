@@ -1,5 +1,5 @@
 <section class="container">
-  <p>{{ room?.name }}</p>
+  <p>{{ room?.roomName }}</p>
   <form [formGroup]="createMessageForm" class="example-form" (submit)="sendMessage()">
     <input title="message" matInput type="text" formControlName="text">
     <input type="hidden" formControlName="uuid">
@@ -8,8 +8,8 @@
     <button mat-button type="submit">Send</button>
   </form>
   <mat-nav-list>
-    <mat-list-item *ngFor="let message of messages">{{ message.text }} from {{
-      findUserById(message.senderId)?.firstName}}
+    <mat-list-item *ngFor="let message of messages" class="{{message.uuid}}{{message.status}}">{{ message?.text }} from {{
+      findUserById(message?.senderId)?.firstName}}
     </mat-list-item>
   </mat-nav-list>
 </section>

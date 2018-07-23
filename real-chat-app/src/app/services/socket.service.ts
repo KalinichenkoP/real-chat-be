@@ -19,14 +19,12 @@ export class SocketService {
   }
 
   connectRoom(roomId: number): void {
-    console.log(roomId);
     this.socket.emit('connectRoom', roomId);
   }
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
       this.socket.on('message', (message: Message) => {
-        console.log(message);
         observer.next(message);
       });
     });
