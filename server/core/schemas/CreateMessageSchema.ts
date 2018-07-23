@@ -20,7 +20,7 @@ export class CreateMessageSchema implements CreateSchema {
                 senderId: Joi
                     .number()
                     .required(),
-                chatId: Joi
+                roomId: Joi
                     .number()
                     .required()
             });

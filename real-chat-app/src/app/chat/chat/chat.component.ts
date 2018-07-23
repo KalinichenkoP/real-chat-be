@@ -10,6 +10,7 @@ import {UserService} from '../../services/user.service';
 import {Room} from '../../models/room';
 import {RoomService} from '../../services/room.service';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -20,6 +21,8 @@ export class ChatComponent implements OnInit {
 
   protected room: Room;
   protected text: string = '';
+  // protected message: Message;
+  protected createMessageForm: FormGroup;
   messages: Message[] = [];
   users: User[] = [];
 
@@ -42,7 +45,14 @@ export class ChatComponent implements OnInit {
         this.messageService.getMessages(this.room.id)
           .subscribe((message: Message[]) => this.messages = message);
       });
+      this.createMessageForm = new FormGroup({
+          'text': new FormControl(this.text, [Validators.required]),
+          'roomId': new FormControl(paramMap.get('roomId')),
+          'senderId': new FormControl(10)
+        }
+      );
     });
+
   }
 
   private initIoConnection(): void {
@@ -58,12 +68,8 @@ export class ChatComponent implements OnInit {
       });
   }
 
-  sendMessageSocket() {
-    const message = new Message();
-    message.text = this.text;
-    message.roomId = this.room.id;
-    message.senderId = 10;
-    this.socketService.sendMessage(message);
+  sendMessage() {
+    this.messageService.sendMessage(this.createMessageForm).subscribe((message: Message) => this.messages.push(message));
   }
 
   getUser(id: number) {
@@ -76,4 +82,3 @@ export class ChatComponent implements OnInit {
     return this.users.filter((user: User) => user.id === id)[0];
   }
 }
-

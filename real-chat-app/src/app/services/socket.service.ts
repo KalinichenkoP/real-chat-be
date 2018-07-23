@@ -15,7 +15,7 @@ export class SocketService {
   // }
 
   public initSocket(): void {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://localhost:4000', {transports: ['websocket']});
   }
 
   sendMessage(message: Message): void {
@@ -34,7 +34,7 @@ export class SocketService {
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
       this.socket.on('message', (data: Message) => {
-        observer.next(data)
+        observer.next(data);
       });
     });
   }

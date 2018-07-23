@@ -23,9 +23,9 @@ export class RoomController {
     @UsePipes(new JoiValidationPipe<CreateRoomDto>(new CreateRoomSchema()))
     async create(@Body() body: CreateRoomDto, @Res() res): Promise<RoomDto> {
         //check for exist
-        const testChannel = await this.roomService.findByName(body.name);
-        if (testChannel) {
-            throw new NotFoundException(`Chat with the selected name already exist`);
+        const testRoom = await this.roomService.findByName(body.roomName);
+        if (testRoom) {
+            throw new NotFoundException(`Room with the selected name already exist`);
         }
         const room: RoomDto = await this.roomService.createRoom(body);
         return res.send(room);

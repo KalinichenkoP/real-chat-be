@@ -1,9 +1,14 @@
 <section class="container">
   <p>{{ room?.name }}</p>
-  <div class="message-list"></div>
-  <input matInput type="text" [(ngModel)]="text">
-  <button mat-button (click)="sendMessageSocket()">Send</button>
+  <form [formGroup]="createMessageForm" class="example-form" (submit)="sendMessage()">
+    <input title="message" matInput type="text" formControlName="text">
+    <input type="hidden" formControlName="roomId">
+    <input type="hidden" formControlName="senderId">
+    <button mat-button type="submit">Send</button>
+  </form>
   <mat-nav-list>
-    <mat-list-item *ngFor="let message of messages">{{ message.text }} from {{ findUserById(message.senderId)?.firstName}}</mat-list-item>
+    <mat-list-item *ngFor="let message of messages">{{ message.text }} from {{
+      findUserById(message.senderId)?.firstName}}
+    </mat-list-item>
   </mat-nav-list>
 </section>

@@ -20,11 +20,11 @@ export class MessageController {
         return this.messageService.findByRoomId(roomId);
     }
 
-    // @Post()
-    // @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
-    // createOne(@Body() body): Promise<Message> {
-    //     return this.messageService.createMessage(body);
-    // }
+    @Post()
+    @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
+    createOne(@Body() body): Promise<Message> {
+        return this.messageService.createMessage(body);
+    }
 
     @Get(':userId')
     async findOne(@Res() res, @Param('userId') userId): Promise<Message> {

@@ -1,5 +1,5 @@
 export class Message {
-  text: string;
+  text?: string;
   senderId: number;
   roomId: number;
 }

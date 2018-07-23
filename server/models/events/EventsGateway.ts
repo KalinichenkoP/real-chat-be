@@ -2,17 +2,22 @@ import {SubscribeMessage, WebSocketGateway, WebSocketServer, WsResponse} from '@
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import * as redisAdapter from 'socket.io-redis';
+
 import {MessageService} from '../message/MessageService';
 import {MessageDto} from '../message/dto/MessageDto';
+import {CreateMessageSchema} from '../../core/schemas/CreateMessageSchema';
+import {CreateMessageDto} from '../message/dto/CreateMessageDto';
+import {JoiValidationPipe} from '../../core/pipes/JoiValidationPipe';
+import {UsePipes} from '@nestjs/common';
 
-@WebSocketGateway( {adapter: redisAdapter({host: 'localhost', port: 6379})})
+@WebSocketGateway(4000, {adapter: redisAdapter({host: 'localhost', port: 6379})})
 export class EventsGateway {
     @WebSocketServer() server;
 
     constructor(private readonly messageService: MessageService) {
     }
 
-    // @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
+    @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     @SubscribeMessage('message')
     onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
         this.messageService.createMessage(message)
@@ -31,18 +36,6 @@ export class EventsGateway {
     @SubscribeMessage('connectRoom')
     onEventConnectRoom(client, roomId: number): Observable<WsResponse<number>> {
         this.server.of('/').adapter.remoteJoin(client.id, roomId.toString(), (err) => {
-            // this.server.of('/').adapter.clientRooms(client.id, (err, clientRooms) => {
-                // console.log('clientRooms');
-                // console.log(clientRooms);
-            // });
-            // this.server.of('/').adapter.clients([room], (err, clients) => {
-            //     console.log('clientsRoom');
-            //     console.log(clients);
-            // });
-            // this.server.of('/').adapter.allRooms((err, rooms) => {
-            //     console.log('allRooms');
-            //     console.log(rooms);
-            // });
             console.log(err);
         });
 

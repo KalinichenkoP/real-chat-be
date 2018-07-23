@@ -4,6 +4,7 @@ import * as Joi from "joi";
 
 import { Factory } from "../../interfaces/Factory";
 import { CreateSchema } from "../schemas/CreateSchemaFactory";
+import {WsException} from '@nestjs/websockets';
 
 @Injectable()
 export class JoiValidationPipe<T> implements PipeTransform<T> {

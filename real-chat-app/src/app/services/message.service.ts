@@ -6,6 +6,7 @@ import {API_URL} from '../../environments/environment';
 import {Room} from '../models/room';
 import {HttpClient} from '@angular/common/http';
 import {ApiListResponse} from '../../../classes/ApiListResponce';
+import {FormGroup} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,8 @@ export class MessageService {
       .get<Message[]>(`${this.url}/${roomId}`);
   }
 
+  sendMessage(messageCreateForm: FormGroup): Observable<Message> {
+    return this.httpClient
+      .post<Message>(`${this.url}`, messageCreateForm.value);
+  }
 }
