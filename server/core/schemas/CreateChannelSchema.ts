@@ -11,7 +11,7 @@ export class CreateRoomSchema implements CreateSchema {
         return Joi
             .object()
             .keys({
-                name: Joi
+                roomName: Joi
                     .string()
                     .trim()
                     .min(MIN_LENGTH)

@@ -1,4 +1,13 @@
-<input mat-input-element type="text" [(ngModel)]="chatName">
-<div>{{this.chatName}}</div>
-<button mat-button (click)="sendChatName()">Create</button>
+<section class="container">
+  <form [formGroup]="createRoomForm" class="example-form" (submit)="sendChatName()">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Create new room" id="roomName" formControlName="roomName" [(ngModel)]="roomName">
+    </mat-form-field>
+    <button mat-button type="submit">Create</button>
+  </form>
+  <p>Chat list</p>
+  <mat-nav-list>
+    <a mat-list-item *ngFor="let room of rooms" href="/chat/{{room.id}}">{{ room.roomName }}</a>
+  </mat-nav-list>
+</section>
 

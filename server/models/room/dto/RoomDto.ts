@@ -4,12 +4,12 @@ import {Room} from '../RoomEntity';
 
 export class RoomDto extends BaseDto<Room> {
 
-    readonly name: string;
+    readonly roomName: string;
     readonly id: number;
 
     constructor(room: Room) {
         super(room);
-        this.name = room.name;
+        this.roomName = room.roomName;
         this.id = room.id;
     }
 }

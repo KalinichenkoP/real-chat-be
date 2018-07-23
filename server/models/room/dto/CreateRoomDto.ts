@@ -1,10 +1,10 @@
 import {RegisterRoomDto} from './RegisterRoomDto';
 
 export class CreateRoomDto {
-    readonly name: string;
+    readonly roomName: string;
 
     constructor(registerDto: RegisterRoomDto) {
-        this.name = registerDto.name;
+        this.roomName = registerDto.roomName;
 
     }
 }

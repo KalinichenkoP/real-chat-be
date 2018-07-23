@@ -15,8 +15,8 @@ export class RoomService {
 
     async findAll(): Promise<ListResponseDto<RoomDto>> {
         const res = await this.roomRepository.findAndCount();
-        const channels = res[0].map((channel) => channel.toDto());
-        return new ListResponseDto<RoomDto>(channels, res[1]);
+        const rooms = res[0].map((room) => room.toDto());
+        return new ListResponseDto<RoomDto>(rooms, res[1]);
     }
 
     async findById(id: number): Promise<Room> {
@@ -27,7 +27,7 @@ export class RoomService {
         return room;
     }
     async findByName(name: string): Promise<Room | undefined> {
-        return await this.roomRepository.findOne({where: {name: name}});
+        return await this.roomRepository.findOne({where: {roomName: name}});
     }
 
     async createRoom(registerRoomDto: RegisterRoomDto): Promise<RoomDto> {

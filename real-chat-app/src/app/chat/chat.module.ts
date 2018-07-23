@@ -7,7 +7,7 @@ import {ROUTES} from "./chat.router";
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ChatCreateComponent } from './chat-create/chat-create.component';
 import {MatButtonModule, MatInputModule} from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [ChatComponent, ChatListComponent, ChatCreateComponent],
@@ -17,6 +17,7 @@ import {FormsModule} from '@angular/forms';
     MatButtonModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(ROUTES),
   ],
   exports: [

@@ -1,5 +1,5 @@
 
 
 export class RegisterRoomDto {
-    readonly name: string;
+    readonly roomName: string;
 }

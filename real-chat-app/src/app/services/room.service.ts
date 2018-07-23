@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 // import {Channel} from '../models/room';
 import {ApiListResponse} from '../../../classes/ApiListResponce';
 import {Room} from '../models/room';
+import {FormGroup} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,9 @@ export class RoomService {
       .get<ApiListResponse<Room>>(this.url);
   }
 
-  createRoom(chatName: string): Observable<Room> {
-    console.log(chatName);
+  createRoom(createForm: FormGroup): Observable<Room> {
     return this.httpClient
-      .post<Room>(this.url, JSON.stringify({name: chatName}), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
+      .post<Room>(this.url, createForm.value);
   }
 
   getRoomById(roomId: number): Observable<Room> {

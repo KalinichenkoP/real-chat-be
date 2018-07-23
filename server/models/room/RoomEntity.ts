@@ -11,11 +11,11 @@ export class Room extends Base<Room>{
     id: number;
 
     @Column({name: "name", unique: true})
-    name: string;
+    roomName: string;
 
-    @ManyToMany(() => User)
-    @JoinTable()
-    users: User[];
+    // @ManyToMany(() => User)
+    // @JoinTable()
+    // users: User[];
 
     toDto(): RoomDto {
         return new RoomDto(this);
