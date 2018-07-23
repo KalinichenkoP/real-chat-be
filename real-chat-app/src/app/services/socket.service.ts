@@ -15,7 +15,7 @@ export class SocketService {
   // }
 
   public initSocket(): void {
-    this.socket = io('http://localhost:3001');
+    this.socket = io('http://localhost:3000');
   }
 
   sendMessage(message: Message): void {

@@ -5,7 +5,7 @@ import * as redisAdapter from 'socket.io-redis';
 import {MessageService} from '../message/MessageService';
 import {MessageDto} from '../message/dto/MessageDto';
 
-@WebSocketGateway(3001, {adapter: redisAdapter({host: 'localhost', port: 6379})})
+@WebSocketGateway( {adapter: redisAdapter({host: 'localhost', port: 6379})})
 export class EventsGateway {
     @WebSocketServer() server;
 
