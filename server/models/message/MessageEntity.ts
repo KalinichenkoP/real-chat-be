@@ -16,5 +16,5 @@ export class Message {
     text: string;
 
     @Column()
-    roomName: string;
+    roomId: number;
 }

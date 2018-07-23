@@ -25,4 +25,10 @@ export class RoomService {
     return this.httpClient
       .post<Room>(this.url, JSON.stringify({name: chatName}), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
   }
+
+  getRoomById(roomId: number): Observable<Room> {
+    console.log(roomId);
+    return this.httpClient
+      .get<Room>(`${this.url}/${roomId}`);
+  }
 }

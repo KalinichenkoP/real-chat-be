@@ -15,9 +15,9 @@ export class MessageController {
         return this.messageService.findAll();
     }
 
-    @Get(':roomName')
-    findByRoomName(@Param("roomName") roomName): Promise<Message[]> {
-        return this.messageService.findByRoomName(roomName);
+    @Get(':roomId')
+    findByRoomName(@Param("roomId") roomId): Promise<Message[]> {
+        return this.messageService.findByRoomId(roomId);
     }
 
     // @Post()

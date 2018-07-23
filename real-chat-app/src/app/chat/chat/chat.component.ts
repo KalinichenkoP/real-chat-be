@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ParamMap, Params} from '@angular/router';
 import {NotifierService} from '../../notifier/notifier.service';
 import {SocketService} from '../../services/socket.service';
 import {Message} from '../../models/message';
@@ -7,6 +7,9 @@ import {MessageService} from '../../services/message.service';
 import {ApiListResponse} from '../../../../classes/ApiListResponce';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
+import {Room} from '../../models/room';
+import {RoomService} from '../../services/room.service';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -15,7 +18,7 @@ import {UserService} from '../../services/user.service';
 })
 export class ChatComponent implements OnInit {
 
-  protected roomName: string = '';
+  protected room: Room;
   protected text: string = '';
   messages: Message[] = [];
   users: User[] = [];
@@ -23,15 +26,24 @@ export class ChatComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private socketService: SocketService,
               private userService: UserService,
+              private roomService: RoomService,
               private messageService: MessageService) {
   }
 
   ngOnInit() {
     this.initIoConnection();
-    this.roomName = this.route.snapshot.paramMap.get('name');
-    this.socketService.connectRoom(this.roomName);
-    this.messageService.getMessages(this.roomName)
-      .subscribe((message: Message[]) => this.messages = message);
+
+    // this.room.id = parseInt(this.route.snapshot.paramMap.get('roomId'), 10);
+    //
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      this.roomService.getRoomById(parseInt(paramMap.get('roomId'), 10)).subscribe((room: Room) => {
+        this.room = room;
+        this.socketService.connectRoom(this.room.name);
+        this.messageService.getMessages(this.room.id)
+          .subscribe((message: Message[]) => this.messages = message);
+      });
+    });
+
   }
 
   private initIoConnection(): void {
@@ -50,7 +62,7 @@ export class ChatComponent implements OnInit {
   sendMessageSocket() {
     const message = new Message();
     message.text = this.text;
-    message.roomName = this.roomName;
+    message.roomId = this.room.id;
     message.senderId = 10;
     this.socketService.sendMessage(message);
   }

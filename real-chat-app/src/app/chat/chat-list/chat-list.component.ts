@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RoomService} from '../../services/room.service';
+import {Room} from '../../models/room';
 
 @Component({
   selector: 'app-chat-list',
@@ -8,7 +9,7 @@ import {RoomService} from '../../services/room.service';
 })
 export class ChatListComponent implements OnInit {
 
-  private rooms = [];
+  protected rooms: Room[] = [];
 
   constructor(private roomService: RoomService) {
   }

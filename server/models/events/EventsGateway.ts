@@ -17,7 +17,7 @@ export class EventsGateway {
     onEventConnect(client, message: MessageDto): Observable<WsResponse<number>> {
         this.messageService.createMessage(message)
             .then(result => {
-                    this.server.to(message.roomName).emit('message', message);
+                    this.server.to(message.roomId).emit('message', message);
                 },
                 error => {
                     console.log(error);
@@ -29,9 +29,9 @@ export class EventsGateway {
     }
 
     @SubscribeMessage('connectRoom')
-    onEventConnectRoom(client, room: string): Observable<WsResponse<number>> {
+    onEventConnectRoom(client, roomId: number): Observable<WsResponse<number>> {
 
-        this.server.of('/').adapter.remoteJoin(client.id, room, (err) => {
+        this.server.of('/').adapter.remoteJoin(client.id, roomId.toString(), (err) => {
             // this.server.of('/').adapter.clientRooms(client.id, (err, clientRooms) => {
                 // console.log('clientRooms');
                 // console.log(clientRooms);

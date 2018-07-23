@@ -16,14 +16,14 @@ export class MessageService {
         return await this.messageRepository.find();
     }
 
-    public async findByRoomName(roomName: string): Promise<Message[]> {
-        return await this.messageRepository.find({'roomName': roomName});
+    public async findByRoomId(roomId: number): Promise<Message[]> {
+        return await this.messageRepository.find({'roomId': roomId});
     }
 
     public async createMessage(messageDto: MessageDto): Promise<Message> {
         const message = new Message();
         message.senderId = messageDto.senderId;
-        message.roomName = messageDto.roomName;
+        message.roomId = messageDto.roomId;
         message.text = messageDto.text;
         return await this.messageRepository.save<Message>(message);
     }
