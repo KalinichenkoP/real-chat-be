@@ -23,7 +23,7 @@ export class UserController extends ServerController {
             return Promise.reject(error);
         }
         let payload = login.getPayload();
-        let user: User = await this.userService.findByEmail(payload.email, false);
+        let user: User = await this.userService.findByEmail(payload.email);
 
         if (!user) {
             user = await this.userService.createOne(payload);
@@ -41,14 +41,12 @@ export class UserController extends ServerController {
 
     @Get('room/:roomId')
     async findByRoom(@Req() req, @Param('roomId') roomId): Promise<ListResponseDto<UserDto>> {
-        return await this.userService.findByRoom(roomId);
+        return await this.userService.findByRoom(parseInt(roomId, 10));
     }
 
     @Get(':id')
-    async findOne(@Res() res, @Param('id') id): Promise<UserDto> {
-        const user = await this.userService.findById(id);
-
-        return res.json(user);
+    async findOne(@Param('id') id): Promise<UserDto> {
+        return await this.userService.findById(parseInt(id, 10));
     }
 
     @Post('/me/verify-token')

@@ -7,12 +7,12 @@ export class RoomUsersDto extends BaseDto<Room> {
 
     readonly roomName: string;
     readonly id: number;
-    readonly users: User[];
+    readonly users: UserDto[];
 
     constructor(room: Room) {
         super(room);
         this.roomName = room.roomName;
         this.id = room.id;
-        this.users = room.users
+        this.users = room.users.map(user=> user.toDto())
     }
 }

@@ -37,22 +37,23 @@ export class RoomController {
 
     @Put()
     // @UsePipes(new JoiValidationPipe<AddUsersRoom>(new AddUsersRoomSchema()))
-    async addUsers(@Body() body: AddUsersRoomDto, @Res() res): Promise<RoomUsersDto> {
+    async addUsers(@Body() body: AddUsersRoomDto): Promise<RoomUsersDto> {
         //check for exist
         const room: Room = await this.roomService.findById(body.roomId);
-        console.log(room);
+        // console.log(room);
         if (!room) {
             throw new NotFoundException(`Room with the selected name is absent`);
         }
+
         const connectedUsers: User[] = await this.userService.findByIds(body.usersIds);
-        console.log(connectedUsers);
+        // console.log(connectedUsers);
         const updatedRoom: Room = await this.roomService.addUsers(room, connectedUsers);
-        return res.send(updatedRoom);
+        return updatedRoom.toUserDto();
     }
 
     @Get(':id')
-    async findOne(@Res() res, @Param('id') id): Promise<RoomDto> {
-        const room: Room = await this.roomService.findById(id);
-        return res.json(room.toDto());
+    async findOne(@Param('id') id): Promise<RoomDto> {
+        const room: Room = await this.roomService.findById(parseInt(id, 10));
+        return await room.toDto();
     }
 }

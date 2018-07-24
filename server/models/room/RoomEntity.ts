@@ -3,6 +3,7 @@ import {Entity} from "typeorm/decorator/entity/Entity";
 import {Base} from "../base/BaseEntity";
 import {User} from '../user/UserEntity';
 import {RoomDto} from './dto/RoomDto';
+import {RoomUsersDto} from './dto/RoomUsersDto';
 
 @Entity({name: 'rooms'})
 export class Room extends Base<Room>{
@@ -19,5 +20,8 @@ export class Room extends Base<Room>{
 
     toDto(): RoomDto {
         return new RoomDto(this);
+    }
+    toUserDto(): RoomUsersDto {
+        return new RoomUsersDto(this);
     }
 }

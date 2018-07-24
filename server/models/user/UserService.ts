@@ -26,8 +26,7 @@ export class UserService {
     }
 
     async findByIds(ids: number[]): Promise<User[]> {
-        const users: User[] = await this.userRepository.findAndCount({id: In(ids)})[0];
-        return users;
+        return await this.userRepository.find({where: {id: In(ids)}});
     }
 
     async findByRoom(roomId: number): Promise<ListResponseDto<UserDto>> {
@@ -36,7 +35,7 @@ export class UserService {
         return new ListResponseDto<UserDto>(users, res[1]);
     }
 
-    async findByEmail(email: string, throwException = true): Promise<User | undefined>  {
+    async findByEmail(email: string): Promise<User | undefined>  {
         return await this.userRepository.findOne({where: {email: email}});
 
     }
