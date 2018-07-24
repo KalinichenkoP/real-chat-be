@@ -20,12 +20,13 @@ export class MessageService {
         return await this.messageRepository.find({'roomId': parseInt(roomId,10)});
     }
 
-    public async createMessage(messageDto: MessageDto): Promise<Message> {
+    public async createMessage(messageDto: CreateMessageDto): Promise<Message> {
         const message = new Message();
         message.uuid = messageDto.uuid;
         message.senderId = messageDto.senderId;
         message.roomId = messageDto.roomId;
         message.text = messageDto.text;
+        message.createdAt = new Date();
         return await this.messageRepository.save<Message>(message);
     }
 

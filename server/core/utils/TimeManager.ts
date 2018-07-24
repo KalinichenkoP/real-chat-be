@@ -12,8 +12,4 @@ export class TimeManager {
             return this.dateToSeconds(date);
         }
     }
-
-    static extractDate(date: Date): string {
-        return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join("-");
-    }
 }
