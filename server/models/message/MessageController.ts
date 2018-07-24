@@ -29,7 +29,6 @@ export class MessageController {
     @Post()
     @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     async createOne(@Body() body): Promise<Message> {
-        console.log('create request');
         const message: Message  = await this.messageService.createMessage(body);
         this.eventGateway.emitMessage(message.toDto());
         return message;
@@ -42,11 +41,9 @@ export class MessageController {
 
     @Patch('/read/:messageUUID')
     async updateOne(@Param('messageUUID') messageUUID): Promise<Message> {
-        console.log(messageUUID);
-        console.log('messageUUID');
         const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(messageUUID);
         if (result.result.ok === 1 ){
-            this.eventGateway.emitUpdatedInfo();
+            this.eventGateway.emitUpdatedInfo(messageUUID);
         }
     }
 }
