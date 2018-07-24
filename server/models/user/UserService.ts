@@ -1,5 +1,5 @@
 import {Inject, Injectable, NotFoundException} from '@nestjs/common';
-import {Repository} from "typeorm";
+import {In, Repository} from 'typeorm';
 import {User} from './UserEntity';
 import {ListResponseDto} from "../../core/dto/ListResponseDto";
 import {UserDto} from "./dto/UserDto";
@@ -26,7 +26,7 @@ export class UserService {
     }
 
     async findByIds(ids: number[]): Promise<User[]> {
-        const users: User[] = await this.userRepository.findAndCount({where: {id: ids}})[0];
+        const users: User[] = await this.userRepository.findAndCount({id: In(ids)})[0];
         return users;
     }
 

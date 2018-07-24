@@ -14,9 +14,7 @@ import {AddUsersRoomDto} from './dto/AddUsersRoomDto';
 @Controller('rooms')
 export class RoomController {
 
-
-    constructor(private readonly roomService: RoomService, private readonly userService: UserService) {
-    }
+    constructor(private readonly roomService: RoomService, private readonly userService: UserService) {}
 
     @Get()
     async findAll(): Promise<ListResponseDto<RoomDto>> {
@@ -42,10 +40,12 @@ export class RoomController {
     async addUsers(@Body() body: AddUsersRoomDto, @Res() res): Promise<RoomUsersDto> {
         //check for exist
         const room: Room = await this.roomService.findById(body.roomId);
-        if (room) {
+        console.log(room);
+        if (!room) {
             throw new NotFoundException(`Room with the selected name is absent`);
         }
         const connectedUsers: User[] = await this.userService.findByIds(body.usersIds);
+        console.log(connectedUsers);
         const updatedRoom: Room = await this.roomService.addUsers(room, connectedUsers);
         return res.send(updatedRoom);
     }
