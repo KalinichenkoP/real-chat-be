@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@nestjs/common';
-import {InsertOneWriteOpResult, MongoRepository, ObjectID} from 'typeorm';
+import {InsertOneWriteOpResult, MongoRepository, ObjectID, UpdateWriteOpResult} from 'typeorm';
 import {Message} from './MessageEntity';
 import {REPOSITORY_TOKEN} from '../../enums/RepositoryTokens';
 import {CreateMessageDto} from './dto/CreateMessageDto';
@@ -27,6 +27,7 @@ export class MessageService {
         message.roomId = messageDto.roomId;
         message.text = messageDto.text;
         message.createdAt = new Date();
+        message.readAmount = 0;
         return await this.messageRepository.save<Message>(message);
     }
 
@@ -39,5 +40,9 @@ export class MessageService {
                 console.log('error ' + error);
             });
         return await this.messageRepository.findOne({where: {userId: userId}});
+    }
+
+    public async updateReadAmount(messageUUID: string): Promise<UpdateWriteOpResult> {
+        return await this.messageRepository.updateOne({uuid: messageUUID}, {$inc: {readAmount: 1}})
     }
 }

@@ -22,6 +22,9 @@ export class Message {
     @Column()
     roomId: number;
 
+    @Column()
+    readAmount: number;
+
     @CreateDateColumn()
     createdAt: Date;
 

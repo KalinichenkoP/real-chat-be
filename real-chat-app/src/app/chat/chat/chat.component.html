@@ -8,7 +8,8 @@
     <button mat-button type="submit">Send</button>
   </form>
   <mat-nav-list>
-    <mat-list-item *ngFor="let message of messages" class="{{message.uuid}}{{message.status}}">{{ message?.text }} from {{(message?.senderId)}}
+    <mat-list-item *ngFor="let message of messages">
+      {{ message?.text }} from {{(message?.senderId)}} status {{(message?.status)}}
     </mat-list-item>
   </mat-nav-list>
 </section>

@@ -88,10 +88,13 @@ export class ChatComponent implements OnInit {
   }
 
   async checkAndPushMessage(newMessage: Message): Promise<any> {
-    console.log(this.messages.filter((message: Message) => message.uuid === newMessage.uuid));
     let checkMessage: Message = await this.messages.filter((message: Message) => message.uuid === newMessage.uuid)[0];
     if (!checkMessage) {
       this.messages.push(newMessage);
+      this.messageService.sendMessageReadInfo(newMessage.uuid).subscribe(result=> {
+        console.log('result');
+        console.log(result);
+      });
     } else {
       newMessage.status = MessageStatus.Send;
     }

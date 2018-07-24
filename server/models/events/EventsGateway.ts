@@ -19,6 +19,10 @@ export class EventsGateway {
         this.server.to(message.roomId.toString()).emit('message', message);
     }
 
+    emitUpdatedInfo(message: MessageDto) {
+        this.server.to(message.roomId.toString()).emit('message', message);
+    }
+
     @SubscribeMessage('connectRoom')
     onEventConnectRoom(client, roomId: number): Observable<WsResponse<number>> {
         console.log(client.id);
