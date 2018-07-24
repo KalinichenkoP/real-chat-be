@@ -13,10 +13,8 @@ export class UserService {
                 private readonly userRepository: Repository<User>) {
     }
 
-    async findAll(): Promise<ListResponseDto<UserDto>> {
-        const res = await this.userRepository.findAndCount();
-        const users = res[0].map((user) => user.toDto());
-        return new ListResponseDto<UserDto>(users, res[1]);
+    async findAll(): Promise<[User[], number]> {
+        return await this.userRepository.findAndCount();
     }
 
     async findById(id: number): Promise<UserDto> {
@@ -25,6 +23,11 @@ export class UserService {
             throw new NotFoundException(`User is absent`);
         }
         return user.toDto()
+    }
+
+    async findByIds(ids: number[]): Promise<User[]> {
+        const users: User[] = await this.userRepository.findAndCount({where: {id: ids}})[0];
+        return users;
     }
 
     async findByRoom(roomId: number): Promise<ListResponseDto<UserDto>> {

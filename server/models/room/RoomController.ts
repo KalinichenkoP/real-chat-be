@@ -1,22 +1,28 @@
-import {Body, Controller, Get, NotFoundException, Param, Post, Req, Res, UsePipes} from '@nestjs/common';
-import {RoomService} from "./RoomService";
+import {Body, Controller, Get, NotFoundException, Param, Post, Put, Res, UsePipes} from '@nestjs/common';
+import {RoomService} from './RoomService';
 import {RoomDto} from './dto/RoomDto';
 import {ListResponseDto} from '../../core/dto/ListResponseDto';
 import {Room} from './RoomEntity';
-import { CreateRoomSchema} from '../../core/schemas/CreateChannelSchema';
+import {CreateRoomSchema} from '../../core/schemas/CreateChannelSchema';
 import {JoiValidationPipe} from '../../core/pipes/JoiValidationPipe';
 import {CreateRoomDto} from './dto/CreateRoomDto';
+import {UserService} from '../user/UserService';
+import {User} from '../user/UserEntity';
+import {RoomUsersDto} from './dto/RoomUsersDto';
+import {AddUsersRoomDto} from './dto/AddUsersRoomDto';
 
 @Controller('rooms')
 export class RoomController {
 
 
-    constructor(private readonly roomService: RoomService) {
+    constructor(private readonly roomService: RoomService, private readonly userService: UserService) {
     }
 
     @Get()
     async findAll(): Promise<ListResponseDto<RoomDto>> {
-        return await this.roomService.findAll();
+        const res = await this.roomService.findAll();
+        const rooms = res[0].map((room) => room.toDto());
+        return new ListResponseDto<RoomDto>(rooms, res[1]);
     }
 
     @Post()
@@ -27,12 +33,25 @@ export class RoomController {
         if (testRoom) {
             throw new NotFoundException(`Room with the selected name already exist`);
         }
-        const room: RoomDto = await this.roomService.createRoom(body);
+        const room: Room = await this.roomService.createRoom(body);
         return res.send(room);
     }
 
+    @Put()
+    // @UsePipes(new JoiValidationPipe<AddUsersRoom>(new AddUsersRoomSchema()))
+    async addUsers(@Body() body: AddUsersRoomDto, @Res() res): Promise<RoomUsersDto> {
+        //check for exist
+        const room: Room = await this.roomService.findById(body.roomId);
+        if (room) {
+            throw new NotFoundException(`Room with the selected name is absent`);
+        }
+        const connectedUsers: User[] = await this.userService.findByIds(body.usersIds);
+        const updatedRoom: Room = await this.roomService.addUsers(room, connectedUsers);
+        return res.send(updatedRoom);
+    }
+
     @Get(':id')
-    async findOne(@Res() res, @Param("id") id): Promise<RoomDto> {
+    async findOne(@Res() res, @Param('id') id): Promise<RoomDto> {
         const room: Room = await this.roomService.findById(id);
         return res.json(room.toDto());
     }

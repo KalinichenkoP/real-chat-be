@@ -7,6 +7,7 @@ import {UserDto} from './dto/UserDto';
 import {OAuth2Client} from 'google-auth-library';
 import ServerController from '../../../real-chat-app/classes/ServerController';
 import {Md5} from 'ts-md5/dist/md5';
+import {RoomDto} from '../room/dto/RoomDto';
 
 const gaClient: any = new OAuth2Client('546854662215-mmnqq81j1bk4k1nf8jn1flugnf9eik28.apps.googleusercontent.com', '', '');
 
@@ -33,8 +34,11 @@ export class UserController extends ServerController {
 
     @Get()
     async findAll(@Req() req): Promise<ListResponseDto<UserDto>> {
-        return await this.userService.findAll();
+        const res = await this.userService.findAll();
+        const users = res[0].map((user) => user.toDto());
+        return new ListResponseDto<UserDto>(users, res[1]);
     }
+
     @Get('room/:roomId')
     async findByRoom(@Req() req, @Param('roomId') roomId): Promise<ListResponseDto<UserDto>> {
         return await this.userService.findByRoom(roomId);

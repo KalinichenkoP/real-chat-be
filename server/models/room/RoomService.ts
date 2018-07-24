@@ -5,6 +5,7 @@ import { CreateRoomFactory} from './factory/RoomFactory';
 import {RoomDto} from './dto/RoomDto';
 import {ListResponseDto} from '../../core/dto/ListResponseDto';
 import {RegisterRoomDto} from './dto/RegisterRoomDto';
+import {User} from '../user/UserEntity';
 
 @Injectable()
 export class RoomService {
@@ -13,10 +14,8 @@ export class RoomService {
                 private readonly roomRepository: Repository<Room>) {
     }
 
-    async findAll(): Promise<ListResponseDto<RoomDto>> {
-        const res = await this.roomRepository.findAndCount();
-        const rooms = res[0].map((room) => room.toDto());
-        return new ListResponseDto<RoomDto>(rooms, res[1]);
+    async findAll(): Promise<[Room[], number]> {
+        return await this.roomRepository.findAndCount();
     }
 
     async findById(id: number): Promise<Room> {
@@ -30,10 +29,14 @@ export class RoomService {
         return await this.roomRepository.findOne({where: {roomName: name}});
     }
 
-    async createRoom(registerRoomDto: RegisterRoomDto): Promise<RoomDto> {
+    async createRoom(registerRoomDto: RegisterRoomDto): Promise<Room> {
         const createRoom = new CreateRoomFactory().create(registerRoomDto);
         const room: Room = await this.roomRepository.create(createRoom);
-        const savedRoom: Room = await this.roomRepository.save<Room>(room);
-        return savedRoom.toDto();
+        return await this.roomRepository.save<Room>(room);
+    }
+
+    async addUsers(room: Room, users: User[]): Promise<Room> {
+        room.users = users;
+        return this.roomRepository.save(room);
     }
 }
