@@ -53,26 +53,18 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  private initIoConnection(): void {
+  private initIoConnection(): any {
     this.socketService.initSocket();
 
     this.socketService.onMessage()
       .subscribe((message: Message) => {
-        let newMessage: Message = this.findMessageByUUID(message.uuid);
-        if (!newMessage) {
-          this.messages.push(message);
-        } else {
-          newMessage.status = MessageStatus.Send;
-        }
-        let user: User = this.findUserById(message.senderId);
-        if (!user) {
-          this.getUser(message.senderId);
-        }
+        this.checkAndPushMessage(message);
+        this.checkAndPushUser(message.senderId);
       });
   }
 
   sendMessage() {
-    this.messageService.sendMessage(this.createMessageForm).subscribe((message: Message) => this.messages.push(message));
+    this.messageService.sendMessage(this.createMessageForm).subscribe((message: Message) => this.checkAndPushMessage(message));
     this.createMessageForm.reset({uuid: uuidFactory.v4(), text: '', roomId: this.room.id, senderId: 10});
   }
 
@@ -88,12 +80,20 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  findUserById(id: number): User {
-    return this.users.filter((user: User) => user.id === id)[0];
+  async checkAndPushUser(id: number): Promise<any> {
+    let user: User = await this.users.filter((user: User) => user.id === id)[0];
+    if (!user) {
+      this.getUser(id);
+    }
   }
 
-  findMessageByUUID(uuid: string): Message {
-    console.log(this.messages.filter((message: Message) => message.uuid === uuid));
-    return this.messages.filter((message: Message) => message.uuid === uuid)[0];
+  async checkAndPushMessage(newMessage: Message): Promise<any> {
+    console.log(this.messages.filter((message: Message) => message.uuid === newMessage.uuid));
+    let checkMessage: Message = await this.messages.filter((message: Message) => message.uuid === newMessage.uuid)[0];
+    if (!checkMessage) {
+      this.messages.push(newMessage);
+    } else {
+      newMessage.status = MessageStatus.Send;
+    }
   }
 }
