@@ -48,9 +48,8 @@ export class ChatComponent implements OnInit {
     this.socketService.initSocket();
 
     this.socketService.onMessage().pipe(
-      tap((message: Message) => console.log(message.uuid)),
-      filter((newMessage: Message) => this.messages.filter((message: Message) => message.uuid === newMessage.uuid).length > 0),
-      tap((message: Message) => console.log(message.uuid)),
+      filter((newMessage: Message) => this.messages.filter((message: Message) => message.uuid === newMessage.uuid).length === 0),
+      tap((message: Message) => message.status = MessageStatus.Send),
       tap((message: Message) => this.messages.push(message)))
       .subscribe();
   }
