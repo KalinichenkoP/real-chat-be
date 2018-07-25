@@ -1,12 +1,7 @@
 <section class="container">
   <p>{{ room?.roomName }}</p>
-  <form [formGroup]="createMessageForm" class="example-form" (submit)="sendMessage()">
-    <input title="message" matInput type="text" formControlName="text">
-    <input type="hidden" formControlName="uuid">
-    <input type="hidden" formControlName="roomId">
-    <input type="hidden" formControlName="senderId">
-    <button mat-button type="submit">Send</button>
-  </form>
+  <input title="message" matInput type="text" [(ngModel)]="text">
+  <button mat-button type="submit" (click)="sendMessage()">Send</button>
   <mat-nav-list>
     <mat-list-item *ngFor="let message of messages">
       {{ message?.text }} from {{(message?.senderId)}} status {{(message?.status)}}

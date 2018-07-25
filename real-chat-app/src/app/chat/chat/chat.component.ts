@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Params} from '@angular/router';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {NotifierService} from '../../notifier/notifier.service';
 import {SocketService} from '../../services/socket.service';
 import {Message} from '../../models/message';
@@ -9,10 +9,8 @@ import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import {Room} from '../../models/room';
 import {RoomService} from '../../services/room.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as uuidFactory from 'uuid';
 import {MessageStatus} from '../../models/message.status';
-import {tap} from 'rxjs/operators';
+import {filter, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -23,7 +21,6 @@ export class ChatComponent implements OnInit {
 
   protected room: Room;
   protected text: string = '';
-  protected createMessageForm: FormGroup;
   messages: Message[] = [];
   users: User[] = [];
 
@@ -44,13 +41,6 @@ export class ChatComponent implements OnInit {
           .subscribe((message: Message[]) => this.messages = message);
       });
       this.getUsersByRoom(parseInt(paramMap.get('roomId')));
-      this.createMessageForm = new FormGroup({
-          'uuid': new FormControl(uuidFactory.v4()),
-          'text': new FormControl(this.text, [Validators.required]),
-          'roomId': new FormControl(paramMap.get('roomId')),
-          'senderId': new FormControl(1)
-        }
-      );
     });
   }
 
@@ -58,16 +48,20 @@ export class ChatComponent implements OnInit {
     this.socketService.initSocket();
 
     this.socketService.onMessage().pipe(
-      tap((message: Message) => this.checkMessage(message)),
+      tap((message: Message) => console.log(message.uuid)),
+      filter((newMessage: Message) => this.messages.filter((message: Message) => message.uuid === newMessage.uuid).length > 0),
+      tap((message: Message) => console.log(message.uuid)),
       tap((message: Message) => this.messages.push(message)))
       .subscribe();
   }
 
-  sendMessage() {
-    this.messageService.sendMessage(this.createMessageForm).pipe(
-      tap((message: Message) => console.log(message.uuid)))
-      .subscribe((message: Message) => this.checkAndPushMessage(message));
-    this.createMessageForm.reset({uuid: uuidFactory.v4(), text: '', roomId: this.room.id, senderId: 10});
+  async sendMessage() {
+    const newMessage: Message = await new Message(this.text, this.room.id);
+    console.log(newMessage);
+    this.messages.push(newMessage);
+    console.log(this.messages);
+    this.messageService.sendMessage(newMessage);
+    this.text= '';
   }
 
   getUserFromDB(id: number) {

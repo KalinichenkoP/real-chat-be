@@ -6,4 +6,8 @@ export class CreateMessageDto {
     readonly roomId: number;
 
     readonly senderId: number;
+
+    readonly createdAt: Date;
+
+
 }

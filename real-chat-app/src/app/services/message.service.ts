@@ -22,9 +22,10 @@ export class MessageService {
       .get<Message[]>(`${this.url}/${roomId}`);
   }
 
-  sendMessage(messageCreateForm: FormGroup): Observable<Message> {
+  sendMessage(message: Message): Observable<Message> {
+    console.log(message);
     return this.httpClient
-      .post<Message>(`${this.url}`, messageCreateForm.value);
+      .post<Message>(`${this.url}`, message);
   }
 
   sendMessageReadInfo(messageUUID: string, roomId: number): Observable<Message> {

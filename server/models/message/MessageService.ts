@@ -21,12 +21,13 @@ export class MessageService {
     }
 
     public async createMessage(messageDto: CreateMessageDto): Promise<Message> {
+        console.log(messageDto);
         const message = new Message();
         message.uuid = messageDto.uuid;
         message.senderId = messageDto.senderId;
         message.roomId = messageDto.roomId;
         message.text = messageDto.text;
-        message.createdAt = new Date();
+        message.createdAt = messageDto.createdAt;
         message.readAmount = 0;
         return await this.messageRepository.save<Message>(message);
     }
