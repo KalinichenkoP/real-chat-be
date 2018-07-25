@@ -12,6 +12,7 @@ import {RoomService} from '../../services/room.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as uuidFactory from 'uuid';
 import {MessageStatus} from '../../models/message.status';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -47,7 +48,7 @@ export class ChatComponent implements OnInit {
           'uuid': new FormControl(uuidFactory.v4()),
           'text': new FormControl(this.text, [Validators.required]),
           'roomId': new FormControl(paramMap.get('roomId')),
-          'senderId': new FormControl(10)
+          'senderId': new FormControl(1)
         }
       );
     });
@@ -56,19 +57,20 @@ export class ChatComponent implements OnInit {
   private initIoConnection(): any {
     this.socketService.initSocket();
 
-    this.socketService.onMessage()
-      .subscribe((message: Message) => {
-        this.checkAndPushMessage(message);
-        this.checkAndPushUser(message.senderId);
-      });
+    this.socketService.onMessage().pipe(
+      tap((message: Message) => this.checkMessage(message)),
+      tap((message: Message) => this.messages.push(message)))
+      .subscribe();
   }
 
   sendMessage() {
-    this.messageService.sendMessage(this.createMessageForm).subscribe((message: Message) => this.checkAndPushMessage(message));
+    this.messageService.sendMessage(this.createMessageForm).pipe(
+      tap((message: Message) => console.log(message.uuid)))
+      .subscribe((message: Message) => this.checkAndPushMessage(message));
     this.createMessageForm.reset({uuid: uuidFactory.v4(), text: '', roomId: this.room.id, senderId: 10});
   }
 
-  getUser(id: number) {
+  getUserFromDB(id: number) {
     this.userService.getUserById(id).subscribe((user: User) => {
       this.users.push(user);
     });
@@ -80,23 +82,34 @@ export class ChatComponent implements OnInit {
     });
   }
 
+  getUser(id: number): User {
+    return this.users.filter((user: User) => user.id === id)[0];
+  }
+
   async checkAndPushUser(id: number): Promise<any> {
     let user: User = await this.users.filter((user: User) => user.id === id)[0];
     if (!user) {
-      this.getUser(id);
+      this.getUserFromDB(id);
     }
   }
 
+  //
   async checkAndPushMessage(newMessage: Message): Promise<any> {
     let checkMessage: Message = await this.messages.filter((message: Message) => message.uuid === newMessage.uuid)[0];
     if (!checkMessage) {
       this.messages.push(newMessage);
-      this.messageService.sendMessageReadInfo(newMessage.uuid).subscribe(result=> {
+      // webpush.sendNotification()
+      // new Notification(`You have unread message from ${this.getUser(newMessage.senderId)}`,{body: newMessage.text});
+      this.messageService.sendMessageReadInfo(newMessage.uuid, newMessage.roomId).subscribe(result => {
         console.log('result');
         console.log(result);
       });
     } else {
       newMessage.status = MessageStatus.Send;
     }
+  }
+
+  async checkMessage(newMessage: Message): Promise<boolean> {
+    return await this.messages.filter((message: Message) => message.uuid === newMessage.uuid).length > 0;
   }
 }

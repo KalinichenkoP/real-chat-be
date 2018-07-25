@@ -16,11 +16,13 @@ export class EventsGateway {
     @WebSocketServer() server;
 
     emitMessage(message: MessageDto) {
+        console.log('emitMessage');
+        console.log(message);
         this.server.to(message.roomId.toString()).emit('message', message);
     }
 
-    emitUpdatedInfo(message: MessageDto) {
-        this.server.to(message.roomId.toString()).emit('message', message);
+    emitUpdatedInfo(messageUUID: string, roomId: string) {
+        this.server.to(roomId).emit('messageUpdate', messageUUID);
     }
 
     @SubscribeMessage('connectRoom')

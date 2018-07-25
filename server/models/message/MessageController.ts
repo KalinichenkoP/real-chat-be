@@ -39,11 +39,15 @@ export class MessageController {
         return this.messageService.findByUserId(userId);
     }
 
-    @Patch('/read/:messageUUID')
-    async updateOne(@Param('messageUUID') messageUUID): Promise<Message> {
+    @Patch('/read/:roomId/:messageUUID')
+    async updateOne(@Param('messageUUID') messageUUID: string, @Param('roomId') roomId: string): Promise<void> {
+        console.log('roomId');
+        console.log(roomId);
+        console.log(messageUUID);
+        console.log('messageUUID');
         const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(messageUUID);
         if (result.result.ok === 1 ){
-            this.eventGateway.emitUpdatedInfo(messageUUID);
+            this.eventGateway.emitUpdatedInfo(messageUUID, roomId);
         }
     }
 }

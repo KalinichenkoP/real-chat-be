@@ -27,8 +27,8 @@ export class MessageService {
       .post<Message>(`${this.url}`, messageCreateForm.value);
   }
 
-  sendMessageReadInfo(messageUUID: string): Observable<Message> {
+  sendMessageReadInfo(messageUUID: string, roomId: number): Observable<Message> {
     return this.httpClient
-      .request<Message>('patch',`${this.url}/read/${messageUUID}`);
+      .request<Message>('patch',`${this.url}/read/${roomId}/${messageUUID}`);
   }
 }
