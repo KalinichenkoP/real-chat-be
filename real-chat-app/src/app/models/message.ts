@@ -1,5 +1,6 @@
 import {MessageStatus} from './message.status';
 import * as uuidFactory from 'uuid';
+import {ServerMessageDto} from './dto/ServerMessageDto';
 
 export class Message {
   uuid: string;
@@ -18,5 +19,9 @@ export class Message {
     this.roomId = roomId;
     this.senderId = 1;
     this.createdAt = new Date();
+  }
+
+  toServerDto() {
+    return new ServerMessageDto(this);
   }
 }

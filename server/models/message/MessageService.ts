@@ -21,7 +21,6 @@ export class MessageService {
     }
 
     public async createMessage(messageDto: CreateMessageDto): Promise<Message> {
-        console.log(messageDto);
         const message = new Message();
         message.uuid = messageDto.uuid;
         message.senderId = messageDto.senderId;

@@ -25,6 +25,10 @@ export class CreateMessageSchema implements CreateSchema {
                     .required(),
                 roomId: Joi
                     .number()
+                    .required(),
+                createdAt: Joi
+                    .date()
+                    // .max(new Date())
                     .required()
             });
     }

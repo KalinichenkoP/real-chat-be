@@ -29,7 +29,6 @@ export class MessageController {
     @Post()
     @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     async createOne(@Body() body): Promise<Message> {
-        console.log(body);
         const message: Message  = await this.messageService.createMessage(body);
         this.eventGateway.emitMessage(message.toDto());
         return message;

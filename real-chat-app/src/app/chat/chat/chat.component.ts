@@ -57,10 +57,8 @@ export class ChatComponent implements OnInit {
 
   async sendMessage() {
     const newMessage: Message = await new Message(this.text, this.room.id);
-    console.log(newMessage);
     this.messages.push(newMessage);
-    console.log(this.messages);
-    this.messageService.sendMessage(newMessage);
+    this.messageService.sendMessage(newMessage.toServerDto()).subscribe();
     this.text= '';
   }
 
