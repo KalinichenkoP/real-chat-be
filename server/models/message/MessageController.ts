@@ -7,6 +7,7 @@ import {CreateMessageDto} from './dto/CreateMessageDto';
 import {SocketService} from '../../../real-chat-app/src/app/services/socket.service';
 import {EventsGateway} from '../events/EventsGateway';
 import {UpdateWriteOpResult} from 'typeorm';
+import {ReadMessageDto} from './dto/ReadMessageDto';
 
 @Controller('messages')
 export class MessageController {
@@ -28,7 +29,7 @@ export class MessageController {
 
     @Post()
     @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
-    async createOne(@Body() body): Promise<Message> {
+    async createOne(@Body() body: CreateMessageDto): Promise<Message> {
         const message: Message  = await this.messageService.createMessage(body);
         this.eventGateway.emitMessage(message.toDto());
         return message;
@@ -39,14 +40,12 @@ export class MessageController {
         return this.messageService.findByUserId(userId);
     }
 
-    @Patch('/read/:roomId/:messageUUID')
-    async updateOne(@Param('messageUUID') messageUUID: string, @Param('roomId') roomId: string): Promise<void> {
-        console.log(messageUUID);
-        console.log(roomId);
-        const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(messageUUID);
-        console.log('emit');
+    @Post('read')
+    async updateOne(@Body() body: ReadMessageDto, @Res() res): Promise<void> {
+        const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(body.messageUUID);
         if (result.result.ok === 1 ){
-            this.eventGateway.emitUpdatedInfo(messageUUID, roomId);
+            this.eventGateway.emitUpdatedInfo(body.messageUUID, body.roomId);
         }
+        return res.json('ok');
     }
 }

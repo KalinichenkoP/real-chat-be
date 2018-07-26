@@ -28,12 +28,13 @@ export class MessageService {
       .post<Message>(`${this.url}`, JSON.stringify(message), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
   }
 
-  sendMessageReadInfo(messageUUID: string, roomId: number): Observable<Message> {
-    console.log('sendInfo');
-    console.log(messageUUID);
-    console.log(roomId);
-    console.log(`${this.url}/read/${roomId}/${messageUUID}`);
+  sendMessageReadInfo(messageUUID: string, roomId: string): Observable<any> {
+    const body = {
+      "roomId": roomId,
+      "messageUUID": messageUUID
+    };
+    console.log(JSON.stringify(body));
     return this.httpClient
-      .request<Message>('patch',`${this.url}/read/${roomId}/${messageUUID}`);
+      .post(`${this.url}/read`,JSON.stringify(body), {headers: new HttpHeaders().set('Content-Type', 'application/json')});
   }
 }

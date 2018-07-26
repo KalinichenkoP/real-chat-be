@@ -32,7 +32,6 @@ import {AccessInterceptorService} from './services/access.interceptor.service';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpModule,
     SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot(ROUTES),
   ],
