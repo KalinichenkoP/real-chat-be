@@ -41,10 +41,6 @@ export class MessageController {
 
     @Patch('/read/:roomId/:messageUUID')
     async updateOne(@Param('messageUUID') messageUUID: string, @Param('roomId') roomId: string): Promise<void> {
-        console.log('roomId');
-        console.log(roomId);
-        console.log(messageUUID);
-        console.log('messageUUID');
         const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(messageUUID);
         if (result.result.ok === 1 ){
             this.eventGateway.emitUpdatedInfo(messageUUID, roomId);
