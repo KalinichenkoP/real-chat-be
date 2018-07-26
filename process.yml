@@ -1,7 +1,7 @@
 apps:
   - script   : index.js
     name: real-chat
-    instances: 4
+    instances: max - 1
     exec_mode: cluster
     watch  : true
     env    :

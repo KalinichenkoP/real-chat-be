@@ -28,7 +28,6 @@ export class RoomService {
   }
 
   getRoomById(roomId: number): Observable<Room> {
-    console.log(roomId);
     return this.httpClient
       .get<Room>(`${this.url}/${roomId}`);
   }

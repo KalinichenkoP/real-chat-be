@@ -9,9 +9,6 @@ import {Message} from '../models/message';
 export class SocketService {
 
   private socket;
-  // constructor() {
-  //   this.socket = io('http://localhost:3001');
-  // }
 
   public initSocket(): void {
     this.socket = io('http://127.0.0.1:3000');

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {NotifierService} from '../../notifier/notifier.service';
 import {SocketService} from '../../services/socket.service';
 import {Message} from '../../models/message';
 import {MessageService} from '../../services/message.service';
@@ -85,22 +84,22 @@ export class ChatComponent implements OnInit {
   }
 
   //
-  async checkAndPushMessage(newMessage: Message): Promise<any> {
-    let checkMessage: Message = await this.messages.filter((message: Message) => message.uuid === newMessage.uuid)[0];
-    if (!checkMessage) {
-      this.messages.push(newMessage);
-      // webpush.sendNotification()
-      // new Notification(`You have unread message from ${this.getUser(newMessage.senderId)}`,{body: newMessage.text});
-      this.messageService.sendMessageReadInfo(newMessage.uuid, newMessage.roomId).subscribe(result => {
-        console.log('result');
-        console.log(result);
-      });
-    } else {
-      newMessage.status = MessageStatus.Send;
-    }
-  }
-
-  async checkMessage(newMessage: Message): Promise<boolean> {
-    return await this.messages.filter((message: Message) => message.uuid === newMessage.uuid).length > 0;
-  }
+  // async checkAndPushMessage(newMessage: Message): Promise<any> {
+  //   let checkMessage: Message = await this.messages.filter((message: Message) => message.uuid === newMessage.uuid)[0];
+  //   if (!checkMessage) {
+  //     this.messages.push(newMessage);
+  //     // webpush.sendNotification()
+  //     // new Notification(`You have unread message from ${this.getUser(newMessage.senderId)}`,{body: newMessage.text});
+  //     this.messageService.sendMessageReadInfo(newMessage.uuid, newMessage.roomId).subscribe(result => {
+  //       console.log('result');
+  //       console.log(result);
+  //     });
+  //   } else {
+  //     newMessage.status = MessageStatus.Send;
+  //   }
+  // }
+  //
+  // async checkMessage(newMessage: Message): Promise<boolean> {
+  //   return await this.messages.filter((message: Message) => message.uuid === newMessage.uuid).length > 0;
+  // }
 }
