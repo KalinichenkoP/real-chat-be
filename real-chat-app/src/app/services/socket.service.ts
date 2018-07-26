@@ -25,4 +25,13 @@ export class SocketService {
       });
     });
   }
+
+  public onMessageUpdate(): Observable<string> {
+    return new Observable<string>(observer => {
+      this.socket.on('messageUpdate', (messageUUID: string) => {
+        console.log(messageUUID);
+        observer.next(messageUUID);
+      });
+    });
+  }
 }

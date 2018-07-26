@@ -29,6 +29,10 @@ export class MessageService {
   }
 
   sendMessageReadInfo(messageUUID: string, roomId: number): Observable<Message> {
+    console.log('sendInfo');
+    console.log(messageUUID);
+    console.log(roomId);
+    console.log(`${this.url}/read/${roomId}/${messageUUID}`);
     return this.httpClient
       .request<Message>('patch',`${this.url}/read/${roomId}/${messageUUID}`);
   }

@@ -19,7 +19,6 @@ export class EventsGateway {
 
     @SubscribeMessage('connectRoom')
     onEventConnectRoom(client, roomId: number): Observable<WsResponse<number>> {
-        console.log(client.id);
         this.server.of('/').adapter.remoteJoin(client.id, roomId.toString(), (err) => {
             if (err) {
                 console.log(err);

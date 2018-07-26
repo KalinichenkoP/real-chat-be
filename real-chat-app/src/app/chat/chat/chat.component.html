@@ -3,7 +3,7 @@
   <input title="message" matInput type="text" [(ngModel)]="text">
   <button mat-button type="submit" (click)="sendMessage()">Send</button>
   <mat-nav-list>
-    <mat-list-item *ngFor="let message of messages">
+    <mat-list-item *ngFor="let message of messages" class="{{message?.readAmount}}">
       {{ message?.text }} from {{(message?.senderId)}} status {{(message?.status)}}
     </mat-list-item>
   </mat-nav-list>

@@ -49,7 +49,12 @@ export class ChatComponent implements OnInit {
     this.socketService.onMessage().pipe(
       filter((newMessage: Message) => this.messages.filter((message: Message) => message.uuid === newMessage.uuid).length === 0),
       tap((message: Message) => message.status = MessageStatus.Send),
-      tap((message: Message) => this.messages.push(message)))
+      tap((message: Message) => this.messages.push(message)),
+      tap((message: Message) => this.messageService.sendMessageReadInfo(message.uuid, this.room.id)))
+      .subscribe();
+
+    this.socketService.onMessageUpdate().pipe(
+      tap((messageUUID: String) => this.messages.filter((message: Message) => message.uuid === messageUUID)[0].readAmount++))
       .subscribe();
   }
 
