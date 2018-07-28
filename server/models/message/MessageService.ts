@@ -4,6 +4,8 @@ import {Message} from './MessageEntity';
 import {REPOSITORY_TOKEN} from '../../enums/RepositoryTokens';
 import {CreateMessageDto} from './dto/CreateMessageDto';
 import {MessageDto} from './dto/MessageDto';
+import {FindUsersDto} from '../user/dto/FindUsersDto';
+import {FindMessagesDto} from './dto/FindMessagesDto';
 
 @Injectable()
 export class MessageService {
@@ -12,12 +14,12 @@ export class MessageService {
                 private readonly messageRepository: MongoRepository<Message>) {
     }
 
-    public async findAll(): Promise<Message[]> {
-        return await this.messageRepository.find();
+    public async findAll(query: FindMessagesDto): Promise<Message[]> {
+        return await this.messageRepository.find({skip: query.offset, take: query.limit});
     }
 
-    public async findByRoomId(roomId: string): Promise<Message[]> {
-        return await this.messageRepository.find({'roomId': parseInt(roomId,10)});
+    public async findByRoomId(roomId: number): Promise<Message[]> {
+        return await this.messageRepository.find({'roomId': roomId});
     }
 
     public async createMessage(messageDto: CreateMessageDto): Promise<Message> {

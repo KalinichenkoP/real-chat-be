@@ -1,15 +1,15 @@
 import {Body, Controller, Get, NotFoundException, Param, Post, Put, Res, UsePipes} from '@nestjs/common';
-import {RoomService} from './RoomService';
-import {RoomDto} from './dto/RoomDto';
-import {ListResponseDto} from '../../core/dto/ListResponseDto';
-import {Room} from './RoomEntity';
-import {CreateRoomSchema} from '../../core/schemas/CreateChannelSchema';
-import {JoiValidationPipe} from '../../core/pipes/JoiValidationPipe';
-import {CreateRoomDto} from './dto/CreateRoomDto';
-import {UserService} from '../user/UserService';
-import {User} from '../user/UserEntity';
-import {RoomUsersDto} from './dto/RoomUsersDto';
-import {AddUsersRoomDto} from './dto/AddUsersRoomDto';
+import {RoomService} from '../models/room/RoomService';
+import {RoomDto} from '../models/room/dto/RoomDto';
+import {ListResponseDto} from '../core/dto/ListResponseDto';
+import {Room} from '../models/room/RoomEntity';
+import {CreateRoomSchema} from '../models/room/schemas/CreateRoomSchema';
+import {JoiValidationPipe} from '../core/pipes/JoiValidationPipe';
+import {CreateRoomDto} from '../models/room/dto/CreateRoomDto';
+import {UserService} from '../models/user/UserService';
+import {User} from '../models/user/UserEntity';
+import {RoomUsersDto} from '../models/room/dto/RoomUsersDto';
+import {AddUsersRoomDto} from '../models/room/dto/AddUsersRoomDto';
 
 @Controller('rooms')
 export class RoomController {

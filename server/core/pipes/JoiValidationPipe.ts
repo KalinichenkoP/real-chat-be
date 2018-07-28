@@ -2,16 +2,15 @@ import {PipeTransform, BadRequestException, Injectable} from '@nestjs/common';
 import { AnySchema } from "joi";
 import * as Joi from "joi";
 
-import { Factory } from "../../interfaces/Factory";
+import { IFactory } from "../../interfaces/IFactory";
 import { CreateSchema } from "../schemas/CreateSchemaFactory";
-import {WsException} from '@nestjs/websockets';
 
 @Injectable()
 export class JoiValidationPipe<T> implements PipeTransform<T> {
-    private readonly factory: Factory<T>;
+    private readonly factory: IFactory<T>;
     private readonly schema: AnySchema;
 
-    constructor(schemaFactory: CreateSchema, factory?: Factory<T>) {
+    constructor(schemaFactory: CreateSchema, factory?: IFactory<T>) {
         this.schema = schemaFactory.createSchema();
 
         if (factory) {

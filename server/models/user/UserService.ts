@@ -5,6 +5,7 @@ import {ListResponseDto} from "../../core/dto/ListResponseDto";
 import {UserDto} from "./dto/UserDto";
 import {RegisterUserDto} from './dto/RegisterUserDto';
 import {CreateUserFactory} from './factory/UserFactory';
+import {FindUsersDto} from './dto/FindUsersDto';
 
 @Injectable()
 export class UserService {
@@ -13,7 +14,9 @@ export class UserService {
                 private readonly userRepository: Repository<User>) {
     }
 
-    async findAll(): Promise<[User[], number]> {
+    async findAll(query: FindUsersDto): Promise<[User[], number]> {
+        console.log(query.offset);
+        console.log(query.limit);
         return await this.userRepository.findAndCount();
     }
 

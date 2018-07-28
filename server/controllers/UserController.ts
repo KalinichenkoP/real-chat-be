@@ -1,13 +1,18 @@
-import {Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Post, Req, Res} from '@nestjs/common';
-import {User} from './UserEntity';
-import {UserService} from './UserService';
-import {ListResponseDto} from '../../core/dto/ListResponseDto';
-import {UserDto} from './dto/UserDto';
+import {Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Post, Query, Req, Res, UsePipes} from '@nestjs/common';
+import {User} from '../models/user/UserEntity';
+import {UserService} from '../models/user/UserService';
+import {ListResponseDto} from '../core/dto/ListResponseDto';
+import {UserDto} from '../models/user/dto/UserDto';
 
 import {OAuth2Client} from 'google-auth-library';
-import ServerController from '../../../real-chat-app/classes/ServerController';
+import ServerController from '../../real-chat-app/classes/ServerController';
 import {Md5} from 'ts-md5/dist/md5';
-import {RoomDto} from '../room/dto/RoomDto';
+import {RoomDto} from '../models/room/dto/RoomDto';
+import {JoiValidationPipe} from '../core/pipes/JoiValidationPipe';
+import {FindByIdSchema} from '../core/schemas/FindByIdSchema';
+import {PaginationSchema} from '../core/schemas/PaginationSchema';
+import {FindUsersDto} from '../models/user/dto/FindUsersDto';
+import {FindUsersSchema} from '../models/user/schemas/FindUsersSchema';
 
 const gaClient: any = new OAuth2Client('546854662215-mmnqq81j1bk4k1nf8jn1flugnf9eik28.apps.googleusercontent.com', '', '');
 
@@ -31,22 +36,24 @@ export class UserController extends ServerController {
         return user.toDto();
     }
 
-
     @Get()
-    async findAll(@Req() req): Promise<ListResponseDto<UserDto>> {
-        const res = await this.userService.findAll();
+    @UsePipes(new JoiValidationPipe<FindUsersDto>(new FindUsersSchema()))
+    async findAll(@Query() query: FindUsersDto): Promise<ListResponseDto<UserDto>> {
+        const res = await this.userService.findAll(query);
         const users = res[0].map((user) => user.toDto());
         return new ListResponseDto<UserDto>(users, res[1]);
     }
 
     @Get('room/:roomId')
-    async findByRoom(@Req() req, @Param('roomId') roomId): Promise<ListResponseDto<UserDto>> {
-        return await this.userService.findByRoom(parseInt(roomId, 10));
+    @UsePipes(new JoiValidationPipe<number>(new FindByIdSchema()))
+    async findByRoom(@Param('roomId') roomId:number): Promise<ListResponseDto<UserDto>> {
+        return await this.userService.findByRoom(roomId);
     }
 
     @Get(':id')
-    async findOne(@Param('id') id): Promise<UserDto> {
-        return await this.userService.findById(parseInt(id, 10));
+    @UsePipes(new JoiValidationPipe<number>(new FindByIdSchema()))
+    async findOne(@Param('id') id: number): Promise<UserDto> {
+        return await this.userService.findById(id);
     }
 
     @Post('/me/verify-token')

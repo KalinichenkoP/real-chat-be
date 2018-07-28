@@ -1,6 +1,6 @@
 import {Module} from "@nestjs/common";
 import {MessageService} from "./MessageService";
-import {MessageController} from "./MessageController";
+import {MessageController} from "../../controllers/MessageController";
 import {DatabaseModule} from "../../database/DatabaseModule";
 import {messageProvider} from "./MessageProvider";
 import {EventsGateway} from '../events/EventsGateway';

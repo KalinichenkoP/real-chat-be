@@ -1,5 +1,5 @@
 import {Module} from '@nestjs/common';
-import {RoomController} from './RoomController';
+import {RoomController} from '../../controllers/RoomController';
 import {RoomService} from './RoomService';
 import {DatabaseModule} from '../../database/DatabaseModule';
 import {roomProvider} from './RoomProvider';

@@ -1,7 +1,7 @@
 import {ObjectSchema} from 'joi';
 import * as Joi from 'joi';
 
-import {CreateSchema} from './CreateSchemaFactory';
+import {CreateSchema} from '../../../core/schemas/CreateSchemaFactory';
 
 const MIN_LENGTH = 3;
 const MAX_LENGTH = 50;
