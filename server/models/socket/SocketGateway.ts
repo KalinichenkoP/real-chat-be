@@ -6,7 +6,7 @@ import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @WebSocketGateway({adapter: redisAdapter({host: 'localhost', port: 6379, key: "real-chat-websockets"})})
-export class EventsGateway {
+export class SocketGateway {
     @WebSocketServer() server;
 
     emitMessage(message: MessageDto) {

@@ -4,7 +4,7 @@ import {Message} from "../models/message/MessageEntity";
 import {JoiValidationPipe} from '../core/pipes/JoiValidationPipe';
 import {CreateMessageSchema} from '../models/message/schemas/CreateMessageSchema';
 import {CreateMessageDto} from '../models/message/dto/CreateMessageDto';
-import {EventsGateway} from '../models/events/EventsGateway';
+import {SocketGateway} from '../models/socket/SocketGateway';
 import {UpdateWriteOpResult} from 'typeorm';
 import {ReadMessageDto} from '../models/message/dto/ReadMessageDto';
 import {ReadMessageSchema} from '../models/message/schemas/ReadMessageSchema';
@@ -16,8 +16,7 @@ import {FindMessagesDto} from '../models/message/dto/FindMessagesDto';
 export class MessageController {
 
     constructor(private readonly messageService: MessageService,
-                private readonly eventGateway: EventsGateway) {
-
+                private readonly socketService: SocketGateway) {
     }
 
     @Get()
@@ -36,7 +35,7 @@ export class MessageController {
     @UsePipes(new JoiValidationPipe<CreateMessageDto>(new CreateMessageSchema()))
     async createOne(@Body() body: CreateMessageDto): Promise<Message> {
         const message: Message  = await this.messageService.createMessage(body);
-        this.eventGateway.emitMessage(message.toDto());
+        this.socketService.emitMessage(message.toDto());
         return message;
     }
 
@@ -51,7 +50,7 @@ export class MessageController {
     async updateOne(@Body() body: ReadMessageDto, @Res() res): Promise<void> {
         const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(body.messageUUID);
         if (result.result.ok === 1 ){
-            this.eventGateway.emitUpdatedInfo(body.messageUUID, body.roomId);
+            this.socketService.emitUpdatedInfo(body.messageUUID, body.roomId);
         }
         return res.json('ok');
     }

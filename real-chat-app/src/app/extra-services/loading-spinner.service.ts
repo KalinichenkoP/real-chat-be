@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 /**
  * This service allows to control rendering of loading spinner.
  * It exposes methods to start and stop spinning,
- * and emits events when they are called (AppComponent listens to them
+ * and emits socket when they are called (AppComponent listens to them
  * and shows or hides spinner overlay).
  */
 @Injectable()

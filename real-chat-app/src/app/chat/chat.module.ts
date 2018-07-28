@@ -6,7 +6,7 @@ import {RouterModule} from "@angular/router";
 import {ROUTES} from "./chat.router";
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ChatCreateComponent } from './chat-create/chat-create.component';
-import {MatButtonModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatInputModule, MatTooltipModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     MatListModule,
     MatInputModule,
+    MatTooltipModule,
     MatButtonModule,
     CommonModule,
     FormsModule,

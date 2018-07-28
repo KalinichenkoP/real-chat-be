@@ -2,7 +2,7 @@ import {Module} from '@nestjs/common';
 import {UserModule} from "./models/user/UserModule";
 import {MessageModule} from "./models/message/MessageModule";
 import {DatabaseModule} from "./database/DatabaseModule";
-import {EventsModule} from './models/events/EventsModule';
+import {SocketModule} from './models/socket/SocketModule';
 import {RoomModule} from './models/room/RoomModule';
 import {ConfigModule} from './models/config/ConfigModule';
 
@@ -13,7 +13,7 @@ import {ConfigModule} from './models/config/ConfigModule';
             MessageModule,
             RoomModule,
             DatabaseModule,
-            EventsModule,
+            SocketModule,
             ConfigModule
         ]
 })
