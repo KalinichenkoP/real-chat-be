@@ -30,6 +30,7 @@ export const databaseProviders = [
         useFactory: async () => await createConnection({
             type: 'mongodb',
             name: 'nosql',
+            // replicaSet: "real-chat-replica",
             host: 'localhost',
             port: 27017,
             database: 'test',
