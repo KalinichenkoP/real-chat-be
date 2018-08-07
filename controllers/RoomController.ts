@@ -10,11 +10,14 @@ import {UserService} from '../models/user/UserService';
 import {User} from '../models/user/UserEntity';
 import {RoomUsersDto} from '../models/room/dto/RoomUsersDto';
 import {AddUsersRoomDto} from '../models/room/dto/AddUsersRoomDto';
+import {SocketService} from "../models/socket/SocketService";
 
 @Controller('rooms')
 export class RoomController {
 
-    constructor(private readonly roomService: RoomService, private readonly userService: UserService) {}
+    constructor(private readonly roomService: RoomService,
+                private readonly userService: UserService,
+                private socketService: SocketService) {}
 
     @Get()
     async findAll(): Promise<ListResponseDto<RoomDto>> {
@@ -32,7 +35,11 @@ export class RoomController {
             throw new NotFoundException(`Room with the selected name already exist`);
         }
         const room: Room = await this.roomService.createRoom(body);
-        return res.send(room);
+        const users: User[] = await this.userService.findAll()[0];
+        const fullRoom: Room = await this.roomService.addUsers(room, users);
+        await this.socketService.connectAllToNewRoom(room.roomName);
+
+        return res.send(fullRoom);
     }
 
     @Put()

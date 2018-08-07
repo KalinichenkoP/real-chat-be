@@ -4,9 +4,10 @@ import * as redisAdapter from 'socket.io-redis';
 import {MessageDto} from '../message/dto/MessageDto';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {User} from "../user/UserEntity";
 
 @WebSocketGateway({adapter: redisAdapter({host: 'localhost', port: 6379, key: "real-chat-websockets"})})
-export class SocketGateway {
+export class SocketService {
     @WebSocketServer() server;
 
     emitMessage(message: MessageDto) {
@@ -15,6 +16,21 @@ export class SocketGateway {
 
     emitUpdatedInfo(messageUUID: string, roomId: string) {
         this.server.to(roomId).emit('messageUpdate', messageUUID);
+    }
+
+    connectAllToNewRoom(roomId: string) {
+        this.server.of('/').adapter.clients((err, clients) => {
+            if (!err) {
+                console.log(clients);
+                clients.map((client: string) => {
+                    this.server.of('/').adapter.remoteJoin(client, roomId, (err) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    })
+                })
+            }
+        })
     }
 
     @SubscribeMessage('connectRoom')

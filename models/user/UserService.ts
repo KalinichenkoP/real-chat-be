@@ -17,9 +17,7 @@ export class UserService {
         this.userRepository = userConnection.getRepository<User>(User);
     }
 
-    async findAll(query: FindUsersDto): Promise<[User[], number]> {
-        console.log(query.offset);
-        console.log(query.limit);
+    async findAll(query?: FindUsersDto): Promise<[User[], number]> {
         return await this.userRepository.findAndCount();
     }
 

@@ -4,7 +4,7 @@ import {Message} from "../models/message/MessageEntity";
 import {JoiValidationPipe} from '../core/pipes/JoiValidationPipe';
 import {CreateMessageSchema} from '../models/message/schemas/CreateMessageSchema';
 import {CreateMessageDto} from '../models/message/dto/CreateMessageDto';
-import {SocketGateway} from '../models/socket/SocketGateway';
+import {SocketService} from '../models/socket/SocketService';
 import {UpdateWriteOpResult} from 'typeorm';
 import {ReadMessageDto} from '../models/message/dto/ReadMessageDto';
 import {ReadMessageSchema} from '../models/message/schemas/ReadMessageSchema';
@@ -16,7 +16,7 @@ import {FindMessagesDto} from '../models/message/dto/FindMessagesDto';
 export class MessageController {
 
     constructor(private readonly messageService: MessageService,
-                private readonly socketService: SocketGateway) {
+                private readonly socketService: SocketService) {
     }
 
     @Get()
