@@ -1,17 +1,18 @@
-import {Inject, Injectable} from '@nestjs/common';
-import {InsertOneWriteOpResult, MongoRepository, ObjectID, UpdateWriteOpResult} from 'typeorm';
+import {Injectable} from '@nestjs/common';
+import {Connection, MongoRepository, UpdateWriteOpResult} from 'typeorm';
 import {Message} from './MessageEntity';
-import {REPOSITORY_TOKEN} from '../../enums/RepositoryTokens';
 import {CreateMessageDto} from './dto/CreateMessageDto';
-import {MessageDto} from './dto/MessageDto';
-import {FindUsersDto} from '../user/dto/FindUsersDto';
 import {FindMessagesDto} from './dto/FindMessagesDto';
+import {InjectConnection} from "@nestjs/typeorm";
 
 @Injectable()
 export class MessageService {
 
-    constructor(@Inject(REPOSITORY_TOKEN.MESSAGE_REPOSITORY_TOKEN)
-                private readonly messageRepository: MongoRepository<Message>) {
+    private messageRepository: MongoRepository<Message>;
+
+    constructor(@InjectConnection('nosql')
+                private readonly messageConnection: Connection) {
+        this.messageRepository = messageConnection.getMongoRepository<Message>(Message);
     }
 
     public async findAll(query: FindMessagesDto): Promise<Message[]> {

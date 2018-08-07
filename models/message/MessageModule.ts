@@ -1,14 +1,14 @@
 import {Module} from "@nestjs/common";
 import {MessageService} from "./MessageService";
 import {MessageController} from "../../controllers/MessageController";
-import {DatabaseModule} from "../../database/DatabaseModule";
-import {messageProvider} from "./MessageProvider";
 import {SocketGateway} from '../socket/SocketGateway';
+import {Message} from "./MessageEntity";
+import {TypeOrmModule} from "@nestjs/typeorm";
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [TypeOrmModule.forFeature([Message], 'nosql')],
     controllers: [MessageController],
-    providers: [...messageProvider, MessageService, SocketGateway],
+    providers: [MessageService, SocketGateway],
 })
 export class MessageModule {
 }

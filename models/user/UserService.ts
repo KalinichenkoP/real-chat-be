@@ -6,12 +6,15 @@ import {UserDto} from "./dto/UserDto";
 import {RegisterUserDto} from './dto/RegisterUserDto';
 import {CreateUserFactory} from './factory/UserFactory';
 import {FindUsersDto} from './dto/FindUsersDto';
-
+import {InjectConnection, InjectEntityManager} from "@nestjs/typeorm";
+import { Connection } from 'typeorm';
 @Injectable()
 export class UserService {
 
-    constructor(@Inject('UserRepositoryToken')
-                private readonly userRepository: Repository<User>) {
+    private userRepository: Repository<User>;
+    constructor(@InjectEntityManager('postgres')
+                private readonly userConnection: Connection) {
+        this.userRepository = userConnection.getRepository<User>(User);
     }
 
     async findAll(query: FindUsersDto): Promise<[User[], number]> {

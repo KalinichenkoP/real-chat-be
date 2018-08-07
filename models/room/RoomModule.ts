@@ -1,14 +1,13 @@
 import {Module} from '@nestjs/common';
 import {RoomController} from '../../controllers/RoomController';
 import {RoomService} from './RoomService';
-import {DatabaseModule} from '../../database/DatabaseModule';
-import {roomProvider} from './RoomProvider';
 import {UserService} from '../user/UserService';
-import {userProvider} from '../user/UserProvider';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {Room} from "./RoomEntity";
 
 @Module({
-    imports: [DatabaseModule],
-    providers: [...roomProvider, RoomService, ...userProvider, UserService],
+    imports: [TypeOrmModule.forFeature([Room], 'postgres')],
+    providers: [ RoomService, UserService],
     controllers: [RoomController],
     exports: [RoomModule]
 })

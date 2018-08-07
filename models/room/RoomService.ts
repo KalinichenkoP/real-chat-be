@@ -1,17 +1,18 @@
-import {Inject, Injectable, NotFoundException} from '@nestjs/common';
-import {Repository} from "typeorm";
+import { Injectable, NotFoundException} from '@nestjs/common';
+import {Connection, Repository} from "typeorm";
 import { Room} from './RoomEntity';
 import { CreateRoomFactory} from './factory/RoomFactory';
-import {RoomDto} from './dto/RoomDto';
-import {ListResponseDto} from '../../core/dto/ListResponseDto';
 import {RegisterRoomDto} from './dto/RegisterRoomDto';
 import {User} from '../user/UserEntity';
+import {InjectConnection} from "@nestjs/typeorm";
 
 @Injectable()
 export class RoomService {
 
-    constructor(@Inject('RoomRepositoryToken')
-                private readonly roomRepository: Repository<Room>) {
+    private roomRepository: Repository<Room>;
+    constructor(@InjectConnection('postgres')
+                private readonly roomConnection: Connection) {
+        this.roomRepository = roomConnection.getRepository<Room>(Room);
     }
 
     async findAll(): Promise<[Room[], number]> {
