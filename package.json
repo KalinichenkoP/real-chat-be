@@ -4,7 +4,6 @@
   "description": "Chat",
   "main": "index.js",
   "dependencies": {
-    "@angular/core": "latest",
     "@nestjs/common": "^5.1.0",
     "@nestjs/core": "^5.1.0",
     "@nestjs/microservices": "^5.1.0",
