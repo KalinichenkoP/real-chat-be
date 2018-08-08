@@ -14,13 +14,14 @@ export class Room extends Base<Room>{
     @Column({name: "name", unique: true})
     roomName: string;
 
-    @ManyToMany(type => User, user => user.rooms)
+    @ManyToMany(() => User, user => user.rooms)
     @JoinTable()
     users: User[];
 
     toDto(): RoomDto {
         return new RoomDto(this);
     }
+
     toUserDto(): RoomUsersDto {
         return new RoomUsersDto(this);
     }

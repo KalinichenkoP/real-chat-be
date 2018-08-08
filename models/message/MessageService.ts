@@ -45,7 +45,10 @@ export class MessageService {
         return await this.messageRepository.findOne({where: {userId: userId}});
     }
 
-    public async updateReadAmount(messageUUID: string): Promise<UpdateWriteOpResult> {
-        return await this.messageRepository.updateOne({uuid: messageUUID}, {$inc: {readAmount: 1}})
+    public async updateReadAmount(messageUUID: string, userId: number): Promise<UpdateWriteOpResult> {
+        return await this.messageRepository.updateOne({uuid: messageUUID}, {
+            $inc: {readAmount: 1},
+            $push: {listReadUsers: userId}
+        })
     }
 }

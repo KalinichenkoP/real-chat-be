@@ -11,7 +11,6 @@ import {JoiValidationPipe} from '../core/pipes/JoiValidationPipe';
 import {FindByIdSchema} from '../core/schemas/FindByIdSchema';
 import {FindUsersDto} from '../models/user/dto/FindUsersDto';
 import {FindUsersSchema} from '../models/user/schemas/FindUsersSchema';
-import {ConfigService} from "../services/ConfigService";
 
 const gaClient: any = new OAuth2Client('546854662215-mmnqq81j1bk4k1nf8jn1flugnf9eik28.apps.googleusercontent.com', '', '');
 

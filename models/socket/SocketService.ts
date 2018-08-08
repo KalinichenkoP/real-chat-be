@@ -21,7 +21,6 @@ export class SocketService {
     connectAllToNewRoom(roomId: string) {
         this.server.of('/').adapter.clients((err, clients) => {
             if (!err) {
-                console.log(clients);
                 clients.map((client: string) => {
                     this.server.of('/').adapter.remoteJoin(client, roomId, (err) => {
                         if (err) {

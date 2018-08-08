@@ -1,7 +1,6 @@
 import { BaseDto } from "../../base/dto/BaseDto";
 import {Room} from '../RoomEntity';
 import {UserDto} from '../../user/dto/UserDto';
-import {User} from '../../user/UserEntity';
 
 export class RoomUsersDto extends BaseDto<Room> {
 
@@ -10,9 +9,10 @@ export class RoomUsersDto extends BaseDto<Room> {
     readonly users: UserDto[];
 
     constructor(room: Room) {
+        console.log(room);
         super(room);
         this.roomName = room.roomName;
         this.id = room.id;
-        this.users = room.users.map(user=> user.toDto())
+        this.users = room.users ? room.users.map(user=> user.toDto()) : []
     }
 }

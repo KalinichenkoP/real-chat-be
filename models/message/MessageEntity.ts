@@ -25,6 +25,9 @@ export class Message {
     @Column()
     readAmount: number;
 
+    @Column()
+    listReadUsers: number[];
+
     @CreateDateColumn()
     createdAt: Date;
 

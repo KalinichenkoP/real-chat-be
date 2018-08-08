@@ -20,6 +20,10 @@ export class ReadMessageSchema implements CreateSchema {
                     .min(MIN_LENGTH)
                     .max(MAX_LENGTH)
                     .required(),
+                userId: Joi
+                    .number()
+                    .positive()
+                    .required()
             });
     }
 }

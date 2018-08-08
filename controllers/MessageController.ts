@@ -48,7 +48,7 @@ export class MessageController {
     @Post('read')
     @UsePipes(new JoiValidationPipe<ReadMessageDto>(new ReadMessageSchema()))
     async updateOne(@Body() body: ReadMessageDto, @Res() res): Promise<void> {
-        const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(body.messageUUID);
+        const result: UpdateWriteOpResult =  await this.messageService.updateReadAmount(body.messageUUID, parseInt(body.userId, 10));
         if (result.result.ok === 1 ){
             this.socketService.emitUpdatedInfo(body.messageUUID, body.roomId);
         }

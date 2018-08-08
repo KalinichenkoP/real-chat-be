@@ -35,8 +35,8 @@ export class RoomController {
             throw new NotFoundException(`Room with the selected name already exist`);
         }
         const room: Room = await this.roomService.createRoom(body);
-        const users: User[] = await this.userService.findAll()[0];
-        const fullRoom: Room = await this.roomService.addUsers(room, users);
+        const userResult: [User[], number] = await this.userService.findAll();
+        const fullRoom: Room = await this.roomService.addUsers(room, userResult[0]);
         await this.socketService.connectAllToNewRoom(room.roomName);
 
         return res.send(fullRoom);
