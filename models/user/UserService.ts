@@ -6,7 +6,7 @@ import {UserDto} from "./dto/UserDto";
 import {RegisterUserDto} from './dto/RegisterUserDto';
 import {CreateUserFactory} from './factory/UserFactory';
 import {FindUsersDto} from './dto/FindUsersDto';
-import {InjectConnection, InjectEntityManager} from "@nestjs/typeorm";
+import { InjectEntityManager} from "@nestjs/typeorm";
 import { Connection } from 'typeorm';
 @Injectable()
 export class UserService {

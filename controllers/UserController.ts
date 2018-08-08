@@ -7,12 +7,11 @@ import {UserDto} from '../models/user/dto/UserDto';
 import {OAuth2Client} from 'google-auth-library';
 import ServerController from '../classes/ServerController';
 import {Md5} from 'ts-md5/dist/md5';
-import {RoomDto} from '../models/room/dto/RoomDto';
 import {JoiValidationPipe} from '../core/pipes/JoiValidationPipe';
 import {FindByIdSchema} from '../core/schemas/FindByIdSchema';
-import {PaginationSchema} from '../core/schemas/PaginationSchema';
 import {FindUsersDto} from '../models/user/dto/FindUsersDto';
 import {FindUsersSchema} from '../models/user/schemas/FindUsersSchema';
+import {ConfigService} from "../services/ConfigService";
 
 const gaClient: any = new OAuth2Client('546854662215-mmnqq81j1bk4k1nf8jn1flugnf9eik28.apps.googleusercontent.com', '', '');
 
