@@ -41,7 +41,10 @@ export class UserService {
 
     async findByEmail(email: string): Promise<User | undefined>  {
         return await this.userRepository.findOne({where: {email: email}});
+    }
 
+    async findByToken(accessToken: string): Promise<User | undefined>  {
+        return await this.userRepository.findOne({where: {accessToken: accessToken}});
     }
 
     async updateAccessToken(user: UserDto, token: string): Promise<UserDto> {
