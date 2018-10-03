@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+    - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+    - '6379:6379'
+  mongodb:
+    image: mongo:latest
+    environment:
+    - MONGODB_DATABASE="realChat"
+    ports:
+    - 27017:27017
+  postgres:
+    image: postgres
+    hostname: postgres
+    restart: always
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  adminer:
+     image: hardware/adminer
+     restart: always
+     ports:
+     - 8888:8888
+  web:
+    build: .
+    ports:
+    - "3000:3000"
+    depends_on:
+      - redis
+      - mongodb
+      - postgres

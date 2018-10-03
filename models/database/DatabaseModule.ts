@@ -40,7 +40,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
             TypeOrmModule.forRoot({
                 type: 'postgres',
                 name: 'postgres',
-                host: 'localhost',
+                host: 'postgres',
                 port: 5432,
                 database: 'postgres',
                 username: 'postgres',
@@ -56,8 +56,8 @@ import {TypeOrmModule} from "@nestjs/typeorm";
             TypeOrmModule.forRoot({
                 type: 'mongodb',
                 name: 'nosql',
-                // replicaSet: "real-chat-replica",
-                host: 'localhost',
+                // replicaSet: "rs0",
+                host: 'mongodb',
                 port: 27017,
                 database: 'test',
                 entities: [Message],

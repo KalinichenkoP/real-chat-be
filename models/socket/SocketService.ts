@@ -4,9 +4,8 @@ import * as redisAdapter from 'socket.io-redis';
 import {MessageDto} from '../message/dto/MessageDto';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {User} from "../user/UserEntity";
 
-@WebSocketGateway({adapter: redisAdapter({host: 'localhost', port: 6379, key: "real-chat-websockets"})})
+@WebSocketGateway({adapter: redisAdapter({host: 'redis', port: 6379, key: "real-chat-websockets"})})
 export class SocketService {
     @WebSocketServer() server;
 
