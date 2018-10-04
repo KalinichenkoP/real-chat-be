@@ -7,18 +7,37 @@ services:
     - ALLOW_EMPTY_PASSWORD=yes
     ports:
     - '6379:6379'
-  mongodb:
-    image: mongo:latest
+  mongodb-primary:
+    image: 'bitnami/mongodb:3.6'
     environment:
-    - MONGODB_DATABASE="realChat"
+    - MONGODB_REPLICA_SET_NAME=real-app-chat
+    - MONGODB_REPLICA_SET_MODE=primary
     ports:
-    - 27017:27017
+      - "27018:27017"
+
+  mongodb-secondary:
+    image: 'bitnami/mongodb:3.6'
+    depends_on:
+    - mongodb-primary
+    environment:
+    - MONGODB_REPLICA_SET_NAME=real-app-chat
+    - MONGODB_REPLICA_SET_MODE=secondary
+    - MONGODB_PRIMARY_HOST=mongodb-primary
+
+  mongodb-arbiter:
+    image: 'bitnami/mongodb:3.6'
+    depends_on:
+    - mongodb-primary
+    environment:
+    - MONGODB_REPLICA_SET_NAME=real-app-chat
+    - MONGODB_REPLICA_SET_MODE=arbiter
+    - MONGODB_PRIMARY_HOST=mongodb-primary
   postgres:
     image: postgres
     hostname: postgres
     restart: always
-    ports:
-    - 5432:5432
+#    ports:
+#    - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -34,5 +53,10 @@ services:
     - "3000:3000"
     depends_on:
       - redis
-      - mongodb
+      - mongodb-primary
+      - mongodb-secondary
+      - mongodb-arbiter
       - postgres
+volumes:
+  mongodb_master_data:
+    driver: local

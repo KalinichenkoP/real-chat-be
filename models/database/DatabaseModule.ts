@@ -56,10 +56,10 @@ import {TypeOrmModule} from "@nestjs/typeorm";
             TypeOrmModule.forRoot({
                 type: 'mongodb',
                 name: 'nosql',
-                // replicaSet: "rs0",
-                host: 'mongodb',
+                replicaSet: "real-app-chat",
+                host: 'mongodb-primary',
                 port: 27017,
-                database: 'test',
+                database: 'real-app',
                 entities: [Message],
                 synchronize: true,
             }),
