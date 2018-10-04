@@ -48,6 +48,8 @@ services:
      ports:
      - 8888:8888
   web:
+    env_file:
+      - ./production.env
     build: .
     ports:
     - "3000:3000"
